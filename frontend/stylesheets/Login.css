@@ -1,0 +1,42 @@
+
+   
+        .card-img-left {
+          width: 45%;
+          /* Link to your background image using in the property below! */
+          background-image:  url('https://media.istockphoto.com/vectors/biceps-muscle-icon-gym-logo-vector-illustration-vector-id1169422269?k=20&m=1169422269&s=612x612&w=0&h=YrVzNHtuun7ahJKkVn8_TtJekIHPVZs5hZRnnprqnuU=');
+          background-size: cover;
+        }
+        
+        .btn-login {
+          font-size: 0.9rem;
+          letter-spacing: 0.05rem;
+          padding: 0.75rem 1rem;
+          margin-top: 30px;
+        }
+        .logIn-div{
+          width: 785px;
+          height: 473px;
+          margin-left: 116px;
+      
+        }
+        .Linput{
+          margin-top: 5px;
+        }
+       .Linput2{
+          margin-top: 17px;
+       }
+       .Login-text{
+          font-size: 35px;
+    font-family: unset;
+    color: #0d6efd;
+       }
+       .signin{
+         
+          color:black
+       }
+       .signin2{
+          color:#0d6efd;
+          font-weight: 10px;
+       }
+        
+        
