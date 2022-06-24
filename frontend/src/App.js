@@ -1,30 +1,28 @@
-import {BrowserRouter as Router,Routes,Route} from "react-router-dom"
-import Login from "./pages/user/Login";
-import Register from "./pages/user/Register";
-import Header from "./components/Header";
-import LandingPage from "./pages/user/LandingPage";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import '../stylesheets/Headder.css'
+// pages...
+import "./App.css";
+import LandingPage from "./pages/user/LandingPage";
+import LoginPage from "./pages/user/LoginPage";
+import RegisterPage from "./pages/user/RegisterPage";
 
 function App() {
   return (
     <>
-    <Router>
-    
-      <Header/>
-   
-      
-    <div className="container py-5">
-   <Routes>
-    <Route path="/" element={<LandingPage/>}/>
-    <Route path="/login" element={<Login/>}/>
-    <Route path="/register" element={<Register/>}/>
-   </Routes>
-  
-   </div>
-   </Router>
-   </>
-  )
+      <div className=" main-container container-fluid">
+        <Router>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </Router>
+      </div>
+      <ToastContainer></ToastContainer>
+    </>
+  );
 }
 
 export default App;
