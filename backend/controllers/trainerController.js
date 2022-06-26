@@ -1,138 +1,123 @@
-const asyncHandler= require("express-async-handler")
-const jwt = require("jsonwebtoken")
-const bcrypt= require("bcryptjs")
+const asyncHandler = require("express-async-handler");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 // require-Trainer-Model
-const Trainer = require("../models/trainerModel")
-const { findById } = require("../models/trainerModel")
+const Trainer = require("../models/trainerModel");
 
+// require-generateToken-function
+const { generateToken } = require("../generateToken/generateToken");
 
+// Trainer-registration
+const registerTrainer = asyncHandler(async (req, res) => {
+  const { name, email, phoneNumber, password, category } = req.body;
+  if (!name || !email || !phoneNumber || !password || !category) {
+    res.status(400);
+    throw new Error("please enter the details");
+  }
 
-const registerTrainer = asyncHandler(async(req,res)=>{
-          const {name,email,phoneNumber,password,category} = req.body
-          if(!name || !email || !phoneNumber || !password || !category){
-                    res.status(400)
-                    throw new Error("please enter the details")
-          }
+  // check-TrainerExist
+  const trainerExist = await Trainer.findOne({ email });
 
-// check-TrainerExist
-          const trainerExist =await Trainer.findOne({email})
+  if (trainerExist) {
+    res.status(400);
+    throw new Error("Trainer Alredy Exists");
+  }
 
-          if(trainerExist){
-                    res.status(400)
-                    throw new Error("Trainer Alredy Exists")
-          }
+  // bcrypt-Password
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
 
-// bcrypt-Password
-          const salt = await bcrypt.genSalt(10)
-          const hashPassword = await bcrypt.hash(password,salt)
+  // Create-Trainer
+  const trainer = await Trainer.create({
+    name: name,
+    email: email,
+    phoneNumber: phoneNumber,
+    category: category,
+    password: hashPassword,
+  });
 
-
-// Create-Trainer
-const trainer = await Trainer.create({
-          name:name,
-          email:email,
-          phoneNumber:phoneNumber,
-          category:category,
-          password:hashPassword
-})
-
-
-// check-the-creation-is- success
-if(trainer){
-          res.status(200).json({
-                   _id:trainer._id,
-                   name:trainer.name,
-                   email:trainer.email,
-                   phoneNumber:trainer.phoneNumber,
-                   category:trainer.category ,
-                   token:generateToken(trainer._id)
-          })
-}else{
-          res.status(400)
-          throw new Error("Invalid Trainer Data")
-}
-})
-
-
+  // check-the-creation-is- success
+  if (trainer) {
+    res.status(200).json({
+      _id: trainer._id,
+      name: trainer.name,
+      email: trainer.email,
+      phoneNumber: trainer.phoneNumber,
+      category: trainer.category,
+      token: generateToken(trainer._id),
+    });
+  } else {
+    res.status(400);
+    throw new Error("Invalid Trainer Data");
+  }
+});
 
 // Login-Trainer
-const loginTrainer = asyncHandler(async(req,res)=>{
-          const {email,password}= req.body;
+const loginTrainer = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-// Check-email
-const trainer = await Trainer.findOne({email})
-          if(trainer){
-                    if(await bcrypt.compare(password,trainer.password)){
-                              res.status(200)
-                              .json({
-                                        _id:trainer._id,
-                                        name:trainer.name,
-                                        email:trainer.email,
-                                        phoneNumber:trainer.phoneNumber,
-                                        category:trainer.category ,
-                                        token:generateToken(trainer._id)     
-                              })
-                    }else{
-                              res.status(400)
-                              throw new Error("Invalid Password")
-                    }
-          }else{
-                    res.status(400)
-                    throw new Error("Invalid Email")
-          }
-          
-})
-
+  // Check-email
+  const trainer = await Trainer.findOne({ email });
+  if (trainer) {
+    if (await bcrypt.compare(password, trainer.password)) {
+      res.status(200).json({
+        _id: trainer._id,
+        name: trainer.name,
+        email: trainer.email,
+        phoneNumber: trainer.phoneNumber,
+        category: trainer.category,
+        token: generateToken(trainer._id),
+      });
+    } else {
+      res.status(400);
+      throw new Error("Invalid Password");
+    }
+  } else {
+    res.status(400);
+    throw new Error("Invalid Email");
+  }
+});
 
 // Update-Trainer
-const UpdateTrainer = asyncHandler(async(req,res)=>{
-          console.log("got ittt",req.body);
-          const trainer = await Trainer.findById(req.params.id)
-          if(!trainer){
-                    res.status(400)
-                    throw new Error("Trainer Not Found")
-          }
-          const updatedTrainer= await Trainer.findByIdAndUpdate(req.params.id,req.body,
-          {
-                    new:true
-          })
-          res.status(200).json(updatedTrainer)
-})
-
-
+const UpdateTrainer = asyncHandler(async (req, res) => {
+  console.log("got ittt", req.body);
+  const trainer = await Trainer.findById(req.params.id);
+  if (!trainer) {
+    res.status(400);
+    throw new Error("Trainer Not Found");
+  }
+  const updatedTrainer = await Trainer.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+    }
+  );
+  res.status(200).json(updatedTrainer);
+});
 
 // Delete-Trainer
-const deleteTrainer = asyncHandler(async(req,res)=>{
-          const trainer= await Trainer.findById(req.params.id)
-          if(!trainer){
-                    res.status(400)
-                    throw new Error('Trainer not found')
-          }
-          await trainer.remove()
-          res.status(200).json({id:req.params.id})
-})
-
+const deleteTrainer = asyncHandler(async (req, res) => {
+  const trainer = await Trainer.findById(req.params.id);
+  if (!trainer) {
+    res.status(400);
+    throw new Error("Trainer not found");
+  }
+  await trainer.remove();
+  res.status(200).json({ id: req.params.id });
+});
 
 // Find-all-Trainers
-const getAllTrainers=asyncHandler(async(req,res)=>{
-          const trainers= await Trainer.find()
-          res.status(200).json(trainers)
-})
+const getAllTrainers = asyncHandler(async (req, res) => {
+  const trainers = await Trainer.find();
+  res.status(200).json(trainers);
+});
 
-
-// Generate-jwt-token
-const generateToken=(id)=>{
-          return jwt.sign({id},process.env.JWT_SECRET,{
-                    expiresIn:"40d"
-          })
-}
-
-
-module.exports ={
-          registerTrainer,
-          loginTrainer,
-          UpdateTrainer,
-          deleteTrainer,
-          getAllTrainers
-}
+module.exports = {
+  registerTrainer,
+  loginTrainer,
+  UpdateTrainer,
+  deleteTrainer,
+  getAllTrainers,
+};

@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 // rerquire-userModel
 const User = require("../models/userModel");
 
+// require -generateToken-function
+const { generateToken } = require("../generateToken/generateToken");
+
 // find-user
 const getUser = asyncHandler(async (req, res) => {
   const users = await User.find();
@@ -104,13 +107,6 @@ const deleteUser = asyncHandler(async (req, res) => {
   await user.remove();
   res.status(200).json({ id: req.params.id });
 });
-
-// Genereate-JWT-Token
-const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "30d",
-  });
-};
 
 module.exports = {
   getUser,
