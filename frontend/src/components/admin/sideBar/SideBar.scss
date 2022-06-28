@@ -1,0 +1,85 @@
+
+.sidebar {
+  flex: 1;
+  border-right: 0.8px solid rgb(230, 227, 227);
+  min-height: 100vh;
+  background-color: white;
+
+  .top {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      // color: #6439ff;
+    }
+  }
+
+  hr {
+    height: 0;
+    border: 0.8px solid rgb(230, 227, 227);
+  }
+  .center {
+    padding-left: 15px;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: rgb(25, 120, 215);
+        transition-duration: 0.3s;
+        border-radius: 4px;
+        padding: 8px;
+        .icon {
+          color: white;
+        }
+      }
+      .icon {
+        font-size: 18px;
+        
+      }
+      span {
+        font-size: 13px;
+        font-weight: 600;
+        color: rgb(81, 86, 89);
+        margin-left: 10px;
+      }
+    }
+  }
+  .bottom{
+          display: flex;
+          align-items: center;
+          margin: 10px;
+
+          .colorOption{
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 5px;
+                    border: 1px solid rgb(25, 120, 215);
+                    cursor: pointer;
+                    margin: 5px;
+
+                    &:nth-child(1){
+                              background-color: whitesmoke;
+                    }
+                    &:nth-child(2){
+                              background-color: #333;
+                    }
+                    &:nth-child(3){
+                              background-color: darkblue;
+                    }
+                    &:nth-child(4){
+                              background-color:red;
+                    }
+          }
+  }
+}
