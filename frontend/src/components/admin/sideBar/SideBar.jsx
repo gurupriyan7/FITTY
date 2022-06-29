@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SideBar.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -8,56 +9,106 @@ import FeaturedPlayListIcon from "@mui/icons-material/FeaturedPlayList";
 import MonetizationOnSharpIcon from "@mui/icons-material/MonetizationOnSharp";
 import AssignmentIndSharpIcon from "@mui/icons-material/AssignmentIndSharp";
 import ExitToAppSharpIcon from "@mui/icons-material/ExitToAppSharp";
+import PersonAddAltSharpIcon from '@mui/icons-material/PersonAddAltSharp';
+import AddCircleSharpIcon from '@mui/icons-material/AddCircleSharp';
+import ClassSharpIcon from '@mui/icons-material/ClassSharp';
+import CurrencyExchangeSharpIcon from '@mui/icons-material/CurrencyExchangeSharp';
+import { useDispatch, useSelector } from "react-redux";
+import {adminLogout,reset} from "../../../features/adminAuth/AdminSlice"
 
 function SideBar() {
+
+const {admin} = useSelector((state)=>{
+ return state.adminAuth
+});
+const dispatch= useDispatch()
+const navigate = useNavigate()
+
+const logoutAdmin =(e)=>{
+  console.log("hello");
+  dispatch(adminLogout())
+  dispatch(reset())
+  navigate("/admin")
+}
+
+useEffect(()=>{
+  if(!admin){
+    navigate("/admin")
+  }
+},[admin,navigate,dispatch])
+
   return (
     <div className="sidebar">
       <div className="top">
-        <span className="logo primary-Color">Gurupiryan</span>
+        
+        <span className="logo primary-Color">{admin ? admin.name :null}</span>
       </div>
       <hr />
       <div className="center">
         <ul>
+        <p className="title primary-Color ">Main</p>
           <li>
-            {" "}
             <DashboardIcon className="icon primary-Color" />
-            <span>Dashboard</span>
+            <Link style={{textDecoration:"none"}} to="/admin/dashboard"><span>Dashboard</span></Link>
           </li>
         </ul>
         <ul>
+          <p className="title primary-Color">User Management</p>
           <li>
             <AccountBoxIcon className="icon primary-Color" />
-            <span>Users</span>
+            <Link style={{textDecoration:"none"}} to='/admin/users'> <span>All Users</span></Link>
+           
+          </li>
+          <li>
+            <PersonAddAltSharpIcon className="icon primary-Color" />
+            <span>Add Users</span>
           </li>
         </ul>
         <ul>
+        <p className="title primary-Color">Trainer Management</p>
           <li>
-            {" "}
+            
             <AccountCircleOutlinedIcon className="icon primary-Color" />
-            <span>Trainers</span>
+            <span>All Trainers</span>
           </li>
-        </ul>
-        <ul>
           <li>
-            {" "}
-            <AccountCircleOutlinedIcon className="icon primary-Color" />
+            
+            <PersonAddAltSharpIcon className="icon primary-Color" />
+            <span>Add Trainers</span>
+          </li>
+        
+          <li>
+            <ClassSharpIcon className="icon primary-Color" />
             <span>Trainers Category</span>
           </li>
-        </ul>
-        <ul>
           <li>
-            {" "}
+            <AddCircleSharpIcon className="icon primary-Color" />
+            <span>Add Trainers Category</span>
+          </li>
+          <li>
+            <CurrencyExchangeSharpIcon className="icon primary-Color" />
+            <span>Payment Request</span>
+          </li>
+          </ul>
+          
+        
+        <ul>
+        <p className="title primary-Color">Plans</p>
+          <li>
+           
             <FeaturedPlayListIcon className="icon primary-Color" />
             <span>Plans</span>
           </li>
         </ul>
         <ul>
+        <p className="title primary-Color">Sales</p>
           <li>
             <MonetizationOnSharpIcon className="icon primary-Color" />
             <span>Sales</span>
           </li>
         </ul>
         <ul>
+        <p className="title primary-Color">Admin</p>
           <li>
             <AssignmentIndSharpIcon className="icon primary-Color" />
             <span>Profile</span>
@@ -66,7 +117,8 @@ function SideBar() {
         <ul>
           <li>
             <ExitToAppSharpIcon className="icon primary-Color" />
-            <span>Logout</span>
+            <button style={{border:"none",backgroundColor:"transparent"}} onClick={logoutAdmin}><span >Logout</span></button>
+            
           </li>
         </ul>
       </div>

@@ -18,7 +18,7 @@ function Widgets({type}) {
                                         title:"USERS",
                                         isMoney:false,
                                         link:"See all users",
-                                        icon:<AccountBoxIcon className='icon primary-backgroundColor'/>
+                                        icon:<AccountBoxIcon className='icon primary-Color'/>
                               };
                               break;
                     case "Trainers":
@@ -26,7 +26,7 @@ function Widgets({type}) {
                                         title:"TRAINERS",
                                         isMoney:false,
                                         link:"See all Trainers",
-                                        icon:<AccountCircleOutlinedIcon className='icon primary-backgroundColor'/>
+                                        icon:<AccountCircleOutlinedIcon className='icon primary-Color'/>
                               };
                               break;
                     case "sails":
@@ -34,7 +34,7 @@ function Widgets({type}) {
                                         title:"SALES",
                                         isMoney:true,
                                         link:"See Total sails",
-                                        icon:<MonetizationOnSharpIcon className='icon primary-backgroundColor'/>
+                                        icon:<MonetizationOnSharpIcon className='icon primary-Color'/>
                               };
                               break;
                     case "plans":
@@ -42,7 +42,7 @@ function Widgets({type}) {
                                         title:"PLANS",
                                         isMoney:false,
                                         link:"See all plans",
-                                        icon:<FeaturedPlayListIcon className='icon primary-backgroundColor'/>
+                                        icon:<FeaturedPlayListIcon className='icon primary-Color'/>
                               };
                               break;
                               default:

@@ -43,7 +43,7 @@ function Charts() {
   ];
   return (
     <div className='chart'>
-      <div className="title primary-Color">Last 6 months Sails</div>
+      <div className="title primary-Color">category and Trainers</div>
         <ResponsiveContainer width="100%" aspect={2/1}>
         <BarChart
           width={200}

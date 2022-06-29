@@ -25,19 +25,21 @@ function App() {
         <Router>
           <Routes>
             {/* user-side */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/" element={<LandingPage />}/>
+            <Route path="/login" element={<LoginPage />}/>
+            <Route path="/register" element={<RegisterPage />}/>
 
             {/* Admin-Side */}
             <Route path="/admin">
-              <Route index element={<Home />} />
-              <Route path="login" element={<LoginAdmin />} />
+              <Route index element={<LoginAdmin />}/>
+              <Route path="dashboard" element={<Home/>}/>
+              {/* user-in-admin */}
               <Route path="users">
-                <Route index element={<ListUser />} />
+                <Route index element={<ListUser/>}/>
                 <Route path=":userId" element={<SingleUser />} />
-                <Route path="new" element={<NewUser />} />
+                <Route path="new" element={<NewUser/>}/>
               </Route>
+              {/* Trainer-in-user */}
               <Route path="trainers">
                 <Route index element={<ListUser />} />
                 <Route path=":trainerId" element={<SingleUser />} />

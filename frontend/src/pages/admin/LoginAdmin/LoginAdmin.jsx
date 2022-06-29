@@ -1,10 +1,15 @@
-import React from 'react'
-import "./LoginAdmin.scss"
+import React from "react";
+import "./LoginAdmin.scss";
+import AdminLogin from "../../../components/admin/AdminLogin/AdminLogin";
 
-function Login() {
+function LoginAdmin() {
   return (
-    <div>Login</div>
-  )
+    <div className="loginadmin">
+      <div className="form">
+        <AdminLogin />
+      </div>
+    </div>
+  );
 }
 
-export default Login
+export default LoginAdmin;

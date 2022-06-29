@@ -1,0 +1,47 @@
+.DataTable {
+         
+          -webkit-box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+          -moz-box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+          box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+          padding: 20px;
+          margin: 20px;
+          border-radius: 6px;
+          .title {
+                    font-size: 20px;
+                    font-weight: 500;
+                  }
+  .table {
+          margin: 20px;
+    
+    .statusActive {
+      color: green;
+      padding: 6px;
+      border-radius: 8px;
+    }
+    .statusBlocked {
+      color: red;
+      padding: 6px;
+      border-radius: 8px;
+    }
+    .tableCell {
+      height: 60px;
+
+      .blockbtn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px;
+        border-radius: 8px;
+        width: 85px;
+      }
+      .unblockbtn {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 5px;
+        border-radius: 8px;
+        width: 85px;
+      }
+    }
+  }
+}
