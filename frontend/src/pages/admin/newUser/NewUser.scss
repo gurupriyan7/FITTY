@@ -1,0 +1,11 @@
+.NewUser{
+          display: flex;
+          .NewUserContainer{
+                    flex: 6;
+
+                    .addUser{
+                              margin: 10px;
+                              padding: 20px;
+                    }
+          }
+}

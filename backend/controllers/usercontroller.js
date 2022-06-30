@@ -52,6 +52,7 @@ const registerUser = asyncHandler(async (req, res) => {
     email: email,
     phoneNumber: phoneNumber,
     password: hashPassword,
+    status:true
   });
   // check-the-creation-is-success
   if (user) {
@@ -60,6 +61,7 @@ const registerUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       phoneNumber: user.phoneNumber,
+      status:user.status,
       token: generateToken(user._id),
     });
   } else {
@@ -83,6 +85,7 @@ const loginUser = asyncHandler(async (req, res) => {
         name: user.name,
         email: user.email,
         phoneNumber: user.phoneNumber,
+        status:user.status,
         token: generateToken(user._id),
       });
     } else {

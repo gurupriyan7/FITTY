@@ -17,6 +17,10 @@ import ListUser from "./pages/admin/ListUser/ListUser";
 import LoginAdmin from "./pages/admin/LoginAdmin/LoginAdmin";
 import NewUser from "./pages/admin/newUser/NewUser";
 import SingleUser from "./pages/admin/singleUser/SingleUser";
+import TrainerLogin from "./pages/trainer/trainerLogin/TrainerLogin";
+
+// Trainer-side
+
 
 function App() {
   return (
@@ -29,6 +33,8 @@ function App() {
             <Route path="/login" element={<LoginPage />}/>
             <Route path="/register" element={<RegisterPage />}/>
 
+
+
             {/* Admin-Side */}
             <Route path="/admin">
               <Route index element={<LoginAdmin />}/>
@@ -39,13 +45,21 @@ function App() {
                 <Route path=":userId" element={<SingleUser />} />
                 <Route path="new" element={<NewUser/>}/>
               </Route>
-              {/* Trainer-in-user */}
+              {/* Trainer-in-admin */}
               <Route path="trainers">
                 <Route index element={<ListUser />} />
                 <Route path=":trainerId" element={<SingleUser />} />
                 <Route path="new" element={<NewUser />} />
               </Route>
             </Route>
+            
+
+            {/* Trainer-side */}
+            <Route path="/trainer">
+              <Route index element={<TrainerLogin/>}/>
+
+            </Route>
+          
           </Routes>
         </Router>
       </div>

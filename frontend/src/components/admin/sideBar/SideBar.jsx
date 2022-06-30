@@ -61,7 +61,7 @@ useEffect(()=>{
           </li>
           <li>
             <PersonAddAltSharpIcon className="icon primary-Color" />
-            <span>Add Users</span>
+            <Link style={{textDecoration:"none"}} to='/admin/users/new'> <span>Add Users</span></Link>
           </li>
         </ul>
         <ul>

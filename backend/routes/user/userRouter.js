@@ -10,7 +10,7 @@ const { getUser,
 
 
 
-router.get('/',protect,getUser)
+router.get('/',getUser)
 
 // Register-user
 router.post('/register',registerUser)
