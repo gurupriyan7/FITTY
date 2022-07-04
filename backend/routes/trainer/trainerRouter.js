@@ -6,7 +6,8 @@ const {
   loginTrainer,
   UpdateTrainer,
   deleteTrainer,
-  getAllTrainers
+  getAllTrainers,
+  ChangeStatusTrainer
 } = require("../../controllers/trainerController");
 
 // Register-Traineer
@@ -23,4 +24,7 @@ router.delete("/delete/:id", deleteTrainer);
 
 // Get-all-Trainers
 router.get("/alltrainers",getAllTrainers)
+
+// change-trainer-status
+router.put("/status/:id",ChangeStatusTrainer)
 module.exports = router;

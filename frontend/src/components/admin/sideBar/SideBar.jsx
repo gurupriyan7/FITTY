@@ -69,21 +69,12 @@ useEffect(()=>{
           <li>
             
             <AccountCircleOutlinedIcon className="icon primary-Color" />
-            <span>All Trainers</span>
+            <Link style={{textDecoration:"none"}} to='/admin/trainers'> <span>All Trainers</span></Link>
           </li>
           <li>
             
             <PersonAddAltSharpIcon className="icon primary-Color" />
-            <span>Add Trainers</span>
-          </li>
-        
-          <li>
-            <ClassSharpIcon className="icon primary-Color" />
-            <span>Trainers Category</span>
-          </li>
-          <li>
-            <AddCircleSharpIcon className="icon primary-Color" />
-            <span>Add Trainers Category</span>
+            <Link style={{textDecoration:"none"}} to='/admin/trainers/new'> <span>Add Trainers</span></Link>
           </li>
           <li>
             <CurrencyExchangeSharpIcon className="icon primary-Color" />
@@ -113,14 +104,13 @@ useEffect(()=>{
             <AssignmentIndSharpIcon className="icon primary-Color" />
             <span>Profile</span>
           </li>
-        </ul>
-        <ul>
           <li>
             <ExitToAppSharpIcon className="icon primary-Color" />
             <button style={{border:"none",backgroundColor:"transparent"}} onClick={logoutAdmin}><span >Logout</span></button>
             
           </li>
         </ul>
+        
       </div>
       <div className="bottom">
         <div className="colorOption"></div>

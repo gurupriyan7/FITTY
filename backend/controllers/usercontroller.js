@@ -78,20 +78,26 @@ const loginUser = asyncHandler(async (req, res) => {
   // check-user-email
   const user = await User.findOne({ email });
   if (user) {
-    if (await bcrypt.compare(password, user.password)) {
-      console.log("successfully login");
-      res.status(200).json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        status:user.status,
-        token: generateToken(user._id),
-      });
-    } else {
-      console.log("login failed");
-      res.status(400);
-      throw new Error("Invalid Password");
+    if(user.status){
+
+      if (await bcrypt.compare(password, user.password)) {
+        console.log("successfully login");
+        res.status(200).json({
+          _id: user._id,
+          name: user.name,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          status:user.status,
+          token: generateToken(user._id),
+        });
+      } else {
+        console.log("login failed");
+        res.status(400);
+        throw new Error("Invalid Password");
+      }
+    }else{
+      res.status(400)
+      throw new Error("You have blocked by admin")
     }
   } else {
     res.status(400);
@@ -111,10 +117,25 @@ const deleteUser = asyncHandler(async (req, res) => {
   res.status(200).json({ id: req.params.id });
 });
 
+// change-status(block/unblock)
+const changeUserStatus =asyncHandler(async(req,res)=>{
+  const user = await User.findById(req.params.id)
+
+  if(user){
+   let changedUser=await User.updateOne({_id:req.params.id},{$set:{status:!user.status}})
+    res.status(200)
+    .json(changedUser)
+  }else{
+    res.status(400)
+    throw new Error("user not found")
+  }
+})
+
 module.exports = {
   getUser,
   userUpdate,
   loginUser,
   registerUser,
   deleteUser,
+  changeUserStatus
 };

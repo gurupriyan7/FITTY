@@ -6,6 +6,7 @@ import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import MonetizationOnSharpIcon from '@mui/icons-material/MonetizationOnSharp';
 import AssignmentIndSharpIcon from '@mui/icons-material/AssignmentIndSharp';
 import ExitToAppSharpIcon from '@mui/icons-material/ExitToAppSharp';
+import { NavLink } from 'react-router-dom';
 
 
 function Widgets({type}) {
@@ -17,7 +18,7 @@ function Widgets({type}) {
                               data={
                                         title:"USERS",
                                         isMoney:false,
-                                        link:"See all users",
+                                        link:<NavLink style={{textDecoration:"none",color:"black"}} to='/admin/users'>See all users</NavLink>,
                                         icon:<AccountBoxIcon className='icon primary-Color'/>
                               };
                               break;

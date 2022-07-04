@@ -5,7 +5,8 @@ const { getUser,
           userUpdate,
           registerUser,
           deleteUser,
-          loginUser
+          loginUser,
+          changeUserStatus
       } = require("../../controllers/usercontroller")
 
 
@@ -30,5 +31,8 @@ router.delete("/delete/:id",deleteUser)
 
 // Find-user
 router.get('/find',getUser)
+
+// change-status-(block/unblock)
+router.put('/status/:id',changeUserStatus)
 
 module.exports = router;  

@@ -22,6 +22,10 @@ const trainerSchema = mongoose.Schema(
       type: String,
       required: [true, "please select your category"],
     },
+    status:{
+      type:Boolean,
+      required:true
+    }
   },
   {
     timestamps: true,

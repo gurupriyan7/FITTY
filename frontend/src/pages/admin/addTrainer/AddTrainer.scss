@@ -1,0 +1,11 @@
+.newTrainer{
+          display: flex;
+          .newTrainerContainer{
+                    flex: 6;
+                    .addTrainer{
+                              margin: 10px;
+                              padding: 20px;
+                              height: fit-content;
+                    }
+          }
+}

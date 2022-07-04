@@ -1,47 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { reset, login } from "../../../features/auth/authSlice";
-import { toast } from "react-toastify";
-import "./LoginScreen.css";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from 'react'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { reset, login } from '../../../features/auth/authSlice'
+import { toast } from 'react-toastify'
+import './LoginScreen.css'
+import { useDispatch, useSelector } from 'react-redux'
 
 function LoginScreen() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const { user, isLoading, isSuccess, isError, message } = useSelector(
-    (state) => state.auth
-  );
+    (state) => state.auth,
+  )
 
   useEffect(() => {
     if (isError) {
-      toast.error(message);
+      toast.error(message)
     }
     if (user || isSuccess) {
-      navigate("/");
+      navigate('/')
     }
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
-  const { email, password } = formData;
+  const { email, password } = formData
 
   const changeValue = (e) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }));
-  };
+    }))
+  }
 
   const onsubmit = (e) => {
-    e.preventDefault();
-    const userdata = { email, password };
-    dispatch(login(userdata));
-  };
+    e.preventDefault()
+    const userdata = { email, password }
+    dispatch(login(userdata))
+  }
 
   return (
     <div>
@@ -99,7 +99,7 @@ function LoginScreen() {
                     </div>
 
                     <NavLink
-                      style={{ textDecorationLine: "none" }}
+                      style={{ textDecorationLine: 'none' }}
                       to="/register"
                       className="d-block text-center mt-2 small"
                     >
@@ -116,7 +116,7 @@ function LoginScreen() {
         </div>
       </body>
     </div>
-  );
+  )
 }
 
-export default LoginScreen;
+export default LoginScreen
