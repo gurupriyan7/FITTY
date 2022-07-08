@@ -5,6 +5,15 @@
           box-shadow: 5px;
           
 }
+.logouticn{
+  font-size: 17px;
+  margin-right: 17px;
+  color: rgb(31, 78, 218);
+  cursor: pointer;
+}
+.logouticn:hover{
+  font-size: 18px;
+}
 
 .loginButton{
           border-radius: 10px;

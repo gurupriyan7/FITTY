@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { reset, logout } from "../../../features/auth/authSlice";
+import ExitToAppOutlinedIcon from '@mui/icons-material/ExitToAppOutlined';
 import "./Headder.js";
 import "./Headder.css";
 
@@ -29,9 +30,10 @@ function Header() {
           </NavLink>
 
           {user ? (
-            <Button onClick={Logout} className="loginButton">
-              Logout
-            </Button>
+            // <Button onClick={Logout} className="loginButton">
+            //   Logout
+            // </Button>
+            <span onClick={Logout} className="logouticn">Logout<ExitToAppOutlinedIcon  /></span>
           ) : (
             <Button
               onClick={() => {

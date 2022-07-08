@@ -1,0 +1,39 @@
+.layout {
+  display: flex;
+  height: 100%;
+  .icon{
+    font-size: 40px;
+  }
+  .profile {
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    .profilepic {
+      border-radius: 50%;
+      background-color: green;
+      height: 100px;
+      width: 100px;
+    }
+    .profileName {
+      font-size: 30px;
+      margin-left: -16px;
+    }
+    .empty {
+      display: none;
+    }
+  }
+  .content {
+    overflow: hidden;
+  }
+}
+.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
+  background-color: rgb(26, 109, 210);
+}
+.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+  color: white;
+}
+.pro-sidebar .pro-menu {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 100vh;
+}

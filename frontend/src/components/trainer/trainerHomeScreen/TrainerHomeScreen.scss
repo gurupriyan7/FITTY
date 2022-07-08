@@ -1,0 +1,125 @@
+.trainerhomescreen {
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  border-radius: 18px;
+  background-color: white;
+  width: 71%;
+  height: 100%;
+  padding: 26px;
+  .space {
+    height: 60px;
+  }
+  .poststext {
+    margin-top: 29px;
+    font-weight: 600;
+    font-size: 23px;
+    padding-bottom: 5px;
+  }
+  .singlepost {
+    //     background-color: green;
+    height: 450px;
+    border-radius: 9px;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    padding-top: 5px;
+
+    .postuserdetails {
+      width: 100%;
+      display: flex;
+      border-radius: 9px;
+      //       background-color: brown;
+      .postuserimg {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        margin-left: 16px;
+        margin-top: 11px;
+      }
+      .postusername {
+        font-size: 19px;
+        font-weight: 600;
+        padding: 13px;
+        padding-left: 20px;
+        margin-top: 5px;
+      }
+    }
+    .postimg {
+      height: 305px;
+      width: 548px;
+      margin-left: 73px;
+      border-radius: 3px;
+    }
+    .likeandcomment {
+      height: 44px;
+      width: 549px;
+      margin-top: 0px;
+      padding-top: 8px;
+      margin-left: 73px;
+      border-bottom-left-radius: 9px;
+      border-bottom-right-radius: 9px;
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+     
+      display: flex;
+      justify-content: space-between;
+      .like {
+       
+        width: 170px;
+        border-bottom-left-radius: 9px;
+        height: 36px;
+        // background-color: blue;
+        position: relative;
+        display: inline-block;
+        .tooltiptext{
+          visibility: hidden;
+          width: 80px;
+          background-color: white;
+          color: red;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+          
+          /* Position the tooltip */
+          position: absolute;
+          z-index: 1;
+        }
+        &:hover{
+          .tooltiptext{
+            visibility: visible;
+          }
+        }
+        .liketext {
+          padding: 12px;
+          cursor: pointer;
+        }
+      }
+      .comment {
+        width: 170px;
+        height: 36px;
+        border-bottom-right-radius: 9px;
+        // background-color: blue;
+        position: relative;
+        display: inline-block;
+        .tooltiptext{
+          visibility: hidden;
+          width: 80px;
+          background-color: white;
+          color: red;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+          
+          /* Position the tooltip */
+          position: absolute;
+          z-index: 1;
+        }
+        &:hover{
+          .tooltiptext{
+            visibility: visible;
+          }
+        }
+        .commenttext {
+          padding: 12px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

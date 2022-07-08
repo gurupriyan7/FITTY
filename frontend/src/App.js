@@ -7,9 +7,10 @@ import 'react-toastify/dist/ReactToastify.css'
 // User-side
 import './App.css'
 import './Theme/Theme.scss'
-import LandingPage from './pages/user/LandingPage'
-import LoginPage from './pages/user/LoginPage'
-import RegisterPage from './pages/user/RegisterPage'
+// import LandingPage from './pages/user/userLandingPage/LandingPage'
+import LoginPage from './pages/user/userLogin/LoginPage'
+import RegisterPage from './pages/user/userRegister/RegisterPage'
+import UserHome from './pages/user/userHome/UserHome'
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -20,6 +21,7 @@ import TrainerLogin from './pages/trainer/trainerLogin/TrainerLogin'
 import TrainerHome from './pages/trainer/trainerHome/TrainerHome'
 import AddTrainer from './pages/admin/addTrainer/AddTrainer'
 import ListTrainer from './pages/admin/ListTrainer/ListTrainer'
+import SinglePost from './pages/trainer/singlePost/SinglePost'
 
 // Trainer-side
 
@@ -30,9 +32,10 @@ function App() {
         <Router>
           <Routes>
             {/* user-side */}
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<UserHome/>} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path='/home'element={<UserHome/>}/>
 
             {/* Admin-Side */}
             <Route path="/admin">
@@ -52,8 +55,9 @@ function App() {
 
             {/* Trainer-side */}
             <Route path="/trainer">
-              <Route index element={<TrainerLogin />} />
-              <Route path="home" element={<TrainerHome />} />
+              <Route index element={<TrainerHome />} />
+              <Route path="login" element={<TrainerLogin />} />
+              <Route path="singlepost" element={<SinglePost/>} />
             </Route>
           </Routes>
         </Router>

@@ -30,7 +30,7 @@ function RegisterScreen() {
       toast.error(message);
     }
     if (user && isSuccess) {
-      navigate("/");
+      navigate("/home");
     }
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);

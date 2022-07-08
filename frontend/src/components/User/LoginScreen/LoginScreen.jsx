@@ -18,7 +18,7 @@ function LoginScreen() {
       toast.error(message)
     }
     if (user || isSuccess) {
-      navigate('/')
+      navigate('/home')
     }
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
@@ -89,14 +89,14 @@ function LoginScreen() {
                         SignIn
                       </button>
                     </div>
-                    <div className="d-grid mb-3">
+                    {/* <div className="d-grid mb-3">
                       <button
                         className="btn  btn-primary btn-login fw-bold text-uppercase"
                         type="submit"
                       >
-                        SignIn with OTP
+                        Trainer Login
                       </button>
-                    </div>
+                    </div> */}
 
                     <NavLink
                       style={{ textDecorationLine: 'none' }}
@@ -109,6 +109,9 @@ function LoginScreen() {
                       </span>
                     </NavLink>
                   </form>
+                  <button onClick={()=>navigate("/trainer")} className='trbtn'>Trainer Login</button>
+                      {/* <NavLink style={{ textDecorationLine: 'none' }}  to='/trainer'><span className="tlink">Trainer Login</span></NavLink> */}
+                
                 </div>
               </div>
             </div>

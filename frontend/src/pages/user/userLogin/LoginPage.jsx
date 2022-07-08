@@ -1,6 +1,6 @@
 import React from 'react'
-import Header from '../../components/User/Headder/Header'
-import LoginScreen from '../../components/User/LoginScreen/LoginScreen'
+import Header from '../../../components/User/Headder/Header'
+import LoginScreen from '../../../components/User/LoginScreen/LoginScreen'
 
 function LoginPage() {
   return (

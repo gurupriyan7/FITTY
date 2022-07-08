@@ -1,0 +1,86 @@
+.trainerProfileCard {
+  padding: 10px;
+  border-radius: 18px;
+  width: 300px;
+  position: fixed;
+  height: 40vh;
+  .top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin: 0;
+    padding: 10px;
+    height: 22vh;
+    background-color: blue;
+    .coverpic {
+      height: 22vh;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      width: 108%;
+      margin: -10px;
+    }
+  }
+  .roundpic {
+    width: 129px;
+    height: 129px;
+    border-radius: 50%;
+    background: green;
+    position: fixed;
+    margin-left: 76px;
+    margin-top: -56px;
+  }
+  .name {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .nametext {
+      font-size: 25px;
+      font-weight: 600;
+      margin-top: 69px;
+    }
+  }
+  .bottom {
+    background-color:white;
+    height: 36vh;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-top: 10px;
+
+    .cardtext {
+      padding: 7px;
+      font-size: 21px;
+      font-weight: 600;
+      list-style: none;
+      margin-left: -6px;
+      margin-top: 7px;
+      cursor: pointer;
+      .picon {
+        margin: 5px;
+        font-size: 29px;
+      }
+    }
+    .addpost {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .addpostbutton {
+        width: 235px;
+        height: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        text-align: center;
+        font-size: 24px;
+         border-color: rgb(32, 138, 214);
+         background-color: white;
+
+         &:hover{
+          background-color:rgb(32, 138, 214) ;
+          color: white;
+         }
+      }
+    }
+  }
+}
