@@ -26,7 +26,7 @@ function Header() {
           style={{ zIndex: "9", boxShadow: "revert-layer" }}
         >
           <NavLink style={{ textDecoration: "none" }} to="/">
-            <span className="LOGO">FITTY</span>
+            <span className="LOGO primary-Color">FITTY</span>
           </NavLink>
 
           {user ? (

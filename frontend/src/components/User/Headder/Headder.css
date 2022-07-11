@@ -29,7 +29,6 @@
 }
 .LOGO{
           font-size: 33px;
-          color: rgb(35, 79, 222);
           font-style: inherit;
           font-family: fantasy;
           margin-left: 20px;
@@ -43,6 +42,6 @@
 
 .progress-bar {
   height: 5px;
-  background: #0e68ee;
+  background: rgb(10, 208, 10);
   width: 0%;
 }

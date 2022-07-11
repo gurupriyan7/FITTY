@@ -11,6 +11,7 @@ import './Theme/Theme.scss'
 import LoginPage from './pages/user/userLogin/LoginPage'
 import RegisterPage from './pages/user/userRegister/RegisterPage'
 import UserHome from './pages/user/userHome/UserHome'
+import GetACoach from './pages/user/getaCoach/GetACoach'
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -36,6 +37,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path='/home'element={<UserHome/>}/>
+            <Route path='/getacoach' element={<GetACoach/>}/>
 
             {/* Admin-Side */}
             <Route path="/admin">

@@ -21,6 +21,9 @@ function UserHomeScreen() {
           alt=""
           className="postimg"
         />
+        <div className="description">
+          hello how are you howlo 
+        </div>
         <div className="likeandcomment">
           <div className="like">
             <span className="liketext">

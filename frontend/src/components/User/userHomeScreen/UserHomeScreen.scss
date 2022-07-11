@@ -1,7 +1,7 @@
 .trainerhomescreen {
-  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  // box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   border-radius: 18px;
-  background-color: white;
+  // background-color: white;
   width: 71%;
   height: 100%;
   padding: 26px;
@@ -16,7 +16,7 @@
   }
   .singlepost {
     //     background-color: green;
-    height: 450px;
+    height: 100%;
     border-radius: 9px;
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
     padding-top: 5px;
@@ -49,13 +49,14 @@
     }
     .likeandcomment {
       height: 44px;
-      width: 549px;
-      margin-top: 0px;
-      padding-top: 8px;
-      margin-left: 73px;
+      background: #e7e7e7;
+      width: 651px;
+      margin-top: 36px;
+      padding-top: 9px;
+      margin-left: 0px;
       border-bottom-left-radius: 9px;
       border-bottom-right-radius: 9px;
-     
+      /* box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px; */
       display: flex;
       justify-content: space-between;
       .like {
@@ -85,7 +86,7 @@
           }
         }
         .liketext {
-          padding: 12px;
+          padding: 32px;
           cursor: pointer;
         }
       }

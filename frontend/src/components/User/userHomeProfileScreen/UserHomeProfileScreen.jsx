@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
-import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
+import FactCheckSharpIcon from '@mui/icons-material/FactCheckSharp';
 import './UserHomeProfileScreen.scss'
+import { useNavigate } from 'react-router-dom';
 
 function UserHomeProfileScreen() {
- 
+  const navigate= useNavigate()
   return (
     <div className="trainerProfileCard">
     <div className="top">
@@ -18,9 +20,9 @@ function UserHomeProfileScreen() {
     </div>
     <div className="bottom">
               <ul>
-                        <li className='cardtext'><GroupAddIcon className='picon'/>Get a Coach</li>
-                        <li className='cardtext'><FeaturedPlayListIcon className='picon'/>My Plans</li>
-                        <li className='cardtext'><ContactPageIcon className='picon'/>My Coach</li>
+                        <li onClick={()=>navigate("/getacoach")} className='cardtext getacoach'><GroupAddIcon className='picon'/>Get a Coach</li>
+                        <li className='cardtext'><FeaturedPlayListIcon className='picon'/> Get Plans</li>
+                        <li className='cardtext'><FactCheckSharpIcon className='picon'/>My Plans</li>
               </ul>
               <div className="addpost">
                         <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button>

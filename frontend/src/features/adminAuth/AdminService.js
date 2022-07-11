@@ -1,7 +1,16 @@
 import axios from 'axios'
 import { ADMIN, ADMIN_LOGIN } from '../../constants/Adminconstants'
-import { USER_REGISTER, GET_USER,USER_STATUS } from '../../constants/userConstants'
-import { TRAINER_REGISTER, GET_TRAINERS,TRAINER_STATUS, TRAINER_DELETE} from '../../constants/trainerConstants'
+import {
+  USER_REGISTER,
+  GET_USER,
+  USER_STATUS,
+} from '../../constants/userConstants'
+import {
+  TRAINER_REGISTER,
+  GET_TRAINERS,
+  TRAINER_STATUS,
+  TRAINER_DELETE,
+} from '../../constants/trainerConstants'
 
 // Admin-Login
 const login = async (adminData) => {
@@ -39,26 +48,25 @@ const AddTrainer = async (TrainerData) => {
 // All-Trainers
 const AllTrainers = async () => {
   const response = await axios.get(GET_TRAINERS)
-        if(response.data){
-                localStorage.setItem("trainer",JSON.stringify(response.data))
-        }
+  if (response.data) {
+    localStorage.setItem('trainer', JSON.stringify(response.data))
+  }
   return response.data
-
 }
 
 // Change-Trainer-status
-const changeTrainerStatus =async(trId)=>{
-  const response = await axios.put(TRAINER_STATUS+trId) 
- return response.data
+const changeTrainerStatus = async (trId) => {
+  const response = await axios.put(TRAINER_STATUS + trId)
+  return response.data
 }
 // delete-trainer
-const deleteTrainer=async(trId)=>{
-  const response= await axios.delete(TRAINER_DELETE+trId)
+const deleteTrainer = async (trId) => {
+  const response = await axios.delete(TRAINER_DELETE + trId)
   return response.data
 }
 // change-user-staus
-const changeUserStatus = async(userId)=>{
-  const response = await axios.put (USER_STATUS+userId)
+const changeUserStatus = async (userId) => {
+  const response = await axios.put(USER_STATUS + userId)
   return response.data
 }
 
@@ -71,6 +79,6 @@ const adminService = {
   AllTrainers,
   changeTrainerStatus,
   changeUserStatus,
-  deleteTrainer
+  deleteTrainer,
 }
 export default adminService
