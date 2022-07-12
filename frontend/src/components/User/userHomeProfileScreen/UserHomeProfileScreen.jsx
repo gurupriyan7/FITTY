@@ -22,7 +22,7 @@ function UserHomeProfileScreen() {
               <ul>
                         <li onClick={()=>navigate("/getacoach")} className='cardtext getacoach'><GroupAddIcon className='picon'/>Get a Coach</li>
                         <li onClick={()=>navigate("/getplans")}className='cardtext getplans'><FeaturedPlayListIcon className='picon'/> Get Plans</li>
-                        <li onClick={()=>navigate("/getacoach")}className='cardtext'><FactCheckSharpIcon className='picon'/>My Plans</li>
+                        <li onClick={()=>navigate("/myplans")}className='cardtext myplans'><FactCheckSharpIcon className='picon'/>My Plans</li>
               </ul>
               <div className="addpost">
                         <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button>

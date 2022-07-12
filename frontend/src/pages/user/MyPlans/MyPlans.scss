@@ -1,4 +1,4 @@
-.getplans {
+.myplans {
   margin: 0;
   padding: 0;
 
@@ -17,7 +17,7 @@
       margin: 42px;
       width: 300px;
       .profilecard {
-        .getplans {
+        .myplans {
           color: rgb(21, 164, 231);
         }
       }
@@ -30,6 +30,7 @@
       border-radius: 8px;
       width: 60%;
       height: 100%;
+      min-height: 100vh;
     }
   }
 }

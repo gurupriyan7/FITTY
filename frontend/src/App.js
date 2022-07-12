@@ -12,7 +12,8 @@ import LoginPage from './pages/user/userLogin/LoginPage'
 import RegisterPage from './pages/user/userRegister/RegisterPage'
 import UserHome from './pages/user/userHome/UserHome'
 import GetACoach from './pages/user/getaCoach/GetACoach'
- import GetPlans from './pages/user/getPlans/GetPlans'
+import GetPlans from './pages/user/getPlans/GetPlans'
+import MyPlans from './pages/user/MyPlans/MyPlans'
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -40,6 +41,7 @@ function App() {
             <Route path='/home'element={<UserHome/>}/>
             <Route path='/getacoach' element={<GetACoach/>}/>
             <Route path='/getplans' element={<GetPlans/>}/>
+            <Route path='/myplans' element={<MyPlans/>}/>
 
             {/* Admin-Side */}
             <Route path="/admin">
