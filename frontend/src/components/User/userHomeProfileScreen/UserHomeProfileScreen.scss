@@ -1,39 +1,133 @@
-.layout {
-  display: flex;
-  height: 100%;
-  .icon{
-    font-size: 40px;
+// .layout {
+//   display: flex;
+//   height: 100%;
+//   .icon{
+//     font-size: 40px;
+//   }
+//   .profile {
+//     display: grid;
+//     align-items: center;
+//     justify-content: center;
+//     .profilepic {
+//       border-radius: 50%;
+//       background-color: green;
+//       height: 100px;
+//       width: 100px;
+//     }
+//     .profileName {
+//       font-size: 30px;
+//       margin-left: -16px;
+//     }
+//     .empty {
+//       display: none;
+//     }
+//   }
+//   .content {
+//     overflow: hidden;
+//   }
+// }
+// .pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
+//   background-color: rgb(26, 109, 210);
+// }
+// .pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
+//   color: white;
+// }
+// .pro-sidebar .pro-menu {
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+//   height: 100vh;
+// }
+
+
+.userProfileCard {
+  padding: 0;
+  border-radius: 18px;
+  width: 300px;
+  position: fixed;
+  height:fit-content;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+
+  .top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin: 0;
+    padding: 10px;
+    height: 22vh;
+    background-color: blue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+    .coverpic {
+      height: 22vh;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      width: 107%;
+      margin: -10px;
+    }
   }
-  .profile {
-    display: grid;
+  .roundpic {
+    width: 129px;
+    height: 129px;
+    border-radius: 50%;
+    background: green;
+    position: fixed;
+    margin-left: 76px;
+    margin-top: -56px;
+  }
+  .name {
+    background-color: white;
+    display: flex;
     align-items: center;
     justify-content: center;
-    .profilepic {
-      border-radius: 50%;
-      background-color: green;
-      height: 100px;
-      width: 100px;
-    }
-    .profileName {
-      font-size: 30px;
-      margin-left: -16px;
-    }
-    .empty {
-      display: none;
+    .nametext {
+      font-size: 25px;
+      font-weight: 600;
+      margin-top: 69px;
     }
   }
-  .content {
-    overflow: hidden;
+  .bottom {
+    background-color:white;
+    height: 36vh;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-top: 10px;
+    
+
+    .cardtext {
+      padding: 7px;
+      font-size: 21px;
+      font-weight: 600;
+      list-style: none;
+      margin-left: -6px;
+      margin-top: 7px;
+      cursor: pointer;
+      .picon {
+        margin: 5px;
+        font-size: 29px;
+      }
+    }
+    .addpost {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .addpostbutton {
+        width: 235px;
+        height: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9px;
+        text-align: center;
+        font-size: 24px;
+         border-color: rgb(32, 138, 214);
+         background-color: white;
+
+         &:hover{
+          background-color:rgb(32, 138, 214) ;
+          color: white;
+         }
+      }
+    }
   }
-}
-.pro-sidebar > .pro-sidebar-inner > .pro-sidebar-layout {
-  background-color: rgb(26, 109, 210);
-}
-.pro-sidebar .pro-menu .pro-menu-item > .pro-inner-item {
-  color: white;
-}
-.pro-sidebar .pro-menu {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  height: 100vh;
 }
