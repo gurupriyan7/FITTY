@@ -1,4 +1,5 @@
 import axios from 'axios'
+import * as api from "../../API/Trainer"
 
 import {
   TRAINER_DELETE,
@@ -10,12 +11,12 @@ import {
 
 // Login-Trainer
 const trainerLogin = async (trainerData)=>{
-          const response = await axios.post(TRAINER_LOGIN,trainerData)
+          const {data} = await api.loginTrainer(trainerData)
 
-          if(response.data){
-                    localStorage.setItem("trainer",JSON.stringify(response.data))
+          if(data){
+                    localStorage.setItem("trainer",JSON.stringify(data))
           }
-          return response.data
+          return data
 }
 
 // Logout-Trainer

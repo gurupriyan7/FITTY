@@ -1,9 +1,9 @@
 const urls = {
   
-  USER_REGISTER: "/api/user/register",
-  USER_LOGIN: "/api/user/login",
-  GET_USER: "/api/user",
-  USER_STATUS:"/api/user/status/"
+  USER_REGISTER: "/register",
+  USER_LOGIN: "/login",
+  GET_USER: "/user",
+  USER_STATUS:"/status/"
 
  
 

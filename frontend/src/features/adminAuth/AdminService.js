@@ -1,25 +1,27 @@
 import axios from 'axios'
-import { ADMIN, ADMIN_LOGIN } from '../../constants/Adminconstants'
 import {
-  USER_REGISTER,
-  GET_USER,
-  USER_STATUS,
-} from '../../constants/userConstants'
-import {
-  TRAINER_REGISTER,
-  GET_TRAINERS,
-  TRAINER_STATUS,
-  TRAINER_DELETE,
-} from '../../constants/trainerConstants'
+  ADMIN_LOGIN,
+  ADD_USER,
+  ALL_USERS,
+  ADD_TRAINER,
+  ALL_TRAINERS,
+  CHANGE_TRAINER_STATUS,
+  CHANGE_USER_STATUS,
+  DELETE_TRAINER
+} from '../../constants/Adminconstants'
+
+import * as api from '../../API/Admin'
 
 // Admin-Login
 const login = async (adminData) => {
-  const response = await axios.post(ADMIN_LOGIN, adminData)
+  // const response = await axios.post(ADMIN_LOGIN, adminData)
+  const {data} = await api.loginAdmin(ADMIN_LOGIN,adminData)
+  
 
-  if (response.data) {
-    localStorage.setItem('admin', JSON.stringify(response.data))
+  if (data) {
+    localStorage.setItem('admin', JSON.stringify(data))
   }
-  return response.data
+  return data
 }
 // Admin-Logout
 const logout = async () => {
@@ -28,46 +30,48 @@ const logout = async () => {
 
 // Add-User
 const AddUsers = async (userData) => {
-  const response = await axios.post(USER_REGISTER, userData)
-
-  return response.data
+  const { data } = await api.AddUser(userData)
+  console.log(data)
+  return data
 }
 
 // All-Users
 const AllUsers = async () => {
-  const response = await axios.get(GET_USER)
-  return response.data
+  console.log("GOTLIT ");
+  const {data}= await api.AllUsers()
+  return data
 }
 
 // Add-Trainer
 const AddTrainer = async (TrainerData) => {
-  const response = await axios.post(TRAINER_REGISTER, TrainerData)
-  console.log(response.data)
-  return response.data
+
+  const {data} = await api.AddTrainer(TrainerData)
+
+  return data
 }
 // All-Trainers
 const AllTrainers = async () => {
-  const response = await axios.get(GET_TRAINERS)
-  if (response.data) {
-    localStorage.setItem('trainer', JSON.stringify(response.data))
+  const {data}= await api.AllTrainers()
+  if (data) {
+    localStorage.setItem('trainer', JSON.stringify(data))
   }
-  return response.data
+  return data
 }
 
 // Change-Trainer-status
 const changeTrainerStatus = async (trId) => {
-  const response = await axios.put(TRAINER_STATUS + trId)
-  return response.data
+  const {data}=await api.changeTrainerStatus(trId)
+  return data
 }
 // delete-trainer
 const deleteTrainer = async (trId) => {
-  const response = await axios.delete(TRAINER_DELETE + trId)
-  return response.data
+  const {data} = await api.deleteTrainer(trId)
+  return data
 }
 // change-user-staus
 const changeUserStatus = async (userId) => {
-  const response = await axios.put(USER_STATUS + userId)
-  return response.data
+  const {data} = await api.changeUserStatus(userId)
+  return data
 }
 
 const adminService = {

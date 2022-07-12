@@ -1,10 +1,10 @@
 const url = {
-  TRAINER_LOGIN: '/api/trainer/login',
-  TRAINER_REGISTER: '/api/trainer/register',
-  GET_TRAINERS: '/api/trainer/alltrainers',
-  TRAINER_UPDATE: '/api/trainer/update',
-  TRAINER_DELETE: '/api/trainer/delete/',
-  TRAINER_STATUS:'/api/trainer/status/'
+  TRAINER_LOGIN: '/login',
+  TRAINER_REGISTER: '/register',
+  GET_TRAINERS: '/alltrainers',
+  TRAINER_UPDATE: '/update',
+  TRAINER_DELETE: '/delete/',
+  TRAINER_STATUS:'/status/'
 }
 export const  {
   GET_TRAINERS,

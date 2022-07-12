@@ -1,13 +1,12 @@
-import axios from "axios";
-import { USER, USER_LOGIN, USER_REGISTER } from "../../constants/userConstants";
+import * as api from "../../API/User"
 
 // Register- user
 const register = async (userdata) => {
-  const response = await axios.post(USER_REGISTER, userdata);
-  if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+  const {data} = await api.registerUser(userdata)
+  if (data) {
+    localStorage.setItem("user", JSON.stringify(data));
   }
-  return response.data;
+  return data;
 };
 
 // logout-user
@@ -17,11 +16,11 @@ const logout = async () => {
 
 // Login-user
 const login = async (userdata) => {
-  const response = await axios.post(USER_LOGIN, userdata);
-  if (response.data) {
-    localStorage.setItem("user", JSON.stringify(response.data));
+ const {data}= await api.loginUser(userdata)
+  if (data) {
+    localStorage.setItem("user", JSON.stringify(data));
   }
-  return response.data;
+  return data;
 };
 
 const authService = {

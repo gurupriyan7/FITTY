@@ -10,7 +10,6 @@ const { generateToken } = require('../generateToken/generateToken')
 
 // Trainer-registration
 const registerTrainer = asyncHandler(async (req, res) => {
-  console.log('hello', req.body)
   const { name, email, phoneNumber, password, category, status } = req.body
   if (!name || !email || !phoneNumber || !password || !category) {
     res.status(400)
