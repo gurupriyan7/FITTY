@@ -1,0 +1,97 @@
+.singleplanscreen {
+  .top {
+    background-color: transparent;
+
+    height: 25vh;
+    .coverimg {
+      width: 79%;
+      height: fit-content;
+      border-radius: 30px;
+      max-height: 53vh;
+      box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+    }
+   
+  }
+  .updetails {
+    height: 31vh;
+    .profilepic {
+      height: 139px;
+      width: 147px;
+      margin-left: 33px;
+      margin-top: -40px;
+      border-radius: 22px;
+      position: absolute;
+    }
+    .pdetails {
+      height: 28vh;
+      border-radius: 30px;
+      // background-color: rebeccapurple;
+      background-color: white;
+      width: 669px;
+      .Pnamediv {
+        display: flex;
+        justify-content: right;
+
+        width: 97%;
+        .Pname {
+          margin-top: 15px;
+          font-size: 26px;
+          font-weight: 700;
+          font-family: system-ui;
+        }
+        .Peditbtndiv {
+          display: flex;
+          justify-content: right;
+          // background-color: green;
+          width: 292px;
+          padding: 13px;
+          .Peditbtn {
+            width: 76px;
+            height: 36px;
+            border: 0;
+            color: #424040;
+            font-size: larger;
+            border-radius: 10px;
+            text-align: center;
+            font-family: system-ui;
+            font-weight: 500;
+            background-color: gainsboro;
+          }
+        }
+      }
+      .Pemaildiv {
+        display: flex;
+        justify-content: center;
+
+        width: 94%;
+        .Pemail {
+          margin-top: -12px;
+          font-size: 18px;
+          font-weight: 500;
+          font-family: system-ui;
+        }
+      }
+      .pedit {
+        display: flex;
+        justify-content: right;
+        .peditbtn {
+          background-color: grey;
+          width: 30px;
+          height: 20px;
+          border-radius: 8px;
+        }
+      }
+      .Pline {
+        margin-top: 52px;
+      }
+
+      // .noPostsdiv{
+      //   height: 4rem;
+      //   background-color: red;
+      //   border-bottom-right-radius: 32px;
+      //   border-bottom-left-radius: 32px;
+
+      // }
+    }
+  }
+}

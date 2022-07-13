@@ -1,4 +1,4 @@
-.trainerhomescreen {
+.userhomescreen {
   // box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   border-radius: 18px;
   // background-color: white;
@@ -15,11 +15,19 @@
     padding-bottom: 5px;
   }
   .singlepost {
-    //     background-color: green;
+    background-color: white;
     height: 100%;
     border-radius: 9px;
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
     padding-top: 5px;
+    width: fit-content;
+    .description {
+      font-size: 15px;
+      padding-left: 69px;
+//       padding-top: 9px;
+      padding-right: 34px;
+      color: rgb(61, 59, 59);
+    }
 
     .postuserdetails {
       width: 100%;
@@ -51,7 +59,7 @@
       height: 44px;
       background: #e7e7e7;
       width: 651px;
-      margin-top: 36px;
+      margin-top: 3px;
       padding-top: 9px;
       margin-left: 0px;
       border-bottom-left-radius: 9px;
@@ -60,14 +68,13 @@
       display: flex;
       justify-content: space-between;
       .like {
-       
         width: 170px;
         border-bottom-left-radius: 9px;
         height: 36px;
         // background-color: blue;
         position: relative;
         display: inline-block;
-        .tooltiptext{
+        .tooltiptext {
           visibility: hidden;
           width: 80px;
           background-color: white;
@@ -75,13 +82,13 @@
           text-align: center;
           border-radius: 6px;
           padding: 5px 0;
-          
+
           /* Position the tooltip */
           position: absolute;
           z-index: 1;
         }
-        &:hover{
-          .tooltiptext{
+        &:hover {
+          .tooltiptext {
             visibility: visible;
           }
         }
@@ -97,7 +104,7 @@
         // background-color: blue;
         position: relative;
         display: inline-block;
-        .tooltiptext{
+        .tooltiptext {
           visibility: hidden;
           width: 80px;
           background-color: white;
@@ -105,13 +112,13 @@
           text-align: center;
           border-radius: 6px;
           padding: 5px 0;
-          
+
           /* Position the tooltip */
           position: absolute;
           z-index: 1;
         }
-        &:hover{
-          .tooltiptext{
+        &:hover {
+          .tooltiptext {
             visibility: visible;
           }
         }

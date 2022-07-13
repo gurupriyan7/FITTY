@@ -14,6 +14,8 @@ import UserHome from './pages/user/userHome/UserHome'
 import GetACoach from './pages/user/getaCoach/GetACoach'
 import GetPlans from './pages/user/getPlans/GetPlans'
 import MyPlans from './pages/user/MyPlans/MyPlans'
+import UserProfile from "./pages/user/UserProfile/UserProfile"
+
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -25,7 +27,6 @@ import TrainerHome from './pages/trainer/trainerHome/TrainerHome'
 import AddTrainer from './pages/admin/addTrainer/AddTrainer'
 import ListTrainer from './pages/admin/ListTrainer/ListTrainer'
 import SinglePost from './pages/trainer/singlePost/SinglePost'
-
 // Trainer-side
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route path='/getacoach' element={<GetACoach/>}/>
             <Route path='/getplans' element={<GetPlans/>}/>
             <Route path='/myplans' element={<MyPlans/>}/>
+            <Route path='/profile' element={<UserProfile/>}/>
 
             {/* Admin-Side */}
             <Route path="/admin">

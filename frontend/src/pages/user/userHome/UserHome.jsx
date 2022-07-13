@@ -16,7 +16,7 @@ function UserHome() {
 
   },[user])
   return (
-    <div className="trainerhome">
+    <div className="userhome">
     <div className="header">
       <Header />
     </div>
