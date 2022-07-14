@@ -148,7 +148,7 @@ function RegisterScreen() {
 
                       <NavLink
                         style={{ textDecorationLine: "none" }}
-                        to="/login"
+                        to="/"
                         className="d-block text-center mt-2 small"
                       >
                         <span className="signin">

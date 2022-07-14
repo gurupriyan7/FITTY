@@ -23,11 +23,11 @@ function TrainerHeadder() {
     dispatch(trainerLogout())
   }
 
-  useEffect(() => {
-    if (!trainer) {
-      Navigate('/trainer/login')
-    }
-  }, [trainer])
+  // useEffect(() => {
+  //   if (!trainer) {
+  //     Navigate('/trainer/login')
+  //   }
+  // }, [trainer])
   return (
     <div className="main">
       

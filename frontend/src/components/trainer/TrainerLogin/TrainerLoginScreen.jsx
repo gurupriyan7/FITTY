@@ -38,7 +38,7 @@ function TrainerLoginScreen() {
       toast.error(message)
     }
     if (isSuccess || trainer) {
-      navigate('/trainer')
+      navigate('/trainer/home')
     }
     dispatch(reset())
   }, [isError, message, isLoading, isSuccess, dispatch, navigate, trainer])

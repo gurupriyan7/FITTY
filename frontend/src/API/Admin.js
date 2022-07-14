@@ -11,7 +11,7 @@ import {
   DELETE_TRAINER,
 } from '../constants/Adminconstants'
 
-const BACKEND_URL = 'http://localhost:5000/api'
+const BACKEND_URL = 'http://localhost:5000/api/'
 
 const API = axios.create({
   baseURL: `${BACKEND_URL}/admin`,

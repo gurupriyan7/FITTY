@@ -1,0 +1,120 @@
+.addbtndiv {
+  display: flex;
+  justify-content: right;
+  .addbtn {
+    width: 330px;
+    height: 53px;
+    border-radius: 8px;
+    /* border: 121px; */
+    margin-top: -55px;
+    border-color: rgb(11, 137, 195);
+    background-color: white;
+    color: rgb(11, 137, 195);
+    font-size: 23px;
+    font-weight: 600;
+    margin-right: 131px;
+    &:hover {
+      background-color: rgb(11, 137, 195);
+      color: white;
+      border: 0;
+    }
+  }
+}
+
+.tplansscreen {
+  height: 100%;
+  // background-color: white;
+  //   background-color: greenyellow;
+  margin: 9px;
+  margin-left: 88px;
+  border-radius: 8px;
+  display: grid;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+
+  .top {
+    height: 193px;
+    background-color: white;
+    display: grid;
+    justify-content: center;
+    border: 5px;
+    .tname {
+      display: flex;
+      justify-content: center;
+      .ttext {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: serif;
+      }
+    }
+    .trainercardimg {
+      width: 230px;
+      height: 156px;
+      /* margin-top: 25px; */
+      border-radius: 8px;
+    }
+  }
+  .bottom {
+    height: 168px;
+    background-color: white;
+    .cat {
+      display: flex;
+      justify-content: center;
+
+      .category {
+        margin-top: -18px;
+        border-radius: 7px;
+        display: flex;
+        justify-content: center;
+        width: 151px;
+        height: 35px;
+
+        p {
+          font-size: 19px;
+          font-weight: 500;
+          color: white;
+          font-family: unset;
+          padding: 4px;
+        }
+      }
+    }
+    .coached {
+      display: flex;
+      justify-content: center;
+      padding-top: 22px;
+      height: 57px;
+      .coachedcount {
+        font-size: 20px;
+        font-weight: 600;
+        font-family: ui-monospace;
+        color: gray;
+      }
+    }
+    .slots {
+      display: flex;
+      justify-content: center;
+      .slotsavailable {
+        font-size: 19px;
+        font-weight: 700;
+        font-family: system-ui;
+      }
+    }
+    .enrol {
+      display: flex;
+      justify-content: center;
+      .enrolbtn {
+        font-size: 19px;
+        font-weight: 600;
+        width: 143px;
+        border-radius: 7px;
+        height: 34px;
+        border-color: rgb(11, 137, 195);
+        background-color: transparent;
+        color: rgb(11, 137, 195);
+        &:hover {
+          background-color: rgb(11, 137, 195);
+          color: white;
+        }
+      }
+    }
+  }
+}

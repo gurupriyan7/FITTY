@@ -38,15 +38,13 @@
 //   height: 100vh;
 // }
 
-
 .userProfileCard {
   padding: 0;
   border-radius: 18px;
   width: 300px;
   position: fixed;
-  height:fit-content;
+  height: fit-content;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-
 
   .top {
     border-top-left-radius: 15px;
@@ -87,12 +85,14 @@
     }
   }
   .bottom {
-    background-color:white;
+    background-color: white;
     height: 36vh;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     padding-top: 10px;
-    
+    .active {
+      color: rgb(11, 137, 195);
+    }
 
     .cardtext {
       padding: 7px;
@@ -102,9 +102,17 @@
       margin-left: -6px;
       margin-top: 7px;
       cursor: pointer;
+
+      .userli {
+        color: black;
+      }
       .picon {
         margin: 5px;
         font-size: 29px;
+
+        .active {
+          color: rgb(11, 137, 195);
+        }
       }
     }
     .addpost {
@@ -121,13 +129,13 @@
         border-radius: 9px;
         text-align: center;
         font-size: 24px;
-         border-color: rgb(32, 138, 214);
-         background-color: white;
+        border-color: rgb(32, 138, 214);
+        background-color: white;
 
-         &:hover{
-          background-color:rgb(32, 138, 214) ;
+        &:hover {
+          background-color: rgb(32, 138, 214);
           color: white;
-         }
+        }
       }
     }
   }

@@ -11,39 +11,49 @@ import './Theme/Theme.scss'
 import LoginPage from './pages/user/userLogin/LoginPage'
 import RegisterPage from './pages/user/userRegister/RegisterPage'
 import UserHome from './pages/user/userHome/UserHome'
-import GetACoach from './pages/user/getaCoach/GetACoach'
-import GetPlans from './pages/user/getPlans/GetPlans'
-import MyPlans from './pages/user/MyPlans/MyPlans'
-import UserProfile from "./pages/user/UserProfile/UserProfile"
-
+import TrainerClientScreen from './components/trainer/TrainerClientsScreen/TrainerClientScreen'
+import UserHomeScreen from './components/User/userHomeScreen/UserHomeScreen'
+import GetACoachScreen from './components/User/GetACoachScreen/GetACoachScreen'
+import GetPlansScreen from './components/User/GetplansScreen/GetPlansScreen'
+import MyPlansScreen from './components/User/MyPlansScreen/MyPlansScreen'
+import UserProfileScreen from './components/User/UserProfile/UserProfileScreen'
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
 import ListUser from './pages/admin/ListUser/ListUser'
 import LoginAdmin from './pages/admin/LoginAdmin/LoginAdmin'
 import NewUser from './pages/admin/newUser/NewUser'
-import TrainerLogin from './pages/trainer/trainerLogin/TrainerLogin'
-import TrainerHome from './pages/trainer/trainerHome/TrainerHome'
 import AddTrainer from './pages/admin/addTrainer/AddTrainer'
 import ListTrainer from './pages/admin/ListTrainer/ListTrainer'
-import SinglePost from './pages/trainer/singlePost/SinglePost'
+
 // Trainer-side
+import TrainerLogin from './pages/trainer/trainerLogin/TrainerLogin'
+import TrainerHome from './pages/trainer/trainerHome/TrainerHome'
+import TrainerHomeScreen from './components/trainer/trainerHomeScreen/TrainerHomeScreen'
+import { useSelector } from 'react-redux'
+import TrainerPlansScreen from './components/trainer/TrainerPlansScreen/TrainerPlansScreen'
 
 function App() {
+  const { trainer } = useSelector((state) => state.trainerAuth)
+  const { user } = useSelector((state) => state.auth)
   return (
     <>
       <div className=" main-container container-fluid">
         <Router>
           <Routes>
+            {/* User-side */}
+            <Route path="/">
+              <Route index element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="home" element={user ? <UserHome /> : <LoginPage />}>
+                <Route index element={<UserHomeScreen />} />
+                <Route path="getacoach" element={<GetACoachScreen />} />
+                <Route path="getplans" element={<GetPlansScreen />} />
+                <Route path="myplans" element={<MyPlansScreen />} />
+                <Route path="profile" element={<UserProfileScreen />} />
+              </Route>
+            </Route>
             {/* user-side */}
-            <Route path="/" element={<UserHome/>} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path='/home'element={<UserHome/>}/>
-            <Route path='/getacoach' element={<GetACoach/>}/>
-            <Route path='/getplans' element={<GetPlans/>}/>
-            <Route path='/myplans' element={<MyPlans/>}/>
-            <Route path='/profile' element={<UserProfile/>}/>
 
             {/* Admin-Side */}
             <Route path="/admin">
@@ -56,16 +66,19 @@ function App() {
               </Route>
               {/* Trainer-in-admin */}
               <Route path="trainers">
-                <Route index element={<ListTrainer/>} />
+                <Route index element={<ListTrainer />} />
                 <Route path="new" element={<AddTrainer />} />
               </Route>
             </Route>
 
             {/* Trainer-side */}
             <Route path="/trainer">
-              <Route index element={<TrainerHome />} />
-              <Route path="login" element={<TrainerLogin />} />
-              <Route path="singlepost" element={<SinglePost/>} />
+              <Route index element={<TrainerLogin/>} />
+              <Route path="home" element={trainer ?<TrainerHome /> : <TrainerLogin/>}>
+                <Route index element={<TrainerHomeScreen />} />
+                <Route path="clients" element={<TrainerClientScreen />} />
+                <Route path='tplans'element={<TrainerPlansScreen/>}/>
+              </Route>
             </Route>
           </Routes>
         </Router>

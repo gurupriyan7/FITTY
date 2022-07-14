@@ -1,8 +1,10 @@
 import React from 'react'
 import './UserProfileScreen.scss'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import ProfilePostsScreen from '../ProfilePostsScreen/ProfilePostsScreen';
 function UserProfileScreen() {
   return (
+    <>
     <div className="singleplanscreen container-fluid">
       <div className="row">
         <AddAPhotoIcon className='addCovericon'/>
@@ -43,6 +45,8 @@ function UserProfileScreen() {
         </div>
       </div>
     </div>
+    <ProfilePostsScreen/>
+    </>
   )
 }
 

@@ -1,10 +1,12 @@
 import React from 'react'
+import {Link, useNavigate} from "react-router-dom"
 import "./TrainerProfileCard.scss"
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 function TrainerProfileCard() {
+  const navigate=useNavigate()
   return (
           <div className="trainerProfileCard">
                     <div className="top">
@@ -16,9 +18,10 @@ function TrainerProfileCard() {
                     </div>
                     <div className="bottom">
                               <ul>
-                                        <li className='cardtext'><GroupAddIcon className='picon'/>Clients</li>
-                                        <li className='cardtext'><FeaturedPlayListIcon className='picon'/>Plans</li>
-                                        <li className='cardtext'><ContactPageIcon className='picon'/>Income</li>
+                                <Link to={''}></Link>
+                                        <li  className='cardtext clients'><GroupAddIcon className='picon'/><Link style={{textDecoration:"none" , color:"black"}} to={"clients"}>Clients</Link> </li>
+                                        <li className='cardtext plans'><FeaturedPlayListIcon className='picon'/><Link style={{textDecoration:"none" , color:"black"}} to={"tplans"}>Plans</Link></li>
+                                        <li className='cardtext income'><ContactPageIcon className='picon'/>Income</li>
                               </ul>
                               <div className="addpost">
                                         <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button>

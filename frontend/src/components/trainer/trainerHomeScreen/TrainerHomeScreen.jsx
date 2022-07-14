@@ -3,15 +3,21 @@ import './TrainerHomeScreen.scss'
 // import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import InsertCommentIcon from '@mui/icons-material/InsertComment'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-import {des} from "./datadata"
+import { useEffect } from 'react'
 function TrainerHomeScreen() {
+  
 
+
+ 
+  
+  
+   
 
   return (
     <div className="trainerhomescreen">
       <span className="poststext">Posts</span>
- {/* single-Post */}
- <div className="singlepost">
+      {/* single-Post */}
+      <div className="singlepost">
         <div className="postuserdetails">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
@@ -25,9 +31,12 @@ function TrainerHomeScreen() {
           alt=""
           className="postimg"
         />
-        <hr/>
-        <div className="description review-toggle">
-        Ever heard of calorie cycling? It may sound fancy, but it’s actually a rather simple way to make your diet more flexible and sustainable! FITTR Coach Bhaskar Tadiyal explains:
+        <hr />
+        <div className="description ">
+         
+        Ever heard of calorie cycling? It may sound fancy, but it’s actually a
+          rather simple way to make your diet more flexible and sustainable!
+          FITTR Coach Bhaskar Tadiyal explains:
         </div>
         <div className="likeandcomment">
           <div className="like">
@@ -56,8 +65,8 @@ function TrainerHomeScreen() {
       </div>
       <div className="space"></div>
       {/* single-post */}
-       {/* single-Post */}
-       <div className="singlepost">
+      {/* single-Post */}
+      <div className="singlepost">
         <div className="postuserdetails">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
@@ -71,9 +80,11 @@ function TrainerHomeScreen() {
           alt=""
           className="postimg"
         />
-        <hr/>
+        <hr />
         <div className="description">
-        Ever heard of calorie cycling? It may sound fancy, but it’s actually a rather simple way to make your diet more flexible and sustainable! FITTR Coach Bhaskar Tadiyal explains:
+        Ever heard of calorie cycling? It may sound fancy, but it’s actually a
+          rather simple way to make your diet more flexible and sustainable!
+          FITTR Coach Bhaskar Tadiyal explains:
         </div>
         <div className="likeandcomment">
           <div className="like">
@@ -102,8 +113,8 @@ function TrainerHomeScreen() {
       </div>
       <div className="space"></div>
       {/* single-post */}
-       {/* single-Post */}
-       <div className="singlepost">
+      {/* single-Post */}
+      <div className="singlepost">
         <div className="postuserdetails">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
@@ -117,9 +128,11 @@ function TrainerHomeScreen() {
           alt=""
           className="postimg"
         />
-        <hr/>
+        <hr />
         <div className="description">
-        Ever heard of calorie cycling? It may sound fancy, but it’s actually a rather simple way to make your diet more flexible and sustainable! FITTR Coach Bhaskar Tadiyal explains:
+          Ever heard of calorie cycling? It may sound fancy, but it’s actually a
+          rather simple way to make your diet more flexible and sustainable!
+          FITTR Coach Bhaskar Tadiyal explains:
         </div>
         <div className="likeandcomment">
           <div className="like">

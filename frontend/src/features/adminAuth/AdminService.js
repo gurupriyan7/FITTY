@@ -15,7 +15,7 @@ import * as api from '../../API/Admin'
 // Admin-Login
 const login = async (adminData) => {
   // const response = await axios.post(ADMIN_LOGIN, adminData)
-  const {data} = await api.loginAdmin(ADMIN_LOGIN,adminData)
+  const {data} = await api.loginAdmin(adminData)
   
 
   if (data) {
