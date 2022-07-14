@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 function UserHomeProfileScreen() {
   const [active, setActive] = useState({
-    gc: true,
+    gc: false,
     gp: false,
     mp: false,
   })
@@ -30,7 +30,14 @@ function UserHomeProfileScreen() {
         alt=""
       />
       <div className="name">
-        <div className="nametext">
+        <div onClick={() => {
+              setActive((prev) => ({
+                ...prev,
+                gc: false,
+                gp: false,
+                mp: false,
+              }))
+            }} className="nametext">
           <Link
             style={{ textDecoration: 'none', color: 'black' }}
             to={'profile'}
@@ -104,10 +111,19 @@ function UserHomeProfileScreen() {
           </li>
         </ul>
         <div className="addpost">
-          <button className="addpostbutton primary-Color">
+          <Link style={{textDecoration:"none"}} to={"addpost"}>
+          <button onClick={() => {
+              setActive((prev) => ({
+                ...prev,
+                gc: false,
+                gp: false,
+                mp: false,
+              }))
+            }} className="addpostbutton primary-Color">
             <AddBoxOutlinedIcon />
             Add Post
           </button>
+          </Link>
         </div>
       </div>
     </div>

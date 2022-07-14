@@ -24,7 +24,7 @@ function TrainerProfileCard() {
                                         <li className='cardtext income'><ContactPageIcon className='picon'/>Income</li>
                               </ul>
                               <div className="addpost">
-                                        <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button>
+                                      <Link style={{textDecoration:"none"}} to={"taddpost"}> <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button></Link> 
                               </div>
                              
                     </div>
