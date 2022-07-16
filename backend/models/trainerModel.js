@@ -25,6 +25,13 @@ const trainerSchema = mongoose.Schema(
     status:{
       type:Boolean,
       required:true
+    },
+    slots:{
+      type:Number,
+    },
+    coached:{
+      type:Number,
+      default:0
     }
   },
   {

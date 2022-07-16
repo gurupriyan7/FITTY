@@ -46,6 +46,7 @@ function AllTrainer() {
               <TableCell className="tableCell">Email</TableCell>
               <TableCell className="tableCell">PhoneNumber</TableCell>
               <TableCell className="tableCell">Category</TableCell>
+              <TableCell className="tableCell">Available Slots</TableCell>
               <TableCell className="tableCell">Status</TableCell>
               <TableCell className="tableCell">Action</TableCell>
               <TableCell className="tableCell">option</TableCell>
@@ -61,6 +62,7 @@ function AllTrainer() {
                 <TableCell className="tableCell">{row.email}</TableCell>
                 <TableCell className="tableCell">{row.phoneNumber}</TableCell>
                 <TableCell className="tableCell">{row.category}</TableCell>
+                <TableCell className="tableCell">{row.slots}</TableCell>
                 <TableCell className="tableCell">
                   <span className={row.status ? 'active' : 'block'}>
                     {row.status ? 'Active' : 'Blocked'}

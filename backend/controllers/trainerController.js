@@ -10,8 +10,8 @@ const { generateToken } = require('../generateToken/generateToken')
 
 // Trainer-registration
 const registerTrainer = asyncHandler(async (req, res) => {
-  const { name, email, phoneNumber, password, category, status } = req.body
-  if (!name || !email || !phoneNumber || !password || !category) {
+  const { name, email, phoneNumber, password, category,slots, status } = req.body
+  if (!name || !email || !phoneNumber || !password || !category||!slots) {
     res.status(400)
     throw new Error('please enter the details')
   }
@@ -35,6 +35,7 @@ const registerTrainer = asyncHandler(async (req, res) => {
     phoneNumber: phoneNumber,
     category: category,
     password: hashPassword,
+    slots:slots,
     status: status,
   })
 
@@ -133,6 +134,7 @@ const deleteTrainer = asyncHandler(async (req, res) => {
 
 // Find-all-Trainers
 const getAllTrainers = asyncHandler(async (req, res) => {
+  console.log("haaa");
   const trainers = await Trainer.find()
   res.status(200).json(trainers)
 })

@@ -4,7 +4,7 @@ import {
   TRAINER_LOGIN,
   TRAINER_REGISTER,
   TRAINER_UPDATE,
-  TRAINERS,
+  GET_TRAINERS,
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -18,3 +18,5 @@ const API = axios.create({
 
 export const loginTrainer = (trainerData) =>
   API.post(TRAINER_LOGIN, trainerData)
+
+  export const AllTrainers = ()=>API.get(GET_TRAINERS)

@@ -34,6 +34,7 @@ import { useSelector } from 'react-redux'
 import TrainerPlansScreen from './components/trainer/TrainerPlansScreen/TrainerPlansScreen'
 import AddPostScreen from './components/User/AddPostScreen/AddPostScreen'
 import TrainerAddPostScreen from './components/trainer/TrainerAddPostScreen/TrainerAddPostScreen'
+import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/TrainerProfileScreen'
 
 function App() {
   const { trainer } = useSelector((state) => state.trainerAuth)
@@ -52,8 +53,8 @@ function App() {
                 <Route path="getacoach" element={<GetACoachScreen />} />
                 <Route path="getplans" element={<GetPlansScreen />} />
                 <Route path="myplans" element={<MyPlansScreen />} />
-                <Route path="profile" element={<UserProfileScreen />} />
                 <Route path='addpost' element={<AddPostScreen/>}/>
+                <Route path="profile" element={<UserProfileScreen />} />
               </Route>
             </Route>
             {/* user-side */}
@@ -82,6 +83,7 @@ function App() {
                 <Route path="clients" element={<TrainerClientScreen />} />
                 <Route path='tplans'element={<TrainerPlansScreen/>}/>
                 <Route path='taddpost' element={<TrainerAddPostScreen/>}/>
+                <Route path='tprofile' element={<TrainerProfileScreen/>}/>
               </Route>
             </Route>
           </Routes>

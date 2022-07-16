@@ -15,25 +15,38 @@ const getUser = asyncHandler(async (req, res) => {
 })
 
 // update-user
-const userUpdate = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id)
+const userUpdate = asyncHandler(async (req,res) => {
+  console.log("hello",req.body);
+  const userId = req.user._id
+  const user = await User.findById(userId)
   if (!user) {
     res.status(400)
     throw new Error('User not Found')
   }
-  const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {
+  const userData={
+    name:req.body.name,
+    email:req.body.email,
+    phoneNumber:req.body.phoneNumber,
+    
+  }
+  const updatedUser = await User.findByIdAndUpdate(userId, userData, {
     new: true,
   })
-  res.status(200).json(updatedUser)
+  res.status(200).json({
+    _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phoneNumber: updatedUser.phoneNumber,
+      status: updatedUser.status,
+      token: generateToken(updatedUser._id),
+  })
 })
 
 // register-user
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, phoneNumber, password } = req.body
-  console.log(req.body)
   if (!name || !email || !password || !phoneNumber) {
     res.status(400)
-    console.log('REGISTERED')
     throw new Error('please enter the details')
   }
 

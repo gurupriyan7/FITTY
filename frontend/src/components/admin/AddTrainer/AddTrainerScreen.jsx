@@ -6,8 +6,6 @@ import { AddTrainer, reset } from '../../../features/adminAuth/AdminSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 function AddTrainerScreen() {
-  
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -19,7 +17,7 @@ function AddTrainerScreen() {
       toast.error(message)
     }
     if (isSuccess) {
-      console.log("happy");
+      console.log('happy')
       navigate('/admin/trainers')
     }
     dispatch(reset())
@@ -31,10 +29,20 @@ function AddTrainerScreen() {
     category: '',
     Password: '',
     password2: '',
-    status:true
+    slots: '',
+    status: true,
   })
 
-  const { name, email, password, password2, phoneNumber, category,status } = formData
+  const {
+    name,
+    email,
+    password,
+    password2,
+    phoneNumber,
+    category,
+    slots,
+    status,
+  } = formData
 
   const changeValue = (e) => {
     setFormData((prev) => ({
@@ -45,7 +53,15 @@ function AddTrainerScreen() {
 
   const onSubmit = (e) => {
     e.preventDefault()
-    const trainerData = { name, email, password, phoneNumber, category,status }
+    const trainerData = {
+      name,
+      email,
+      password,
+      phoneNumber,
+      category,
+      status,
+      slots,
+    }
     dispatch(AddTrainer(trainerData))
   }
   return (
@@ -107,6 +123,18 @@ function AddTrainerScreen() {
                         placeholder="category"
                       />
                       <label htmlFor="floatingInputcategory">Category</label>
+                    </div>
+                    <div className="form-floating mb-1 Linput2">
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={changeValue}
+                        value={slots}
+                        id="floatingInputcategory"
+                        name="slots"
+                        placeholder="category"
+                      />
+                      <label htmlFor="floatingInputcategory">No of Solts</label>
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input

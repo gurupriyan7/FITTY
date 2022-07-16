@@ -21,7 +21,7 @@ export const trainerLogin = createAsyncThunk(
     try {
       return await trainerService.trainerLogin(trainerData)
     } catch (error) {
-      return thunkAPI.rejectWithValue(errorMessage(error));
+      return thunkAPI.rejectWithValue(errorMessage(error))
     }
   },
 )
@@ -31,13 +31,14 @@ export const trainerLogout = createAsyncThunk(
   'trainerAuth/trainerLogout',
   async () => {
     try {
-      
       return await trainerService.trainerLogout()
     } catch (error) {
-      console.log(error);
+     
     }
   },
 )
+
+
 
 // create-slice
 export const trainerSlice = createSlice({
@@ -75,6 +76,7 @@ export const trainerSlice = createSlice({
       state.trainer = null
       state.isSuccess = false
     },
+   
   },
 })
 

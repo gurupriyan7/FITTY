@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link, useNavigate} from "react-router-dom"
+import {Link, NavLink, useNavigate} from "react-router-dom"
 import "./TrainerProfileCard.scss"
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
@@ -14,14 +14,14 @@ function TrainerProfileCard() {
                     </div>
                     <img className='roundpic' src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg" alt="" />
                     <div className="name">
-                    <div className="nametext">Gurupriyan</div>
+                    <div className="nametext"><Link to={"tprofile"} style={{textDecoration:"none" , color:"black"}} >Gurupriyan</Link></div>
                     </div>
                     <div className="bottom">
                               <ul>
                                 <Link to={''}></Link>
-                                        <li  className='cardtext clients'><GroupAddIcon className='picon'/><Link style={{textDecoration:"none" , color:"black"}} to={"clients"}>Clients</Link> </li>
-                                        <li className='cardtext plans'><FeaturedPlayListIcon className='picon'/><Link style={{textDecoration:"none" , color:"black"}} to={"tplans"}>Plans</Link></li>
-                                        <li className='cardtext income'><ContactPageIcon className='picon'/>Income</li>
+                                        <li  className='cardtext '><GroupAddIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"clients"}>Clients</NavLink> </li>
+                                        <li className='cardtext '><FeaturedPlayListIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"tplans"}>Plans</NavLink></li>
+                                        <li className='cardtext '><ContactPageIcon className='picon'/>Income</li>
                               </ul>
                               <div className="addpost">
                                       <Link style={{textDecoration:"none"}} to={"taddpost"}> <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button></Link> 

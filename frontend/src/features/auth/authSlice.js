@@ -4,6 +4,9 @@ import { errorMessage } from "../ErrorHandle/errorMessage";
 
 // Get-user-from-localStorage
 const user = JSON.parse(localStorage.getItem("user"));
+// const user =function(){
+//   return JSON.parse(localStorage.getItem("user"));
+// }
 
 
 const initialState = {

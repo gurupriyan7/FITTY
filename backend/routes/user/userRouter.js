@@ -19,13 +19,13 @@ router.post('/register', registerUser)
 router.post('/login', loginUser)
 
 // Update-user
-router.put('/update/:id', userUpdate)
+router.put('/update',protect,userUpdate)
 
 // Delete-user
-router.delete('/delete/:id', deleteUser)
+router.delete('/delete/:id',deleteUser)
 
 // Find-user
-router.get('/find', getUser)
+router.get('/find',getUser)
 
 // change-status-(block/unblock)
 router.put('/status/:id', changeUserStatus)
