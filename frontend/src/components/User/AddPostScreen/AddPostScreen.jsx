@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './AddPostScreen.scss'
 import mm from '../../../images/no_img.svg'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-import { userAddPost, reset } from '../../../features/userPosts/UserPostsSlice'
+import { AddPost, reset } from '../../../features/Posts/PostsSlice'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ function AddPostScreen() {
   const navigate = useNavigate()
 
   const { isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.userPost,
+    (state) => state.Post,
   )
 
   useEffect(() => {
@@ -34,7 +34,7 @@ function AddPostScreen() {
   }
   const [formData, setFormData] = useState({
     description: '',
-    image:''
+    image: '',
   })
 
   const [load, setLoad] = useState(false)
@@ -45,22 +45,20 @@ function AddPostScreen() {
       [e.target.name]: e.target.value,
     }))
   }
- 
- 
+
   // submit-formData
   const onsubmit = async (e) => {
     e.preventDefault()
     if (!image) {
-      alert("no image selected")
-    }else{
+      alert('no image selected')
+    } else {
       setLoad(true)
       const data = await imageUpload(image)
-      formData.image =data.secure_url.toString()
-      dispatch(userAddPost(formData))
+      formData.image = data.secure_url.toString()
+      dispatch(AddPost(formData))
       setLoad(false)
     }
   }
-
 
   return (
     <div className="useraddpostscreen container">

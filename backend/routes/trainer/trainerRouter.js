@@ -9,6 +9,7 @@ const {
   getAllTrainers,
   ChangeStatusTrainer,
 } = require('../../controllers/trainerController')
+const {addpost} =require("../../controllers/postcontroller")
 
 // Register-Traineer
 router.post('/register', registerTrainer)
@@ -27,4 +28,7 @@ router.get('/alltrainers', getAllTrainers)
 
 // change-trainer-status
 router.put('/status/:id', ChangeStatusTrainer)
+
+// Trainer-addPost
+router.post("/addpost",trainerProtect,addpost)
 module.exports = router

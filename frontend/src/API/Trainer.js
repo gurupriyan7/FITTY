@@ -5,6 +5,7 @@ import {
   TRAINER_REGISTER,
   TRAINER_UPDATE,
   GET_TRAINERS,
+  TRAINER_ADDPOST
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -26,3 +27,6 @@ export const loginTrainer = (trainerData) =>
 
   // Update-Trainer
   export const updateTrainer = (config,trainerData)=>API.put(TRAINER_UPDATE,trainerData,config)
+
+  // Add-post
+  export const AddPost = (config,postData)=>API.post(TRAINER_ADDPOST,postData,config)

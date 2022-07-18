@@ -9,7 +9,7 @@ const {
   loginUser,
   changeUserStatus,
 } = require('../../controllers/usercontroller')
-const {addpost} = require ("../../controllers/userPostcontroller")
+const {addpost} = require ("../../controllers/postcontroller")
 
 router.get('/', getUser)
 
