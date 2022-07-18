@@ -7,6 +7,7 @@ import FactCheckSharpIcon from '@mui/icons-material/FactCheckSharp'
 import './UserHomeProfileScreen.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function UserHomeProfileScreen() {
   const [active, setActive] = useState({
@@ -14,6 +15,8 @@ function UserHomeProfileScreen() {
     gp: false,
     mp: false,
   })
+
+  const {user}= useSelector((state)=>state.auth)
 
   return (
     <div className="userProfileCard">
@@ -42,7 +45,7 @@ function UserHomeProfileScreen() {
             style={{ textDecoration: 'none', color: 'black' }}
             to={'profile'}
           >
-            Gurupriyan
+            {user.name}
           </Link>{' '}
         </div>
       </div>

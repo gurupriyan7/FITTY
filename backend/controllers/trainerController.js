@@ -10,8 +10,17 @@ const { generateToken } = require('../generateToken/generateToken')
 
 // Trainer-registration
 const registerTrainer = asyncHandler(async (req, res) => {
-  const { name, email, phoneNumber, password, category,slots, status } = req.body
-  if (!name || !email || !phoneNumber || !password || !category||!slots) {
+  console.log('tregister', req.body)
+  const {
+    name,
+    email,
+    phoneNumber,
+    password,
+    category,
+    slots,
+    status,
+  } = req.body
+  if (!name || !email || !phoneNumber || !password || !category || !slots) {
     res.status(400)
     throw new Error('please enter the details')
   }
@@ -35,7 +44,7 @@ const registerTrainer = asyncHandler(async (req, res) => {
     phoneNumber: phoneNumber,
     category: category,
     password: hashPassword,
-    slots:slots,
+    slots: slots,
     status: status,
   })
 
@@ -72,6 +81,8 @@ const loginTrainer = asyncHandler(async (req, res) => {
           phoneNumber: trainer.phoneNumber,
           category: trainer.category,
           status: trainer.status,
+          slots: trainer.slots,
+          coached: trainer.coached,
           token: generateToken(trainer._id),
         })
       } else {
@@ -90,20 +101,28 @@ const loginTrainer = asyncHandler(async (req, res) => {
 
 // Update-Trainer
 const UpdateTrainer = asyncHandler(async (req, res) => {
-  console.log('got ittt', req.body)
-  const trainer = await Trainer.findById(req.params.id)
+  const trainerId = req.trainer._id
+  console.log('got ittt', trainerId)
+
+  const trainer = await Trainer.findById(trainerId)
   if (!trainer) {
     res.status(400)
     throw new Error('Trainer Not Found')
   }
-  const updatedTrainer = await Trainer.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-    },
-  )
-  res.status(200).json(updatedTrainer)
+  const updatedTrainer = await Trainer.findByIdAndUpdate(trainerId,req.body, {
+    new: true,
+  })
+  const newTrainer = {
+    name: updatedTrainer.name,
+    email: updatedTrainer.email,
+    phoneNumber: updatedTrainer.phoneNumber,
+    status: updatedTrainer.status,
+    category: updatedTrainer.category,
+    slots: updatedTrainer.slots,
+    coached: updatedTrainer.coached,
+    token:generateToken(updatedTrainer._id)
+  }
+  res.status(200).json(newTrainer)
 })
 
 // Change-status
@@ -134,7 +153,7 @@ const deleteTrainer = asyncHandler(async (req, res) => {
 
 // Find-all-Trainers
 const getAllTrainers = asyncHandler(async (req, res) => {
-  console.log("haaa");
+  console.log('haaa')
   const trainers = await Trainer.find()
   res.status(200).json(trainers)
 })

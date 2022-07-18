@@ -38,7 +38,18 @@ export const trainerLogout = createAsyncThunk(
   },
 )
 
-
+// edit-Trainer
+export const updateTrainer = createAsyncThunk(
+  "trainerAuth/updateTrainer",
+  async(trainerData,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return await trainerService.updateTrainer(token,trainerData)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
 
 // create-slice
 export const trainerSlice = createSlice({
@@ -76,6 +87,22 @@ export const trainerSlice = createSlice({
       state.trainer = null
       state.isSuccess = false
     },
+    // Update-trainer-case
+    [updateTrainer.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [updateTrainer.fulfilled]:(state,action)=>{
+      state.isSuccess=true 
+      state.isError=false
+      state.isLoading=false
+      state.trainer=action.payload
+    },
+    [updateTrainer.rejected]:(state,action)=>{
+      state.isError=true
+      state.isLoading=false
+      state.isSuccess=false
+      state.message=action.payload
+    }
    
   },
 })

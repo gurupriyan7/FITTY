@@ -1,20 +1,7 @@
-import axios from 'axios'
-import {
-  ADMIN_LOGIN,
-  ADD_USER,
-  ALL_USERS,
-  ADD_TRAINER,
-  ALL_TRAINERS,
-  CHANGE_TRAINER_STATUS,
-  CHANGE_USER_STATUS,
-  DELETE_TRAINER,
-} from '../../constants/Adminconstants'
-
 import * as api from '../../API/Admin'
 
 // Admin-Login
 const login = async (adminData) => {
-  // const response = await axios.post(ADMIN_LOGIN, adminData)
   const { data } = await api.loginAdmin(adminData)
 
   if (data) {
@@ -22,6 +9,7 @@ const login = async (adminData) => {
   }
   return data
 }
+
 // Admin-Logout
 const logout = async () => {
   await localStorage.removeItem('admin')
@@ -30,13 +18,11 @@ const logout = async () => {
 // Add-User
 const AddUsers = async (userData) => {
   const { data } = await api.AddUser(userData)
-  console.log(data)
   return data
 }
 
 // All-Users
 const AllUsers = async () => {
-  console.log('GOTLIT ')
   const { data } = await api.AllUsers()
   return data
 }

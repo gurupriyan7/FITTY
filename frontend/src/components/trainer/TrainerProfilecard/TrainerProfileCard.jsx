@@ -5,8 +5,11 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import {useSelector} from "react-redux"
 function TrainerProfileCard() {
   const navigate=useNavigate()
+  const {trainer}=useSelector((state)=>state.trainerAuth)
+  
   return (
           <div className="trainerProfileCard">
                     <div className="top">
@@ -14,7 +17,7 @@ function TrainerProfileCard() {
                     </div>
                     <img className='roundpic' src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg" alt="" />
                     <div className="name">
-                    <div className="nametext"><Link to={"tprofile"} style={{textDecoration:"none" , color:"black"}} >Gurupriyan</Link></div>
+                    <div className="nametext"><Link to={"tprofile"} style={{textDecoration:"none" , color:"black"}} >{trainer.name}</Link></div>
                     </div>
                     <div className="bottom">
                               <ul>

@@ -141,13 +141,72 @@
         border-top: 3px solid!important;
       }
 
-      // .noPostsdiv{
-      //   height: 4rem;
-      //   background-color: red;
-      //   border-bottom-right-radius: 32px;
-      //   border-bottom-left-radius: 32px;
+      .noPostsdiv{
+        height: 4rem;
+        border-bottom-right-radius: 32px;
+        border-bottom-left-radius: 32px;
+        display: flex;
+        .left{
+          height: 100%;
+           width: 33%;
+           border-bottom-left-radius: 32px;
+           border-style: groove;
+           background-color: white;
+           .plans{
+            font-size: 24px;
+            font-weight: 700;
+            margin-left: 37%;
+            font-family: system-ui;
+           }
+           .planscount{
+            font-size: 23px;
+    width: 100%;
+    font-weight: 700;
+    margin-left: 17%;
+    font-family: system-ui;
+          }
+        }
+        .center{
+          height: 100%;
+          width: 34%;
+          border-style: groove;
+          background-color: white;
+          .clients{
+            font-size: 24px;
+    font-weight: 700;
+    margin-left: 37%;
+    font-family: system-ui;
+          }
+          .clientscount{
+            font-size: 27px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            font-weight: 700;
+            margin-left: 45%;
+            margin-top: -4%;
+          }
 
-      // }
+        }
+        .right{
+          height: 100%;
+          width: 33%;
+          border-bottom-right-radius: 32px;
+          border-style: groove;
+          background-color: white;
+            .posts{
+              font-size: 24px;
+    font-weight: 700;
+    margin-left: 37%;
+    font-family: system-ui;
+            }
+            .postscount{
+              font-size: 27px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            font-weight: 700;
+            margin-left: 45%;
+            margin-top: -4%;
+            }
+        }
+      }
     }
   }
 }

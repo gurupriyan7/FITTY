@@ -9,6 +9,7 @@ const {
   loginUser,
   changeUserStatus,
 } = require('../../controllers/usercontroller')
+const {addpost} = require ("../../controllers/userPostcontroller")
 
 router.get('/', getUser)
 
@@ -29,5 +30,8 @@ router.get('/find',getUser)
 
 // change-status-(block/unblock)
 router.put('/status/:id', changeUserStatus)
+
+// Add-post
+router.post('/addpost',protect,addpost)
 
 module.exports = router

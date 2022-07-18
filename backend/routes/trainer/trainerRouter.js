@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-
+const {trainerProtect}= require("../../middleware/authMiddleware")
 const {
   registerTrainer,
   loginTrainer,
@@ -17,7 +17,7 @@ router.post('/register', registerTrainer)
 router.post('/login', loginTrainer)
 
 // Update-Trainer
-router.put('/update/:id', UpdateTrainer)
+router.put('/update',trainerProtect,UpdateTrainer)
 
 // Delete-Trainer
 router.delete('/delete/:id', deleteTrainer)

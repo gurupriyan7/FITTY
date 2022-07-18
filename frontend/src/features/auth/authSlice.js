@@ -2,13 +2,12 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "./authService";
 import { errorMessage } from "../ErrorHandle/errorMessage";
 
+
 // Get-user-from-localStorage
 const user = JSON.parse(localStorage.getItem("user"));
-// const user =function(){
-//   return JSON.parse(localStorage.getItem("user"));
-// }
 
 
+// set-initial-state
 const initialState = {
   user: user ? user : null,
   isError: false,
@@ -45,6 +44,21 @@ export const login = createAsyncThunk(
     }
   }
 );
+
+// edit-user
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async (userData,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().auth.user.token
+      return await authService.updateUser(token,userData)
+
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
+
 
 export const authSlice = createSlice({
   name: "auth",
@@ -95,6 +109,21 @@ export const authSlice = createSlice({
       state.message = action.payload;
       state.user = null;
     },
+    //update-user-case
+    [updateUser.pending] :(state)=>{
+      state.isLoading=true
+    },
+    [updateUser.fulfilled]:(state,action)=>{
+      state.isError=false
+      state.isSuccess=true
+      state.isLoading=false
+      state.user=action.payload
+    },
+    [updateUser.rejected]:(state,action)=>{
+      state.isError=true
+      state.isLoading=false
+      state.isSuccess=false
+    }
   },
 });
 export const { reset } = authSlice.actions;

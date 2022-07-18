@@ -22,10 +22,25 @@ const AllTrainers = async () => {
   return data
 }
 
+// edit-Trainer
+const updateTrainer = async (token,trainerData)=>{
+  const config ={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data} = await api.updateTrainer(config,trainerData)
+  if(data){
+    await localStorage.setItem("trainer",JSON.stringify(data))
+  }
+  return data
+}
+
 const trainerService = {
   trainerLogin,
   trainerLogout,
   AllTrainers,
+  updateTrainer
 }
 
 export default trainerService

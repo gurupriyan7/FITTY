@@ -9,9 +9,9 @@ import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { reset, updateUser } from '../../../features/UpdateUser/UpdateUserSlice'
+import { reset, updateUser } from '../../../features/auth/authSlice'
 import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -39,18 +39,33 @@ function UserProfileScreen() {
   const dispatch = useDispatch()
 
   // edit-form-data
-  const User = JSON.parse(localStorage.getItem('user'))
-  const { name, email, phoneNumber } = User
+  // const User = JSON.parse(localStorage.getItem('user'))
+  const { user, isSuccess, isLoading, isError, message } = useSelector(
+    (state) => state.auth,
+  )
 
-  console.log('helloo', User, User.name)
+  // const{name,email,phoneNumber}=singleUser
+  useEffect(() => {
+    if (isSuccess) {
+      setFormData((prev) => ({
+        ...prev,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      }))
+      edithandleClose()
+
+    }
+  }, [user, isSuccess, isError, isLoading, message])
 
   const [formData, setFormData] = useState({
-    name: name,
-    email: email,
-    phoneNumber: phoneNumber,
+    name: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
   })
 
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     const userData = formData
     dispatch(updateUser(userData))
   }
@@ -268,7 +283,7 @@ function UserProfileScreen() {
 
             <div className="pdetails">
               <div className="Pnamediv">
-                <p className="Pname primary-Color">{name}</p>
+                <p className="Pname primary-Color">{formData.name}</p>
                 <div className="Peditbtndiv">
                   {/* <Link to={"editprofile"}><button className="Peditbtn">Edit</button></Link>  */}
                   <button onClick={edithandleOpen} className="Peditbtn">
@@ -278,16 +293,29 @@ function UserProfileScreen() {
               </div>
               <div className="Pemaildiv">
                 <p className="Pemail">
-                  <span>{email}</span>
+                  <span>{formData.email}</span>
                   <br />
-                  <span>{phoneNumber}</span>
+                  <span>{formData.phoneNumber}</span>
                 </p>
               </div>
               <div className="pedit">
                 {/* <buttom className="peditbtn">Edit</buttom> */}
               </div>
               <hr className="Pline" />
-              <div className="noPostsdiv"></div>
+              <div className="noPostsdiv">
+                <div className="left">
+                  <h5 className="plans primary-Color">Plans</h5>
+                  <h5 className="planscount">2</h5>
+                </div>
+                <div className="center">
+                  <h5 className="clients primary-Color">Clients</h5>
+                  <p className="clientscount">8</p>
+                </div>
+                <div className="right">
+                  <h5 className="posts primary-Color">Posts</h5>
+                  <h5 className="postscount">7</h5>
+                </div>
+              </div>
             </div>
           </div>
         </div>

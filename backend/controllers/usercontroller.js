@@ -29,17 +29,19 @@ const userUpdate = asyncHandler(async (req,res) => {
     phoneNumber:req.body.phoneNumber,
     
   }
-  const updatedUser = await User.findByIdAndUpdate(userId, userData, {
+  const updatedUser = await User.findByIdAndUpdate(userId,userData, {
     new: true,
   })
-  res.status(200).json({
+  const newUser={
     _id: updatedUser._id,
-      name: updatedUser.name,
-      email: updatedUser.email,
-      phoneNumber: updatedUser.phoneNumber,
-      status: updatedUser.status,
-      token: generateToken(updatedUser._id),
-  })
+    name: updatedUser.name,
+    email: updatedUser.email,
+    phoneNumber: updatedUser.phoneNumber,
+    status: updatedUser.status,
+    token: generateToken(updatedUser._id),
+  }
+  console.log("newuser",newUser);
+  res.status(200).json(newUser)
 })
 
 // register-user
@@ -146,6 +148,8 @@ const changeUserStatus = asyncHandler(async (req, res) => {
     throw new Error('user not found')
   }
 })
+
+
 
 module.exports = {
   getUser,

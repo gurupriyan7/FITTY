@@ -16,7 +16,13 @@ const API = axios.create({
 
 // Trainer-endpoints
 
+
+// Trainer-Login
 export const loginTrainer = (trainerData) =>
   API.post(TRAINER_LOGIN, trainerData)
 
+  // Featch-all-Trainers
   export const AllTrainers = ()=>API.get(GET_TRAINERS)
+
+  // Update-Trainer
+  export const updateTrainer = (config,trainerData)=>API.put(TRAINER_UPDATE,trainerData,config)
