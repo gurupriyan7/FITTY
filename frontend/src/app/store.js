@@ -3,13 +3,15 @@ import authReducer from '../features/auth/authSlice'
 import adminReducer from "../features/adminAuth/AdminSlice"
 import trainerReducer from "../features/trainerAuth/TrainerSlice"
 import featchTrainerReducer from "../features/featchTrainers/FeatchTrainersSlice"
-import PostReducer from "../features/Posts/PostsSlice"
+import userPostReducer from "../features/UserPosts/PostsSlice"
+import trainerPostReducer from "../features/trainerPosts/TrainerPostSlice"
 export const store = configureStore({
   reducer: {
     auth:authReducer,
     adminAuth:adminReducer,
     trainerAuth:trainerReducer,
     featchAllTrainers:featchTrainerReducer,
-    Post:PostReducer
+    userPost:userPostReducer,
+    trainerPost:trainerPostReducer
   },
 });

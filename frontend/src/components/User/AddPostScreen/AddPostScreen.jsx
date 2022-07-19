@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './AddPostScreen.scss'
 import mm from '../../../images/no_img.svg'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
-import { AddPost, reset } from '../../../features/Posts/PostsSlice'
+import { AddPost, reset } from '../../../features/UserPosts/PostsSlice'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -12,7 +12,7 @@ function AddPostScreen() {
   const navigate = useNavigate()
 
   const { isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.Post,
+    (state) => state.userPost,
   )
 
   useEffect(() => {

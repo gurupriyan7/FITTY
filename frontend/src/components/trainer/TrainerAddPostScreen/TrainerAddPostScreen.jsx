@@ -1,26 +1,28 @@
-import React, { useRef, useState,useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import mm from '../../../images/no_img.svg'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import './TrainerAddPostScreen.scss'
-import {useSelector,useDispatch,} from "react-redux"
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import {imageUpload} from "../../../util/cloudniary/imageUpload"
-import {reset,trainerAddpost} from "../../../features/Posts/PostsSlice"
+import { imageUpload } from '../../../util/cloudniary/imageUpload'
+import {
+  reset,trainerAddpost
+} from '../../../features/trainerPosts/TrainerPostSlice'
 function TrainerAddPostScreen() {
   const imageRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-// require-state
-const { isError, isSuccess, isLoading, message } = useSelector(
-  (state) => state.Post,
-)
+  // require-state
+  const { isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.trainerPost,
+  )
 
-useEffect(()=>{
-if(isSuccess){
-  navigate("/trainer/home/tprofile")
-}
-dispatch(reset())
-},[isSuccess,isError,message])
+  useEffect(() => {
+    if (isSuccess) {
+      navigate('/trainer/home/tprofile')
+    }
+    dispatch(reset())
+  }, [isSuccess, isError, message])
 
   // Image-preview
   const [image, setImage] = useState(null)
@@ -32,31 +34,30 @@ dispatch(reset())
   }
 
   // form-data
-  const [formdata,setFormData]=useState({
-    description:"",
-    image:""
+  const [formdata, setFormData] = useState({
+    description: '',
+    image: '',
   })
 
-  const onChange = (e)=>{
-    setFormData((prev)=>({
+  const onChange = (e) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]:e.target.value
+      [e.target.name]: e.target.value,
     }))
   }
 
   // onsubmit
-  const [load,setload]= useState(false)
-  const onsubmit = async(e)=>{
+  const [load, setload] = useState(false)
+  const onsubmit = async (e) => {
     e.preventDefault()
-    if(!image){
-      alert("image not selected")
-    }else{
-       setload(true)
-       const data = await imageUpload(image)
-       formdata.image = data.secure_url.toString()
-     dispatch(trainerAddpost(formdata))
-     setload(false)
-
+    if (!image) {
+      alert('image not selected')
+    } else {
+      setload(true)
+      const data = await imageUpload(image)
+      formdata.image = data.secure_url.toString()
+      dispatch(trainerAddpost(formdata))
+      setload(false)
     }
   }
   return (
@@ -108,7 +109,9 @@ dispatch(reset())
         </div>
         <div className="postbtndiv col-12">
           <div className="postbtninnerdiv">
-            <button onClick={onsubmit} className="postbtn">Add Post</button>
+            <button onClick={onsubmit} className="postbtn">
+              Add Post
+            </button>
           </div>
         </div>
       </div>

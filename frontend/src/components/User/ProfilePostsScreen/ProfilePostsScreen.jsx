@@ -3,6 +3,7 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import InsertCommentIcon from '@mui/icons-material/InsertComment'
 import './ProfilePostsScreen.scss'
 function ProfilePostsScreen() {
+
   return (
     <div className="userprofilepostsscreen">
       <span className="poststext">Posts</span>

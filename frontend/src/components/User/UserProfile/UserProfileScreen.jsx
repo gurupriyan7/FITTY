@@ -39,12 +39,11 @@ function UserProfileScreen() {
   const dispatch = useDispatch()
 
   // edit-form-data
-  // const User = JSON.parse(localStorage.getItem('user'))
   const { user, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.auth,
   )
 
-  // const{name,email,phoneNumber}=singleUser
+  
   useEffect(() => {
     if (isSuccess) {
       setFormData((prev) => ({
@@ -109,7 +108,7 @@ function UserProfileScreen() {
   }
   return (
     <>
-      {/* edit-image */}
+      {/* edit-profile */}
       <Modal
         open={editopen}
         onClose={edithandleClose}
