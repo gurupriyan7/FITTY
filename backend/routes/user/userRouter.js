@@ -8,6 +8,7 @@ const {
   deleteUser,
   loginUser,
   changeUserStatus,
+  userPosts
 } = require('../../controllers/usercontroller')
 const {addpost} = require ("../../controllers/postcontroller")
 
@@ -33,5 +34,8 @@ router.put('/status/:id', changeUserStatus)
 
 // Add-post
 router.post('/addpost',protect,addpost)
+
+// single-user-posts
+router.get("/posts",protect,userPosts)
 
 module.exports = router

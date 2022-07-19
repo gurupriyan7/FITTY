@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import { reset, updateUser } from '../../../features/auth/authSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { userPost } from '../../../features/UserPosts/PostsSlice'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -42,8 +43,10 @@ function UserProfileScreen() {
   const { user, isSuccess, isLoading, isError, message } = useSelector(
     (state) => state.auth,
   )
+  // post-count
+  const {userposts}=useSelector((state)=>state.userPost)
+  const [postCount,setPostCount]= useState(0)
 
-  
   useEffect(() => {
     if (isSuccess) {
       setFormData((prev) => ({
@@ -56,6 +59,12 @@ function UserProfileScreen() {
 
     }
   }, [user, isSuccess, isError, isLoading, message])
+
+  useEffect(()=>{
+    if(userposts){
+      setPostCount(userposts.length)
+    }
+  },[userposts])
 
   const [formData, setFormData] = useState({
     name: user.name,
@@ -312,7 +321,7 @@ function UserProfileScreen() {
                 </div>
                 <div className="right">
                   <h5 className="posts primary-Color">Posts</h5>
-                  <h5 className="postscount">7</h5>
+                  <h5 className="postscount">{postCount}</h5>
                 </div>
               </div>
             </div>

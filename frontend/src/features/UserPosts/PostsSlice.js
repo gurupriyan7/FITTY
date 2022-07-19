@@ -10,6 +10,7 @@ const initialState = {
   isSuccess: false,
   message: '',
   isLoading: false,
+  userposts:[]
 }
 
 // Add-userPosts
@@ -24,10 +25,10 @@ export const AddPost = createAsyncThunk(
     }
   },
 )
-// user-posts
+// user-posts-featch
 export const userPost = createAsyncThunk(
   "posts/userPosts",
-  async(data,thunkAPI)=>{
+  async(t,thunkAPI)=>{
     try {
       const token = await thunkAPI.getState().auth.user.token
       return await PostsService.userposts(token)
@@ -68,6 +69,20 @@ const PostSlice = createSlice({
       state.isSuccess = false
       state.message = action.payload
     },
+    [userPost.pending]:(state,action)=>{
+      state.isLoading=true
+    },
+    [userPost.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.userposts =action.payload
+    },
+    [userPost.rejected]:(state,action)=>{
+      state.isError=true
+      state.isSuccess=false
+      state.message=action.payload
+      state.userposts=[]
+    }
   },
 })
 export const { reset } = PostSlice.actions

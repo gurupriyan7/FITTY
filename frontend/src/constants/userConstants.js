@@ -4,7 +4,8 @@ const urls = {
   GET_USER: '/user',
   USER_STATUS: '/status/',
   USER_UPDATE: '/update',
-  USER_ADDPOST:'/addpost'
+  USER_ADDPOST:'/addpost',
+  USER_POSTS:"/posts"
 }
 
 export const {
@@ -13,5 +14,6 @@ export const {
   USER_REGISTER,
   USER_STATUS,
   USER_UPDATE,
-  USER_ADDPOST
+  USER_ADDPOST,
+  USER_POSTS
 } = urls

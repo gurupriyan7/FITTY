@@ -4,7 +4,8 @@ import {
   USER_LOGIN,
   USER_REGISTER,
   USER_UPDATE,
-  USER_ADDPOST
+  USER_ADDPOST,
+  USER_POSTS
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
 
@@ -21,3 +22,4 @@ export const editUser = (userData, config) =>
 
   // User-posts
   export const userAddPost = (postData,config)=>API.post(USER_ADDPOST,postData,config)
+  export const userPosts = (config)=>API.get(USER_POSTS,config)

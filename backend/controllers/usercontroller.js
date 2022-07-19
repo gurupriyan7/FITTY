@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs')
 // rerquire-userModel
 const User = require('../models/userModel')
 
+// require-postsModel
+const Posts=require("../models/postModel")
+
 // require -generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
 
@@ -15,24 +18,24 @@ const getUser = asyncHandler(async (req, res) => {
 })
 
 // update-user
-const userUpdate = asyncHandler(async (req,res) => {
-  console.log("hello",req.body);
-  const userId = req.user._id
+const userUpdate = asyncHandler(async (req, res) => {
+  console.log('hello', req.body)
+  const userid = req.user._id
   const user = await User.findById(userId)
   if (!user) {
     res.status(400)
     throw new Error('User not Found')
   }
-  const userData={
-    name:req.body.name,
-    email:req.body.email,
-    phoneNumber:req.body.phoneNumber,
-    
+  const userData = {
+    name: req.body.name,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
   }
-  const updatedUser = await User.findByIdAndUpdate(userId,userData, {
+  const updatedUser = await User.findByIdAndUpdate(userid, userData, {
     new: true,
   })
-  const newUser={
+  let userId= updatedUser._id
+  const newUser = {
     _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
@@ -40,7 +43,7 @@ const userUpdate = asyncHandler(async (req,res) => {
     status: updatedUser.status,
     token: generateToken(updatedUser._id),
   }
-  console.log("newuser",newUser);
+  console.log('newuser', newUser)
   res.status(200).json(newUser)
 })
 
@@ -97,13 +100,13 @@ const loginUser = asyncHandler(async (req, res) => {
   if (user) {
     if (user.status) {
       if (await bcrypt.compare(password, user.password)) {
-        console.log('successfully login')
         res.status(200).json({
           _id: user._id,
           name: user.name,
           email: user.email,
           phoneNumber: user.phoneNumber,
           status: user.status,
+          postCount:postCount,
           token: generateToken(user._id),
         })
       } else {
@@ -149,7 +152,18 @@ const changeUserStatus = asyncHandler(async (req, res) => {
   }
 })
 
-
+// single-user-posts
+const userPosts = asyncHandler(async(req,res)=>{
+  const userId = req.user._id
+  const posts = await Posts.find({userId})
+  if(posts){
+    console.log("hello",posts)
+    res.status(200).json(posts)
+  }else{
+    res.status(401)
+    throw new Error("No posts found")
+  }
+})
 
 module.exports = {
   getUser,
@@ -158,4 +172,5 @@ module.exports = {
   registerUser,
   deleteUser,
   changeUserStatus,
+  userPosts
 }
