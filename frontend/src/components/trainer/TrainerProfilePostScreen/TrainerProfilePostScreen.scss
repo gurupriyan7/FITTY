@@ -14,6 +14,24 @@
             font-size: 23px;
             padding-bottom: 5px;
           }
+          .emptyPost{
+            width: 113%;
+    // background-color: green;
+    height: 100%;
+    .emptyimg{
+      width: 26%;
+      height: 33%;
+      margin-left: 34%;
+    }
+    .emptyimgtext{
+      font-size: 18px;
+    font-weight: 600;
+    margin-left: 38%;
+    padding: 2%;
+    color: darkgrey;
+    font-family: system-ui;
+    }
+          }
           .singlepost {
             background-color: white;
             height: 100%;
@@ -27,13 +45,15 @@
         //       padding-top: 9px;
               padding-right: 34px;
               color: rgb(61, 59, 59);
+              overflow-wrap: break-word;
+              max-width: 650px;
             }
         
             .postuserdetails {
               width: 100%;
               display: flex;
               border-radius: 9px;
-              //       background-color: brown;
+              // background-color: brown;
               .postuserimg {
                 border-radius: 50%;
                 height: 40px;
@@ -47,7 +67,14 @@
                 padding: 13px;
                 padding-left: 20px;
                 margin-top: 5px;
+                width: 49%;
               }
+              .delete{
+                display: flex;
+                justify-content: right;
+                width: 39%;
+              }
+
             }
             .postimg {
               height: 305px;
@@ -95,6 +122,7 @@
                 .liketext {
                   padding: 32px;
                   cursor: pointer;
+                  
                 }
               }
               .comment {

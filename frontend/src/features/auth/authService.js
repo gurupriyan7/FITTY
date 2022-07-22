@@ -29,7 +29,7 @@ const updateUser = async (token, userdata) => {
       Authorization: `Bearer ${token}`,
     },
   }
-  const { data } = await api.editUser(userdata, config)
+  const { data } = await api.editUser(userdata,config)
 
   if (data) {
     await localStorage.setItem('user', JSON.stringify(data))

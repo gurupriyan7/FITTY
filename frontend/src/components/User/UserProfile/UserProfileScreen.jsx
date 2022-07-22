@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 import { reset, updateUser } from '../../../features/auth/authSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userPost } from '../../../features/UserPosts/PostsSlice'
+import { imageUpload } from '../../../util/cloudniary/imageUpload'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -44,44 +44,54 @@ function UserProfileScreen() {
     (state) => state.auth,
   )
   // post-count
-  const {userposts}=useSelector((state)=>state.userPost)
-  const [postCount,setPostCount]= useState(0)
+  const { userposts } = useSelector((state) => state.userPost)
+  const [postCount, setPostCount] = useState(0)
 
   useEffect(() => {
     if (isSuccess) {
-      setFormData((prev) => ({
-        ...prev,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-      }))
       edithandleClose()
-
     }
   }, [user, isSuccess, isError, isLoading, message])
 
-  useEffect(()=>{
-    if(userposts){
+  useEffect(() => {
+    if (userposts) {
       setPostCount(userposts.length)
     }
-  },[userposts])
+  }, [userposts])
 
   const [formData, setFormData] = useState({
     name: user.name,
     email: user.email,
     phoneNumber: user.phoneNumber,
+    coverimg: user.coverimg,
+    profileimage: user.profileimage,
   })
 
-  const onSubmit = (e) => {
+  useEffect(() => {
+    dispatch(updateUser(formData))
+  }, [formData.coverimg, formData.profileimage])
+
+// profile-image
+  const [Pimage, setPimage] = useState(null)
+  const onSubmit = async(e) => {
     e.preventDefault()
-    const userData = formData
-    dispatch(updateUser(userData))
+    setcload(true)
+      const data = await imageUpload(Pimage)
+      const pimge = await data.secure_url.toString()
+      let newImage = { profileimage: pimge }
+      setFormData((formData) => ({
+        ...formData,
+        ...newImage,
+      }))
+      setcload(false)
+   
   }
 
   // cover-image
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  const [cload, setcload] = useState(false)
   // profile-img
   const [Popen, setPopen] = useState(false)
   const PhandleOpen = () => setPopen(true)
@@ -94,15 +104,25 @@ function UserProfileScreen() {
   // onchange-prview-cover
   const [Cimage, setCimage] = useState(null)
   const imageRef = useRef()
-  const onChangeCoverimg = (event) => {
+  const onChangeCoverimg = async (event) => {
     if (event.target.files && event.target.files[0]) {
       let Cimg = event.target.files[0]
       setCimage(Cimg)
+      setcload(true)
+      const data = await imageUpload(Cimg)
+      const cimge = await data.secure_url.toString()
+      let newImage = { coverimg: cimge }
+      setFormData((formData) => ({
+        ...formData,
+        ...newImage,
+      }))
+      setcload(false)
     }
   }
+  // upload-cover-image-
+
   // onchange-prview-profile
-  const [Pimage, setPimage] = useState(null)
-  const onChangePoverimg = (event) => {
+  const onChangePoverimg =async (event) => {
     if (event.target.files && event.target.files[0]) {
       let Pimg = event.target.files[0]
       setPimage(Pimg)
@@ -114,6 +134,9 @@ function UserProfileScreen() {
       ...prevestate,
       [e.target.name]: e.target.value,
     }))
+  }
+  if (cload) {
+    return <h1>hello world</h1>
   }
   return (
     <>
@@ -146,8 +169,8 @@ function UserProfileScreen() {
                               alt=""
                               className="PeditPimg"
                             />
-                          ) : Psample ? (
-                            <img src={Psample} alt="" className="PeditPimg" />
+                          ) : user.profileimage ? (
+                            <img src={user.profileimage} alt="" className="PeditPimg" />
                           ) : (
                             <img
                               src={emptyprofilepic}
@@ -230,7 +253,7 @@ function UserProfileScreen() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src={Csample} alt="" className="coverimgpopup" />
+          <img src={user.coverimg} alt="" className="coverimgpopup" />
         </Box>
       </Modal>
       {/* cover-image */}
@@ -243,7 +266,7 @@ function UserProfileScreen() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src={Psample} alt="" className="profileimgpopup" />
+          <img src={user.profileimage} alt="" className="profileimgpopup" />
         </Box>
       </Modal>
       {/* profile image */}
@@ -266,10 +289,10 @@ function UserProfileScreen() {
                 alt=""
                 className="coverimg"
               />
-            ) : Csample ? (
+            ) : user.coverimg ? (
               <img
                 onClick={handleOpen}
-                src={Csample}
+                src={user.coverimg}
                 alt=""
                 className="coverimg"
               />
@@ -278,10 +301,10 @@ function UserProfileScreen() {
             )}
           </div>
           <div className="updetails">
-            {Psample ? (
+            {user.profileimage ? (
               <img
                 onClick={PhandleOpen}
-                src={Psample}
+                src={user.profileimage }
                 alt=""
                 className="Sprofilepic"
               />
@@ -313,7 +336,7 @@ function UserProfileScreen() {
               <div className="noPostsdiv">
                 <div className="left">
                   <h5 className="plans primary-Color">Plans</h5>
-                  <h5 className="planscount">2</h5>
+                  <h5 className="planscount">5</h5>
                 </div>
                 <div className="center">
                   <h5 className="clients primary-Color">Clients</h5>
@@ -329,6 +352,7 @@ function UserProfileScreen() {
         </div>
       </div>
       <ProfilePostsScreen />
+      {formData.coverimg}
     </>
   )
 }

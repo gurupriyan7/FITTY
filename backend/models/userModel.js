@@ -21,6 +21,12 @@ const userSchema = mongoose.Schema(
     status:{
       type:Boolean,
       required:true,
+    },
+    profileimage:{
+      type:String
+    },
+    coverimg:{
+      type:String
     }
   },
   {

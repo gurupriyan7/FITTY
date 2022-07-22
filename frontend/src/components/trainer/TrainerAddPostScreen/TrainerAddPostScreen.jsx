@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import mm from '../../../images/no_img.svg'
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import './TrainerAddPostScreen.scss'
+import { toast } from 'react-toastify'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
@@ -19,7 +20,9 @@ function TrainerAddPostScreen() {
 
   useEffect(() => {
     if (isSuccess) {
+      toast.success("post Added")
       navigate('/trainer/home/tprofile')
+  
     }
     dispatch(reset())
   }, [isSuccess, isError, message])

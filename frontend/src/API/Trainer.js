@@ -5,7 +5,10 @@ import {
   TRAINER_REGISTER,
   TRAINER_UPDATE,
   GET_TRAINERS,
-  TRAINER_ADDPOST
+  TRAINER_ADDPOST,
+  TRAINER_POSTS,
+  TRAINER_POST_DELETE,
+  ALL_POSTS
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -30,3 +33,12 @@ export const loginTrainer = (trainerData) =>
 
   // Add-post
   export const AddPost = (config,postData)=>API.post(TRAINER_ADDPOST,postData,config)
+
+  // featch-posts
+  export const trainerPosts = (config)=>API.get(TRAINER_POSTS,config)
+
+  // delete-posts
+  export const deletePost = (config,postId)=>API.delete(TRAINER_POST_DELETE+postId,config)
+
+  // all-posts
+  export const allPosts=(config)=>API.get(ALL_POSTS,config)

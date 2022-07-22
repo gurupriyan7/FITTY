@@ -1,58 +1,94 @@
 import React from 'react'
-import "./TrainerProfilePostScreen.scss"
+import './TrainerProfilePostScreen.scss'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import InsertCommentIcon from '@mui/icons-material/InsertComment'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
+import emptyimg from '../../../images/no_img.svg'
+import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import {
+  TrainerPosts,
+  reset,
+  deletePost
+} from '../../../features/trainerPosts/TrainerPostSlice'
 function TrainerProfilePostScreen() {
+  const dispatch = useDispatch()
+  // get-userposts
+  const { trainerPosts,isDeleted } = useSelector((state) => state.trainerPost)
+  const [posts, setPosts] = useState([])
+ 
+
+  useEffect(() => {
+    dispatch(TrainerPosts())
+  }, [isDeleted])
+
+  useEffect(() => {
+    if (trainerPosts) {
+      setPosts(trainerPosts)
+    }
+    dispatch(reset())
+  }, [trainerPosts])
+  const deleteTPost = (id) => {
+     dispatch(deletePost(id))
+    //  setDelId(id)
+  }
+  const liked = (id) => {}
   return (
-          <div className="trainerprofilepostsscreen">
-          <span className="poststext">Posts</span>
-          {/* single-Post */}
-          <div className="singlepost">
-            <div className="postuserdetails">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
-                alt=""
-                className="postuserimg"
-              />
-              <span className="postusername">Gurupriyan</span>
-            </div>
-            <img
-              src="https://www.telegraph.co.uk/content/dam/football/2021/08/05/TELEMMGLPICT000267249163_1_trans_NvBQzQNjv4BqqVzuuqpFlyLIwiB6NTmJwauLYewjGO21NF-o1gxbkUI.jpeg"
-              alt=""
-              className="postimg"
-            />
-            <hr/>
-            <div className="description">
-            Ever heard of calorie cycling? It may sound fancy, but it’s actually a rather simple way to make your diet more flexible and sustainable! FITTR Coach Bhaskar Tadiyal explains:
-            </div>
-            <div className="likeandcomment">
-              <div className="like">
-                <span className="liketext">
-                  <ThumbUpIcon />
-                  Like
-                </span>
-                <br></br>
-                <span class="tooltiptext">
-                  <ThumbUpIcon style={{ color: 'red' }} />
-                  112
-                </span>
+    <div className="trainerprofilepostsscreen">
+      <span className="poststext">Posts</span>
+      {posts.length ? (
+        posts
+          
+          .map((post) => (
+            <>
+              {/* single-Post */}
+              <div className="singlepost">
+                <div className="postuserdetails">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
+                    alt=""
+                    className="postuserimg"
+                  />
+                  <span className="postusername">{post.postedBy.name}</span>
+                  <div className="delete">
+                    <Tooltip title="Delete">
+                      <IconButton onClick={() => deleteTPost(post._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
+                </div>
+                <img src={post.image} alt="" className="postimg" />
+                <hr />
+                <div className="description">{post.description}</div>
+                <div className="likeandcomment">
+                  <div className="like">
+                    <span className="liketext">
+                      <ThumbUpIcon onClick={() => liked(post._id)} />{' '}
+                      {post.like}
+                    </span>
+                  </div>
+                  <div className="comment">
+                    <span className="commenttext"></span>
+
+                    <br />
+                  </div>
+                </div>
               </div>
-              <div className="comment">
-                <span className="commenttext">
-                  <InsertCommentIcon />
-                  Comment
-                </span>
-                <br />
-                <span class="tooltiptext">
-                  <InsertCommentIcon style={{ color: 'red' }} />
-                  112
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="space"></div>
-          {/* single-post */}
+              <div className="space"></div>
+              {/* single-post */}
+            </>
+          ))
+      ) : (
+        <div className="emptyPost">
+          <img src={emptyimg} alt="" className="emptyimg" />
+          <p className="emptyimgtext">No posts found</p>
         </div>
+      )}
+    </div>
   )
 }
 

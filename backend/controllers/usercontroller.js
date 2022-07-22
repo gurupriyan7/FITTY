@@ -6,7 +6,10 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/userModel')
 
 // require-postsModel
-const Posts=require("../models/postModel")
+const { userpost } = require('../models/postModel')
+
+// require-trainerPost-model
+const { trainerpsot } = require('../models/postModel')
 
 // require -generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
@@ -21,7 +24,7 @@ const getUser = asyncHandler(async (req, res) => {
 const userUpdate = asyncHandler(async (req, res) => {
   console.log('hello', req.body)
   const userid = req.user._id
-  const user = await User.findById(userId)
+  const user = await User.findById(userid)
   if (!user) {
     res.status(400)
     throw new Error('User not Found')
@@ -30,16 +33,20 @@ const userUpdate = asyncHandler(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
+    coverimg:req.body.coverimg,
+    profileimage:req.body.profileimage
+
   }
   const updatedUser = await User.findByIdAndUpdate(userid, userData, {
     new: true,
   })
-  let userId= updatedUser._id
   const newUser = {
     _id: updatedUser._id,
     name: updatedUser.name,
     email: updatedUser.email,
     phoneNumber: updatedUser.phoneNumber,
+    coverimg:updatedUser.coverimg,
+    profileimage:updatedUser.profileimage,
     status: updatedUser.status,
     token: generateToken(updatedUser._id),
   }
@@ -106,7 +113,9 @@ const loginUser = asyncHandler(async (req, res) => {
           email: user.email,
           phoneNumber: user.phoneNumber,
           status: user.status,
-          postCount:postCount,
+          coverimg:user.coverimg,
+          profileimg:user.profileimage,
+          postCount: user.postCount,
           token: generateToken(user._id),
         })
       } else {
@@ -152,19 +161,66 @@ const changeUserStatus = asyncHandler(async (req, res) => {
   }
 })
 
+// add-user-posts
+const addpost = asyncHandler(async (req, res) => {
+  const { description, image } = req.body
+  if (req.user) {
+    let id = req.user._id
+    const userPost = await userpost.create({
+      description: description,
+      image: image,
+      Comment: [],
+      postedBy: id,
+    })
+    if (userPost) {
+      res.status(200).json('post added successfully')
+    } else {
+      res.status(401)
+      throw new Error('somthing wrong post not added')
+    }
+  }
+})
 // single-user-posts
-const userPosts = asyncHandler(async(req,res)=>{
-  const userId = req.user._id
-  const posts = await Posts.find({userId})
-  if(posts){
-    console.log("hello",posts)
-    res.status(200).json(posts)
-  }else{
+const userPosts = asyncHandler(async (req, res) => {
+  const userPosts = await userpost
+    .find()
+    .populate({ path: 'postedBy', select: ['name', 'email'] })
+  if (userPosts) {
+    res.status(200).json(userPosts)
+  } else {
     res.status(401)
-    throw new Error("No posts found")
+    throw new Error('No posts found')
   }
 })
 
+// user-post-delete
+const deletePost = asyncHandler(async (req, res) => {
+  const userPost = await userpost.findById(req.params.id)
+  if (userPost) {
+    await userPost.remove()
+    res.status(200).json({ id: req.params.id })
+  } else {
+    res.status(400)
+    throw new Error('post not found')
+  }
+})
+
+// All-posts
+const allPosts = asyncHandler(async (req, res) => {
+  const userPost = await userpost
+    .find()
+    .populate({ path: 'postedBy', select: ['name', 'email'] })
+  const trainerPost = await trainerpsot
+    .find()
+    .populate({ path: 'postedBy', select: ['name', 'email'] })
+  if (userPost || trainerPost) {
+    const allpost = [...userPost, ...trainerPost]
+    res.status(200).json(allpost)
+  } else {
+    res.status(400)
+    throw new Error('No posts found')
+  }
+})
 module.exports = {
   getUser,
   userUpdate,
@@ -172,5 +228,8 @@ module.exports = {
   registerUser,
   deleteUser,
   changeUserStatus,
-  userPosts
+  userPosts,
+  addpost,
+  deletePost,
+  allPosts,
 }

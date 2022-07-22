@@ -1,35 +1,44 @@
 import React from 'react'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import InsertCommentIcon from '@mui/icons-material/InsertComment'
+import DeleteIcon from '@mui/icons-material/Delete'
+import IconButton from '@mui/material/IconButton'
+import Tooltip from '@mui/material/Tooltip'
 import './ProfilePostsScreen.scss'
 import { useSelector, useDispatch } from 'react-redux'
+import emptyimg from "../../../images/no_img.svg"
 import { useEffect } from 'react'
-import { userPost, reset } from '../../../features/UserPosts/PostsSlice'
+import { userPost, reset,postDelete} from '../../../features/UserPosts/PostsSlice'
 import { useState } from 'react'
 function ProfilePostsScreen() {
   const dispatch = useDispatch()
   // get-state
-  const { userposts, isSuccess, isError, isLoading, message } = useSelector(
+  const { userposts, isSuccess, isError, isLoading, message,isDeleted } = useSelector(
     (state) => state.userPost,
   )
+  const [post ,setPost]=useState([])
 
   useEffect(() => {
     dispatch(userPost())
-  }, [])
+  }, [isDeleted])
 
   useEffect(() => {
-    if (isSuccess && userposts) {
+    if (userposts) {
+      setPost(userposts)
     }
     dispatch(reset())
-  }, [isError, isSuccess, message, dispatch, userposts])
-  console.log('post', userposts)
+  }, [userposts])
 
+
+const deleteUPost =(id)=>{
+dispatch(postDelete(id))
+  }
   return (
     <>
       <div className="userprofilepostsscreen">
         <span className="poststext">Posts</span>
-        {userposts
-          ? userposts.map((post) => (
+        {post.length
+          ? post.map((post) => (
               <>
                 <div className="singlepost">
                   <div className="postuserdetails">
@@ -38,7 +47,14 @@ function ProfilePostsScreen() {
                       alt=""
                       className="postuserimg"
                     />
-                    <span className="postusername">Gurupriyan</span>
+                    <span className="postusername">{post.postedBy.name}</span>
+                    <div className="delete">
+                    <Tooltip title="Delete">
+                      <IconButton onClick={() => deleteUPost(post._id)}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </div>
                   </div>
                   <img src={post.image} alt="" className="postimg" />
                   <hr />
@@ -47,23 +63,18 @@ function ProfilePostsScreen() {
                     <div className="like">
                       <span className="liketext">
                         <ThumbUpIcon />
-                        Like
-                      </span>
-                      <br></br>
-                      <span class="tooltiptext">
-                        <ThumbUpIcon style={{ color: 'red' }} />
                         {post.like}
                       </span>
+                      <br></br>
+                      
                     </div>
                     <div className="comment">
                       <span className="commenttext">
-                        <InsertCommentIcon />
-                        Comment
+                        
                       </span>
                       <br />
                       <span class="tooltiptext">
-                        <InsertCommentIcon style={{ color: 'red' }} />
-                        112
+                        
                       </span>
                     </div>
                   </div>
@@ -71,7 +82,14 @@ function ProfilePostsScreen() {
                 <div className="space"></div>
               </>
             ))
-          : ''}
+          : 
+          <div className="emptyPost">
+<img src={emptyimg} alt="" className="emptyimg" />
+<p className="emptyimgtext">No posts found</p>
+
+
+</div>
+          }
       </div>
     </>
   )

@@ -23,8 +23,32 @@ const userposts = async (token) => {
   return data
 }
 
+// post-delete
+const postDelete = async(token,postId)=>{
+  const config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}= await api.postDelete(config,postId)
+  return data
+}
+
+// get-all-posts
+const getAllPosts =async(token)=>{
+  const config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data} = await api.getAllPosts(config)
+  return data
+}
+
 export const PostsService = {
   userAddpost,
   userposts,
+  postDelete,
+  getAllPosts
 }
 export default PostsService

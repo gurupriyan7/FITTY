@@ -23,10 +23,18 @@
     width: fit-content;
     .description {
       font-size: 15px;
-      padding-left: 69px;
-//       padding-top: 9px;
-      padding-right: 34px;
-      color: rgb(61, 59, 59);
+    padding-left: 69px;
+    padding-right: 34px;
+    color: rgb(61, 59, 59);
+    background-color: green;
+    max-width: 650px;
+    height: 100%;
+    overflow-wrap: break-word;
+    
+.discriptionText{
+  min-width: 0;
+  
+}
       .readml{
         cursor: pointer;
       }

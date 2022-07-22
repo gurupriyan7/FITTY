@@ -8,8 +8,11 @@ const {
   deleteTrainer,
   getAllTrainers,
   ChangeStatusTrainer,
+  addpost,
+  trainerPosts,
+  deletePost,
+  Allposts
 } = require('../../controllers/trainerController')
-const {addpost} =require("../../controllers/postcontroller")
 
 // Register-Traineer
 router.post('/register', registerTrainer)
@@ -31,4 +34,13 @@ router.put('/status/:id', ChangeStatusTrainer)
 
 // Trainer-addPost
 router.post("/addpost",trainerProtect,addpost)
+
+// Trainer-posts
+router.get("/posts",trainerProtect,trainerPosts)
+
+// Trainer-post-delete
+router.delete("/post/delete/:id",trainerProtect,deletePost)
+
+// All-posts
+router.get("/allposts",trainerProtect,Allposts)
 module.exports = router

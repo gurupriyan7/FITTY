@@ -7,6 +7,9 @@ const initialState = {
   isSuccess: false,
   isLoading: false,
   message: '',
+  isDeleted:false,
+  trainerPosts:[],
+  allPosts:[]
 }
 
 // Trainer-Add-Post
@@ -21,6 +24,44 @@ export const trainerAddpost = createAsyncThunk(
     }
   },
 )
+// Trainer-posts
+export const TrainerPosts = createAsyncThunk(
+  "trainerposts/trainerPosts",
+  async(t,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return TrainerPostService.trainerPosts(token)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
+
+// Trainer-Delete-post
+export const deletePost = createAsyncThunk(
+  "trainerposts/deletePost",
+  async(postId,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+    return TrainerPostService.deletePost(token,postId)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+    
+  }
+)
+// All-posts
+export const AllPosts = createAsyncThunk(
+  "trainerposts/deletePost",
+  async(t,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return TrainerPostService.AllPosts(token)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
 
 // create-slice
 const TrainerPostSlice = createSlice({
@@ -32,6 +73,7 @@ const TrainerPostSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.message = false
+      state.isDeleted=false
     },
   },
   extraReducers: {
@@ -50,6 +92,51 @@ const TrainerPostSlice = createSlice({
       state.isLoading = false
       state.message = action.payload
     },
+    // get-trainer-posts
+    [TrainerPosts.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [TrainerPosts.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError= false
+      state.isSuccess=true
+      state.trainerPosts=action.payload
+    },
+    [TrainerPosts.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.message=action.payload
+    },
+    // delete-post
+    [deletePost.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [deletePost.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.isDeleted=true
+    },
+    [deletePost.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.isSuccess=false
+      state.message=action.payload 
+    },
+    // All-posts
+    [AllPosts.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [AllPosts.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.allPosts=action.payload
+    },
+    [AllPosts.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.isSuccess=false
+      state.message=action.payload 
+    }
   },
 })
 

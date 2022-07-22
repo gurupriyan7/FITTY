@@ -8,11 +8,13 @@ const {
   deleteUser,
   loginUser,
   changeUserStatus,
-  userPosts
+  userPosts,
+  addpost,
+  deletePost,
+  allPosts
 } = require('../../controllers/usercontroller')
-const {addpost} = require ("../../controllers/postcontroller")
 
-router.get('/', getUser)
+router.get('/',getUser)
 
 // Register-user
 router.post('/register', registerUser)
@@ -37,5 +39,11 @@ router.post('/addpost',protect,addpost)
 
 // single-user-posts
 router.get("/posts",protect,userPosts)
+
+// delete-post
+router.delete('/posts/delete/:id',protect,deletePost)
+
+// all-posts
+router.get('/allposts',protect,allPosts)
 
 module.exports = router

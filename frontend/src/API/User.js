@@ -5,7 +5,9 @@ import {
   USER_REGISTER,
   USER_UPDATE,
   USER_ADDPOST,
-  USER_POSTS
+  USER_POSTS,
+  USER_DELETE_POST,
+  USER_ALL_POSTS
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
 
@@ -23,3 +25,7 @@ export const editUser = (userData, config) =>
   // User-posts
   export const userAddPost = (postData,config)=>API.post(USER_ADDPOST,postData,config)
   export const userPosts = (config)=>API.get(USER_POSTS,config)
+  export const postDelete=(config,postId)=>API.delete(`${USER_DELETE_POST}/${postId}`,config)
+
+  // get-all-posts
+  export const getAllPosts = (config)=>API.get(USER_ALL_POSTS,config)

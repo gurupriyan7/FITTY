@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs')
 // require-Trainer-Model
 const Trainer = require('../models/trainerModel')
 
+// require-trainerpost,userPost - model
+const { trainerpsot , userpost} = require('../models/postModel')
+
 // require-generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
 
@@ -109,7 +112,7 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
     res.status(400)
     throw new Error('Trainer Not Found')
   }
-  const updatedTrainer = await Trainer.findByIdAndUpdate(trainerId,req.body, {
+  const updatedTrainer = await Trainer.findByIdAndUpdate(trainerId, req.body, {
     new: true,
   })
   const newTrainer = {
@@ -120,7 +123,7 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
     category: updatedTrainer.category,
     slots: updatedTrainer.slots,
     coached: updatedTrainer.coached,
-    token:generateToken(updatedTrainer._id)
+    token: generateToken(updatedTrainer._id),
   }
   res.status(200).json(newTrainer)
 })
@@ -158,6 +161,72 @@ const getAllTrainers = asyncHandler(async (req, res) => {
   res.status(200).json(trainers)
 })
 
+// trainer-add-post
+const addpost = asyncHandler(async (req, res) => {
+  const { description, image } = req.body
+  if (req.trainer) {
+    const id = req.trainer._id
+    const trainerPost = await trainerpsot.create({
+      description: description,
+      image: image,
+      postedBy: id,
+      comment: [],
+    })
+    if (trainerPost) {
+      res.send(200).json('post added successfully')
+    } else {
+      res.send(401)
+      throw new Error('somthing wrong post not added')
+    }
+  } else {
+    res.send(400)
+    throw new Error('post not available')
+  }
+})
+
+// single-trainer-posts
+const trainerPosts = asyncHandler(async (req, res) => {
+  const trainerPost = await trainerpsot
+    .find()
+    .populate({ path: 'postedBy', select: ['name', 'email'] })
+  if (trainerPost) {
+    res.status(200).json(trainerPost)
+  } else {
+    res.status(401)
+    throw new Error('No posts found')
+  }
+})
+
+// Trainer-post-delete
+const deletePost = asyncHandler(async (req, res) => {
+  const post = await trainerpsot.findById(req.params.id)
+  if (!post) {
+    res.status(400)
+    throw new Error('post not found')
+  }
+  await post.remove()
+  res.status(200).json({ id: req.params.id })
+})
+
+// Trainer-Allposts
+const Allposts = asyncHandler(async(req,res)=>{
+  const userposts = await userpost
+  .find()
+  .populate({ path: 'postedBy', select: ['name', 'email'] })
+  const trainerPost = await trainerpsot
+  .find()
+  .populate({ path: 'postedBy', select: ['name', 'email'] })
+
+  if(userposts||trainerPost){
+    const allposts=[...userposts,...trainerPost]
+    res.status(200).json(allposts)
+  }else{
+    res.status(400)
+    throw new Error("No post found")
+  }
+})
+    
+
 module.exports = {
   registerTrainer,
   loginTrainer,
@@ -165,4 +234,8 @@ module.exports = {
   deleteTrainer,
   getAllTrainers,
   ChangeStatusTrainer,
+  addpost,
+  trainerPosts,
+  deletePost,
+  Allposts
 }
