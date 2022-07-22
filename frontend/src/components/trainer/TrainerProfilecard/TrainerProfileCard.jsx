@@ -5,6 +5,7 @@ import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import emptimg from "../../../images/profile-pic-avather.png"
 import {useSelector} from "react-redux"
 function TrainerProfileCard() {
   const navigate=useNavigate()
@@ -13,9 +14,17 @@ function TrainerProfileCard() {
   return (
           <div className="trainerProfileCard">
                     <div className="top">
-                              <img className='coverpic' src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg" alt="" />
+                        {trainer.coverimage ?
+                <img className='coverpic' src={trainer.coverimage} alt="" />        
+               : <img className='coverpic' src={emptimg} alt="" /> }
+                              
+                              
                     </div>
-                    <img className='roundpic' src="https://fcb-abj-pre.s3.amazonaws.com/img/jugadors/MESSI.jpg" alt="" />
+                    {trainer.profileimage ?
+                    <img className='roundpic' src={trainer.profileimage} alt="" /> :
+                   
+                    <img className='roundpic' src={emptimg} alt="" />
+                    }
                     <div className="name">
                     <div className="nametext"><Link to={"tprofile"} style={{textDecoration:"none" , color:"black"}} >{trainer.name}</Link></div>
                     </div>

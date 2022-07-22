@@ -32,7 +32,14 @@ const trainerSchema = mongoose.Schema(
     coached:{
       type:Number,
       default:0
-    }
+    },
+    profileimage:{
+      type:String
+    },
+    coverimage:{
+      type:String
+    },
+    
   },
   {
     timestamps: true,

@@ -31,10 +31,7 @@ const Editstyle = {
   boxShadow: 24,
   p: 4,
 }
-const Csample =
-  'https://scontent.fcok8-1.fna.fbcdn.net/v/t39.30808-6/250713542_1729340387456304_9196444806310970091_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_ohc=ya_QKB6_JiEAX-DUkTD&_nc_oc=AQkIhhX6I1qqSs6vKnplWXbhE3T3ZQQF_7ussLUE6Z16IL3PgOdiVa8EEzM1hC4SOoI&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9Z1zqrW-8QqC4XeJhijblc0Chqv-aeiaQJyLwsANHKCA&oe=62D179AB'
-const Psample =
-  'https://scontent.fcok8-1.fna.fbcdn.net/v/t1.6435-9/82549164_1189955858061429_8521194662629736448_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=174925&_nc_ohc=qIdwnaniLLoAX-DiBGy&tn=CpgIrfUW4Ca1UxJB&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9VDCtaIvmdOOI2676HJVlpjFMdeV44ZlQTMydBdrhfPA&oe=62EAD2B7'
+
 
 function UserProfileScreen() {
   const dispatch = useDispatch()
@@ -63,13 +60,13 @@ function UserProfileScreen() {
     name: user.name,
     email: user.email,
     phoneNumber: user.phoneNumber,
-    coverimg: user.coverimg,
+    coverimage: user.coverimage,
     profileimage: user.profileimage,
   })
 
   useEffect(() => {
     dispatch(updateUser(formData))
-  }, [formData.coverimg, formData.profileimage])
+  }, [formData.coverimage, formData.profileimage])
 
 // profile-image
   const [Pimage, setPimage] = useState(null)
@@ -111,7 +108,7 @@ function UserProfileScreen() {
       setcload(true)
       const data = await imageUpload(Cimg)
       const cimge = await data.secure_url.toString()
-      let newImage = { coverimg: cimge }
+      let newImage = { coverimage: cimge }
       setFormData((formData) => ({
         ...formData,
         ...newImage,
@@ -253,7 +250,7 @@ function UserProfileScreen() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src={user.coverimg} alt="" className="coverimgpopup" />
+          <img src={user.coverimage} alt="" className="coverimgpopup" />
         </Box>
       </Modal>
       {/* cover-image */}
@@ -288,11 +285,12 @@ function UserProfileScreen() {
                 src={URL.createObjectURL(Cimage)}
                 alt=""
                 className="coverimg"
+                onClick={handleOpen}
               />
-            ) : user.coverimg ? (
+            ) : user.coverimage ? (
               <img
                 onClick={handleOpen}
-                src={user.coverimg}
+                src={user.coverimage}
                 alt=""
                 className="coverimg"
               />
@@ -352,7 +350,6 @@ function UserProfileScreen() {
         </div>
       </div>
       <ProfilePostsScreen />
-      {formData.coverimg}
     </>
   )
 }

@@ -4,6 +4,7 @@ import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList'
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle'
 import FactCheckSharpIcon from '@mui/icons-material/FactCheckSharp'
+import empty from "../../../images/profile-pic-avather.png"
 import './UserHomeProfileScreen.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -21,17 +22,35 @@ function UserHomeProfileScreen() {
   return (
     <div className="userProfileCard">
       <div className="top">
+        {user.coverimage ?
         <img
-          className="coverpic"
-          src={user.coverimg}
-          alt=""
-        />
-      </div>
+        className="coverpic"
+        src={user.coverimage}
+        alt=""
+      /> :
       <img
+      className="coverpic"
+      src={empty}
+      alt=""
+    />
+        }
+        
+       
+      </div>
+      {user.profileimage
+      ? <img
+      className="roundpic"
+      src={user.profileimage}
+      alt=""
+    /> :
+    <img
         className="roundpic"
-        src={user.profileimage}
+        src={empty}
         alt=""
       />
+     }
+     
+      
       <div className="name">
         <div onClick={() => {
               setActive((prev) => ({

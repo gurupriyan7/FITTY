@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
     profileimage:{
       type:String
     },
-    coverimg:{
+    coverimage:{
       type:String
     }
   },

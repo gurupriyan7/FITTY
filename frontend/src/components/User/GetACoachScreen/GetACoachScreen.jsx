@@ -24,7 +24,7 @@ function GetACoachScreen() {
             <div className="ttext primary-Color">{data.name}</div>
           </div>
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnJpn8p3YU24-9F6_4dLzMBDghh6_vZor4yg&usqp=CAU"
+            src={data.profileimage}
             alt=""
             className="trainercardimg"
           />

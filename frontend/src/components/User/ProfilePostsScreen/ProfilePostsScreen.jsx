@@ -43,7 +43,7 @@ dispatch(postDelete(id))
                 <div className="singlepost">
                   <div className="postuserdetails">
                     <img
-                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgqtDdxwuz8djhPKpWhiDQ3evq_vk6VkUnLA&usqp=CAU"
+                      src={post.postedBy.profileimage}
                       alt=""
                       className="postuserimg"
                     />

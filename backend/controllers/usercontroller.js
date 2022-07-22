@@ -33,7 +33,7 @@ const userUpdate = asyncHandler(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    coverimg:req.body.coverimg,
+    coverimage:req.body.coverimage,
     profileimage:req.body.profileimage
 
   }
@@ -45,7 +45,7 @@ const userUpdate = asyncHandler(async (req, res) => {
     name: updatedUser.name,
     email: updatedUser.email,
     phoneNumber: updatedUser.phoneNumber,
-    coverimg:updatedUser.coverimg,
+    coverimage:updatedUser.coverimage,
     profileimage:updatedUser.profileimage,
     status: updatedUser.status,
     token: generateToken(updatedUser._id),
@@ -89,7 +89,10 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       status: user.status,
+      coverimage:user.coverimage,
+      profileimage:user.profileimage,
       token: generateToken(user._id),
+
     })
   } else {
     res.status(400)
@@ -113,7 +116,7 @@ const loginUser = asyncHandler(async (req, res) => {
           email: user.email,
           phoneNumber: user.phoneNumber,
           status: user.status,
-          coverimg:user.coverimg,
+          coverimage:user.coverimage,
           profileimg:user.profileimage,
           postCount: user.postCount,
           token: generateToken(user._id),
@@ -183,8 +186,8 @@ const addpost = asyncHandler(async (req, res) => {
 // single-user-posts
 const userPosts = asyncHandler(async (req, res) => {
   const userPosts = await userpost
-    .find()
-    .populate({ path: 'postedBy', select: ['name', 'email'] })
+    .find({postedBy:req.user._id})
+    .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   if (userPosts) {
     res.status(200).json(userPosts)
   } else {
@@ -209,10 +212,10 @@ const deletePost = asyncHandler(async (req, res) => {
 const allPosts = asyncHandler(async (req, res) => {
   const userPost = await userpost
     .find()
-    .populate({ path: 'postedBy', select: ['name', 'email'] })
+    .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   const trainerPost = await trainerpsot
     .find()
-    .populate({ path: 'postedBy', select: ['name', 'email'] })
+    .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   if (userPost || trainerPost) {
     const allpost = [...userPost, ...trainerPost]
     res.status(200).json(allpost)

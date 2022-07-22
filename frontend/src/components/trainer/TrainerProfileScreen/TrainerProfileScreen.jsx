@@ -13,6 +13,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TrainerProfilePostScreen from '../TrainerProfilePostScreen/TrainerProfilePostScreen'
 import {updateTrainer} from "../../../features/trainerAuth/TrainerSlice"
+import { formControlLabelClasses } from '@mui/material'
+import { imageUpload } from '../../../util/cloudniary/imageUpload'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -32,10 +34,8 @@ const Editstyle = {
   p: 4,
 }
 
-const Csample =
-  'https://scontent.fcok8-1.fna.fbcdn.net/v/t39.30808-6/250713542_1729340387456304_9196444806310970091_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_ohc=ya_QKB6_JiEAX-DUkTD&_nc_oc=AQkIhhX6I1qqSs6vKnplWXbhE3T3ZQQF_7ussLUE6Z16IL3PgOdiVa8EEzM1hC4SOoI&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9Z1zqrW-8QqC4XeJhijblc0Chqv-aeiaQJyLwsANHKCA&oe=62D179AB'
-const Psample =
-  'https://scontent.fcok8-1.fna.fbcdn.net/v/t1.6435-9/82549164_1189955858061429_8521194662629736448_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=174925&_nc_ohc=qIdwnaniLLoAX-DiBGy&tn=CpgIrfUW4Ca1UxJB&_nc_ht=scontent.fcok8-1.fna&oh=00_AT9VDCtaIvmdOOI2676HJVlpjFMdeV44ZlQTMydBdrhfPA&oe=62EAD2B7'
+
+
 function TrainerProfileScreen() {
   const dispatch = useDispatch()
 
@@ -47,27 +47,38 @@ function TrainerProfileScreen() {
     email: trainer.email,
     phoneNumber: trainer.phoneNumber,
     slots:trainer.slots,
-    coached:trainer.coached
+    coached:trainer.coached,
+    coverimage:trainer.coverimage,
+    profileimage:trainer.profileimage
   })
+  useEffect(()=>{
+    dispatch(updateTrainer(formData))
+  },[formData.coverimage,formData.profileimage])
   useEffect(()=>{ 
     if(isSuccess){
-      setFormData((prev)=>({
-        ...prev,
-        name:trainer.name,
-        email:trainer.email,
-        phoneNumber:trainer.phoneNumber,
-        slots:trainer.slots,
-        coached:trainer.coached
-      }))
+      
       edithandleClose()
     }
   },[isSuccess,trainer])
 
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const trainerData = formData
-      dispatch(updateTrainer(trainerData))
+  const [Pimage, setPimage] = useState(null)
+
+  const onSubmit =async (e) => {
+    e.preventDefault() 
+    if(Pimage){
+      setLoad(true)
+            const data = await imageUpload(Pimage)
+            const newImage = {profileimage:data.secure_url.toString()}
+      setFormData((formData)=>({
+        ...formData,
+        ...newImage
+      }))
+      setLoad(false)
+    }else{
+      dispatch(updateTrainer(formData))
+    }
   }
+  
 
   // cover-image
   const [open, setOpen] = useState(false)
@@ -84,19 +95,29 @@ function TrainerProfileScreen() {
 
   // onchange-prview-cover
   const [Cimage, setCimage] = useState(null)
+  const [load,setLoad]=useState(formControlLabelClasses)
   const imageRef = useRef()
-  const onChangeCoverimg = (event) => {
+  const onChangeCoverimg =async (event) => {
     if (event.target.files && event.target.files[0]) {
       let Cimg = event.target.files[0]
       setCimage(Cimg)
+          setLoad(true)
+          const data = await imageUpload(Cimg)
+          const newImage = {coverimage:data.secure_url.toString()}
+    setFormData((formData)=>({
+      ...formData,
+      ...newImage
+    }))
+    setLoad(false)
+          
     }
   }
   // onchange-prview-profile
-  const [Pimage, setPimage] = useState(null)
   const onChangePoverimg = (event) => {
     if (event.target.files && event.target.files[0]) {
       let Pimg = event.target.files[0]
       setPimage(Pimg)
+      
     }
   }
 
@@ -105,6 +126,9 @@ function TrainerProfileScreen() {
       ...prevestate,
       [e.target.name]: e.target.value,
     }))
+  }
+  if(load){
+    <h1>Loading....</h1>
   }
   return (
     <>
@@ -137,8 +161,8 @@ function TrainerProfileScreen() {
                               alt=""
                               className="PeditPimg"
                             />
-                          ) : Psample ? (
-                            <img src={Psample} alt="" className="PeditPimg" />
+                          ) : trainer.profileimage ? (
+                            <img src={trainer.profileimage} alt="" className="PeditPimg" />
                           ) : (
                             <img
                               src={emptyprofilepic}
@@ -235,7 +259,7 @@ function TrainerProfileScreen() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src={Csample} alt="" className="coverimgpopup" />
+          <img src={trainer.coverimage} alt="" className="coverimgpopup" />
         </Box>
       </Modal>
       {/* cover-image */}
@@ -248,7 +272,7 @@ function TrainerProfileScreen() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <img src={Psample} alt="" className="profileimgpopup" />
+          <img src={trainer.profileimage} alt="" className="profileimgpopup" />
         </Box>
       </Modal>
       {/* profile image */}
@@ -270,11 +294,12 @@ function TrainerProfileScreen() {
                 src={URL.createObjectURL(Cimage)}
                 alt=""
                 className="coverimg"
+                onClick={handleOpen}
               />
-            ) : Csample ? (
+            ) : trainer.coverimage ? (
               <img
                 onClick={handleOpen}
-                src={Csample}
+                src={trainer.coverimage}
                 alt=""
                 className="coverimg"
               />
@@ -283,10 +308,10 @@ function TrainerProfileScreen() {
             )}
           </div>
           <div className="updetails">
-            {Psample ? (
+            {trainer.profileimage ? (
               <img
                 onClick={PhandleOpen}
-                src={Psample}
+                src={trainer.profileimage}
                 alt=""
                 className="Sprofilepic"
               />

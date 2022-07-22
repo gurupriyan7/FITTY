@@ -60,6 +60,11 @@ const registerTrainer = asyncHandler(async (req, res) => {
       phoneNumber: trainer.phoneNumber,
       category: trainer.category,
       status: trainer.status,
+      slots: trainer.slots,
+      coached: trainer.coached,
+      coverimage:trainer.coverimage,
+      profileimage:trainer.profileimage,
+      token: generateToken(trainer._id),
     })
   } else {
     res.status(400)
@@ -86,6 +91,8 @@ const loginTrainer = asyncHandler(async (req, res) => {
           status: trainer.status,
           slots: trainer.slots,
           coached: trainer.coached,
+          coverimage:trainer.coverimgae,
+          profileimage:trainer.profileimage,
           token: generateToken(trainer._id),
         })
       } else {
@@ -105,7 +112,7 @@ const loginTrainer = asyncHandler(async (req, res) => {
 // Update-Trainer
 const UpdateTrainer = asyncHandler(async (req, res) => {
   const trainerId = req.trainer._id
-  console.log('got ittt', trainerId)
+  console.log('got ittt', req.body)
 
   const trainer = await Trainer.findById(trainerId)
   if (!trainer) {
@@ -123,6 +130,8 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
     category: updatedTrainer.category,
     slots: updatedTrainer.slots,
     coached: updatedTrainer.coached,
+    profileimage:updatedTrainer.profileimage,
+    coverimage:updatedTrainer.coverimage,
     token: generateToken(updatedTrainer._id),
   }
   res.status(200).json(newTrainer)
@@ -187,8 +196,8 @@ const addpost = asyncHandler(async (req, res) => {
 // single-trainer-posts
 const trainerPosts = asyncHandler(async (req, res) => {
   const trainerPost = await trainerpsot
-    .find()
-    .populate({ path: 'postedBy', select: ['name', 'email'] })
+    .find({postedBy:req.trainer._id})
+    .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   if (trainerPost) {
     res.status(200).json(trainerPost)
   } else {
@@ -212,10 +221,10 @@ const deletePost = asyncHandler(async (req, res) => {
 const Allposts = asyncHandler(async(req,res)=>{
   const userposts = await userpost
   .find()
-  .populate({ path: 'postedBy', select: ['name', 'email'] })
+  .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   const trainerPost = await trainerpsot
   .find()
-  .populate({ path: 'postedBy', select: ['name', 'email'] })
+  .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
 
   if(userposts||trainerPost){
     const allposts=[...userposts,...trainerPost]
