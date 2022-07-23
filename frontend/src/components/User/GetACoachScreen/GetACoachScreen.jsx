@@ -3,9 +3,12 @@ import { useEffect } from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import './GetACoachScreen.scss'
 import {AllTrainers,reset} from "../../../features/featchTrainers/FeatchTrainersSlice"
+
+import { useNavigate,Link } from 'react-router-dom'
 function GetACoachScreen() {
 
   const dispatch =  useDispatch()
+  const navigate = useNavigate()
   const {trainers,isLoading,isError}=useSelector((state)=>state.featchAllTrainers)
   console.log('all',trainers);
   useEffect(()=>{
@@ -46,7 +49,7 @@ function GetACoachScreen() {
            
           </div>
           <div className="enrol">
-            {data.slots ? <button className="enrolbtn">Enrol</button>
+            {data.slots ?<Link to={`/home/coach/${data._id}`}><button   className="enrolbtn">Enrol</button></Link> 
             : <button className="enrolbtn">No Slots</button>}
             
           </div>

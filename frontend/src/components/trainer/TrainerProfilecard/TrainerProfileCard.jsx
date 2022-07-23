@@ -26,17 +26,17 @@ function TrainerProfileCard() {
                     <img className='roundpic' src={emptimg} alt="" />
                     }
                     <div className="name">
-                    <div className="nametext"><Link to={"tprofile"} style={{textDecoration:"none" , color:"black"}} >{trainer.name}</Link></div>
+                    <div className="nametext"><Link to={"/trainer/home/tprofile"} style={{textDecoration:"none" , color:"black"}} >{trainer.name}</Link></div>
                     </div>
                     <div className="bottom">
                               <ul>
                                 <Link to={''}></Link>
-                                        <li  className='cardtext '><GroupAddIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"clients"}>Clients</NavLink> </li>
-                                        <li className='cardtext '><FeaturedPlayListIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"tplans"}>Plans</NavLink></li>
+                                        <li  className='cardtext '><GroupAddIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"/trainer/home/clients"}>Clients</NavLink> </li>
+                                        <li className='cardtext '><FeaturedPlayListIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"/trainer/home/tplans"}>Plans</NavLink></li>
                                         <li className='cardtext '><ContactPageIcon className='picon'/>Income</li>
                               </ul>
                               <div className="addpost">
-                                      <Link style={{textDecoration:"none"}} to={"taddpost"}> <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button></Link> 
+                                      <Link style={{textDecoration:"none"}} to={"/trainer/home/taddpost"}> <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button></Link> 
                               </div>
                              
                     </div>

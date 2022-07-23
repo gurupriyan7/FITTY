@@ -91,19 +91,19 @@ useEffect(()=>{
             <span>Plans</span>
           </li>
         </ul>
-        <ul>
+        {/* <ul>
         <p className="title primary-Color">Sales</p>
           <li>
             <MonetizationOnSharpIcon className="icon primary-Color" />
             <span>Sales</span>
           </li>
-        </ul>
+        </ul> */}
         <ul>
         <p className="title primary-Color">Admin</p>
-          <li>
+          {/* <li>
             <AssignmentIndSharpIcon className="icon primary-Color" />
             <span>Profile</span>
-          </li>
+          </li> */}
           <li>
             <ExitToAppSharpIcon className="icon primary-Color" />
             <button style={{border:"none",backgroundColor:"transparent"}} onClick={logoutAdmin}><span >Logout</span></button>

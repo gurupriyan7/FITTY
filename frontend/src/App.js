@@ -17,6 +17,7 @@ import GetACoachScreen from './components/User/GetACoachScreen/GetACoachScreen'
 import GetPlansScreen from './components/User/GetplansScreen/GetPlansScreen'
 import MyPlansScreen from './components/User/MyPlansScreen/MyPlansScreen'
 import UserProfileScreen from './components/User/UserProfile/UserProfileScreen'
+import UserTrainerProfileScreen from './components/User/TrainerProfile/UserTrainerProfileScreen'
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -36,6 +37,7 @@ import AddPostScreen from './components/User/AddPostScreen/AddPostScreen'
 import TrainerAddPostScreen from './components/trainer/TrainerAddPostScreen/TrainerAddPostScreen'
 import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/TrainerProfileScreen'
 
+
 function App() {
   const { trainer } = useSelector((state) => state.trainerAuth)
   const { user } = useSelector((state) => state.auth)
@@ -48,13 +50,15 @@ function App() {
             <Route path="/">
               <Route index element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
-              <Route path="home" element={user ? <UserHome /> : <LoginPage />}>
-                <Route index element={<UserHomeScreen />} />
-                <Route path="getacoach" element={<GetACoachScreen />} />
-                <Route path="getplans" element={<GetPlansScreen />} />
-                <Route path="myplans" element={<MyPlansScreen />} />
-                <Route path='addpost' element={<AddPostScreen/>}/>
-                <Route path="profile" element={<UserProfileScreen />} />
+
+              <Route path="home">
+                <Route index  element={user ? <UserHome childern={<UserHomeScreen />} /> : <LoginPage />} />
+                <Route path="getacoach"  element={user ? <UserHome childern={<GetACoachScreen />} /> : <LoginPage />} />
+                <Route path="getplans" element={user ? <UserHome childern={<GetPlansScreen />} /> : <LoginPage />}/>
+                <Route path="myplans"  element={user ? <UserHome childern={<MyPlansScreen />} /> : <LoginPage />}/>
+                <Route path='addpost'  element={user ? <UserHome childern={<AddPostScreen/>} /> : <LoginPage />}/>
+                <Route path="profile"  element={user ? <UserHome childern={<UserProfileScreen />} /> : <LoginPage />} />
+                <Route path="coach/:id"   element={user ? <UserHome childern={<UserTrainerProfileScreen />} /> : <LoginPage />}/>
               </Route>
             </Route>
             {/* user-side */}
@@ -78,12 +82,13 @@ function App() {
             {/* Trainer-side */}
             <Route path="/trainer">
               <Route index element={<TrainerLogin/>} />
-              <Route path="home" element={trainer ?<TrainerHome /> : <TrainerLogin/>}>
-                <Route index element={<TrainerHomeScreen />} />
-                <Route path="clients" element={<TrainerClientScreen />} />
-                <Route path='tplans'element={<TrainerPlansScreen/>}/>
-                <Route path='taddpost' element={<TrainerAddPostScreen/>}/>
-                <Route path='tprofile' element={<TrainerProfileScreen/>}/>
+              <Route path="home" >
+                {/* <Route index element={<TrainerHomeScreen />} /> */}
+                <Route index element={trainer ?<TrainerHome childern={<TrainerHomeScreen />} /> : <TrainerLogin/>} />
+                <Route path="clients"  element={trainer ?<TrainerHome childern={<TrainerClientScreen />} /> : <TrainerLogin/>}/>
+                <Route path='tplans' element={trainer ?<TrainerHome childern={<TrainerPlansScreen/>} /> : <TrainerLogin/>}/>
+                <Route path='taddpost'  element={trainer ?<TrainerHome childern={<TrainerAddPostScreen/>} /> : <TrainerLogin/>}/>
+                <Route path='tprofile'  element={trainer ?<TrainerHome childern={<TrainerProfileScreen/>} /> : <TrainerLogin/>}/>
               </Route>
             </Route>
           </Routes>

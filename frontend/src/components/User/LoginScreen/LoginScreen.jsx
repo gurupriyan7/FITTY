@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { reset, login } from '../../../features/auth/authSlice'
 import { toast } from 'react-toastify'
 import './LoginScreen.css'
+import google from "../../../images/google.svg"
 import { useDispatch, useSelector } from 'react-redux'
 
 function LoginScreen() {
@@ -89,14 +90,14 @@ function LoginScreen() {
                         SignIn
                       </button>
                     </div>
-                    {/* <div className="d-grid mb-3">
+                    <div className="d-grid mb-3">
                       <button
                         className="btn  btn-primary btn-login fw-bold text-uppercase"
                         type="submit"
-                      >
-                        Trainer Login
+                      > <img src={google} alt="" className="google" />
+                        Login with Google
                       </button>
-                    </div> */}
+                    </div>
 
                     <NavLink
                       style={{ textDecorationLine: 'none' }}

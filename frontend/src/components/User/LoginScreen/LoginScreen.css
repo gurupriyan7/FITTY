@@ -1,8 +1,7 @@
 .card-img-left {
-  width: 45%;
-  /* Link to your background image using in the property below! */
-  background-image: url('https://media.istockphoto.com/vectors/biceps-muscle-icon-gym-logo-vector-illustration-vector-id1169422269?k=20&m=1169422269&s=612x612&w=0&h=YrVzNHtuun7ahJKkVn8_TtJekIHPVZs5hZRnnprqnuU=');
-  background-size: cover;
+  width: 46%;
+  background-image: url("https://thumbs.dreamstime.com/b/burning-dumbbells-black-background-fitness-theme-d-rendeirng-computer-digital-drawing-162066500.jpg");
+  background-size: contain;
 }
 
 .btn-login {
@@ -13,7 +12,7 @@
 }
 .logIn-div {
   width: 785px;
-  height: 473px;
+  height: 503px;
   margin-left: 116px;
 }
 .Linput {
@@ -65,6 +64,13 @@
     transform: rotate(360deg);
   }
 }
+.google{
+  width: 65px;
+  height: 27px;
+  border-radius: 50%;
+  margin-left: -17%;
+  padding-right: 5%;
+}
 
 .trbtn {
   border-radius: 7px;
@@ -72,7 +78,7 @@
   background-color: transparent;
   color: blue;
   height: 33px;
-  margin-top: 43px;
+  margin-top: 10px;
 }
 .trbtn:hover{
   background-color: #0d6efd;

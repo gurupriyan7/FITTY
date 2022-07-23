@@ -6,7 +6,7 @@ import Header from '../../../components/User/Headder/Header'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
-function UserHome() {
+function UserHome({childern}) {
   const navigate= useNavigate()
   const {user} = useSelector((state)=>state.auth)
   
@@ -23,7 +23,8 @@ function UserHome() {
         </div>
       </div>
       <div className="tcontent">
-        <Outlet/>
+        {/* <Outlet/> */}
+        {childern}
       </div>
     </div>
   </div>

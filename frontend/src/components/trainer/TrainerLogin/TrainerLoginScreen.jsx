@@ -6,6 +6,7 @@ import './TrainerLoginScreen.scss'
 import { reset, trainerLogin } from '../../../features/trainerAuth/TrainerSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import google from "../../../images/google.svg"
 function TrainerLoginScreen() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -92,12 +93,12 @@ function TrainerLoginScreen() {
                       </button>
                     </div>
                     <div className="d-grid mb-3">
-                      {/* <button
-                            className="btn  btn-primary btn-login fw-bold text-uppercase"
-                            type="submit"
-                          >
-                            SignIn with OTP
-                          </button> */}
+                      <button
+                        className="btn  btn-primary btn-login fw-bold text-uppercase"
+                        type="submit"
+                      > <img src={google} alt="" className="google" />
+                        Login with Google
+                      </button>
                     </div>
                   </form>
                 </div>

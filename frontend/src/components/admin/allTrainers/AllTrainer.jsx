@@ -49,7 +49,7 @@ function AllTrainer() {
               <TableCell className="tableCell">Available Slots</TableCell>
               <TableCell className="tableCell">Status</TableCell>
               <TableCell className="tableCell">Action</TableCell>
-              <TableCell className="tableCell">option</TableCell>
+              {/* <TableCell className="tableCell">option</TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -75,9 +75,9 @@ function AllTrainer() {
                     <button onClick={()=>changeStatusTrainer(row._id)} className="unblockbtn">unBlock</button>
                   )}
                 </TableCell>
-                <TableCell>
+                {/* <TableCell>
                   <button onClick={()=>{deleteTr(row._id)}} className="deleteBtn">Delete</button>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>

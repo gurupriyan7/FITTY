@@ -62,7 +62,7 @@ function UserHomeProfileScreen() {
             }} className="nametext">
           <Link
             style={{ textDecoration: 'none', color: 'black' }}
-            to={'profile'}
+            to={'/home/profile'}
           >
             {user.name}
           </Link>{' '}
@@ -85,7 +85,7 @@ function UserHomeProfileScreen() {
             <Link
               className={active.gc ? 'active' : 'userli'}
               style={{ textDecoration: 'none' }}
-              to={'getacoach'}
+              to={'/home/getacoach'}
             >
               Get a Coach
             </Link>
@@ -105,7 +105,7 @@ function UserHomeProfileScreen() {
             <Link
               className={active.gp ? 'active' : 'userli'}
               style={{ textDecoration: 'none' }}
-              to={'getplans'}
+              to={'/home/getplans'}
             >
               {' '}
               Get Plans
@@ -126,14 +126,14 @@ function UserHomeProfileScreen() {
             <Link
               className={active.mp ? 'active' : 'userli'}
               style={{ textDecoration: 'none' }}
-              to={'myplans'}
+              to={'/home/myplans'}
             >
               My Plans
             </Link>
           </li>
         </ul>
         <div className="addpost">
-          <Link style={{textDecoration:"none"}} to={"addpost"}>
+          <Link style={{textDecoration:"none"}} to={"/home/addpost"}>
           <button onClick={() => {
               setActive((prev) => ({
                 ...prev,
