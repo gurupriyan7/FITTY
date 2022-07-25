@@ -8,6 +8,9 @@ const User = require('../models/userModel')
 // require-postsModel
 const { userpost } = require('../models/postModel')
 
+// require-trainerMOdel
+const Trainer = require("../models/trainerModel")
+
 // require-trainerPost-model
 const { trainerpsot } = require('../models/postModel')
 
@@ -224,6 +227,19 @@ const allPosts = asyncHandler(async (req, res) => {
     throw new Error('No posts found')
   }
 })
+
+// singletrainer
+const singletrainer= asyncHandler(async(req,res)=>{
+  
+  const trainer = await Trainer.findById(req.params.id)
+  if(trainer){
+    
+    res.status(200 ).json(trainer)
+  }else{
+    res.status(400)
+    throw new Error("someThing worong Trainer not found")
+  }
+})
 module.exports = {
   getUser,
   userUpdate,
@@ -235,4 +251,5 @@ module.exports = {
   addpost,
   deletePost,
   allPosts,
+  singletrainer
 }

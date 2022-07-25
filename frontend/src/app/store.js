@@ -5,6 +5,7 @@ import trainerReducer from "../features/trainerAuth/TrainerSlice"
 import featchTrainerReducer from "../features/featchTrainers/FeatchTrainersSlice"
 import userPostReducer from "../features/UserPosts/PostsSlice"
 import trainerPostReducer from "../features/trainerPosts/TrainerPostSlice"
+import trainerPlanReducer from "../features/TrainerPlans/TrainerPlanSlice"
 export const store = configureStore({
   reducer: {
     auth:authReducer,
@@ -12,6 +13,7 @@ export const store = configureStore({
     trainerAuth:trainerReducer,
     featchAllTrainers:featchTrainerReducer,
     userPost:userPostReducer,
-    trainerPost:trainerPostReducer
+    trainerPost:trainerPostReducer,
+    trainerPlan:trainerPlanReducer
   },
 });

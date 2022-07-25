@@ -1,11 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './TrainerPlansScreen.scss'
 function TrainerPlansScreen() {
   return (
     <div className="container">
       <div className="row">
         <div className="addbtndiv col-12">
-          <button className="addbtn">Add Plans</button>
+          <Link to={"/trainer/home/addplan"}><button className="addbtn">Add Plans</button></Link>
+          
         </div>
         {/* getplans-card */}
         <div className="col-md-4 tplansscreen primary-backgroundColor">

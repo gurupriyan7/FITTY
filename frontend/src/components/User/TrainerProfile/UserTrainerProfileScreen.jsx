@@ -9,7 +9,7 @@ import './TrainerProfileScreen.scss'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { AllTrainers } from '../../../features/featchTrainers/FeatchTrainersSlice'
+import { singleTrainer } from '../../../features/featchTrainers/FeatchTrainersSlice'
 
 const style = {
   position: 'absolute',
@@ -19,20 +19,19 @@ const style = {
   boxShadow: 24,
 }
 function UserTrainerProfileScreen() {
-  const { trainers, isSuccess, isError, isLoading } = useSelector(
+  const { Trainer, isSuccess, isError, isLoading } = useSelector(
     (state) => state.featchAllTrainers,
   )
   const { id } = useParams()
-  console.log('id', trainers)
+  
   const dispatch = useDispatch()
+  
 
-  const [allTr, setAllTr] = useState([])
 
   useEffect(() => {
-    if (trainers) {
-      setAllTr(trainers)
-    }
-  }, [trainers])
+    dispatch(singleTrainer(id))
+  }, [])
+  console.log("trainer",Trainer);
   // const trainer = trainers.filter((data) => data._id ==id)
 
   // cover-image
@@ -45,9 +44,8 @@ function UserTrainerProfileScreen() {
   const PhandleClose = () => setPopen(false)
   return (
     <>
-      {trainers
-        .filter((data) => data._id == id)
-        .map((trainer) => (
+      
+        
           <>
             {/* cover-image */}
             <Modal
@@ -58,7 +56,7 @@ function UserTrainerProfileScreen() {
             >
               <Box sx={style}>
                 <img
-                  src={trainer.coverimage}
+                  src={Trainer.coverimage}
                   alt=""
                   className="coverimgpopup"
                 />
@@ -75,7 +73,7 @@ function UserTrainerProfileScreen() {
             >
               <Box sx={style}>
                 <img
-                  src={trainer.profileimage}
+                  src={Trainer.profileimage}
                   alt=""
                   className="profileimgpopup"
                 />
@@ -87,10 +85,10 @@ function UserTrainerProfileScreen() {
             <div className="singleplanscreen container-fluid">
               <div className="row">
                 <div className="top col-12">
-                  {trainer.coverimage ? (
+                  {Trainer.coverimage ? (
                     <img
                       onClick={handleOpen}
-                      src={trainer.coverimage}
+                      src={Trainer.coverimage}
                       alt=""
                       className="coverimg"
                     />
@@ -99,10 +97,10 @@ function UserTrainerProfileScreen() {
                   )}
                 </div>
                 <div className="updetails">
-                  {trainer.profileimage ? (
+                  {Trainer.profileimage ? (
                     <img
                       onClick={PhandleOpen}
-                      src={trainer.profileimage}
+                      src={Trainer.profileimage}
                       alt=""
                       className="Sprofilepic"
                     />
@@ -112,16 +110,16 @@ function UserTrainerProfileScreen() {
 
                   <div className="pdetails">
                     <div className="Pnamediv">
-                      <p className="Pname primary-Color">{trainer.name}</p>
+                      <p className="Pname primary-Color">{Trainer.name}</p>
                       <div className="Peditbtndiv">
-                        {/* <Link to={"editprofile"}><button className="Peditbtn">Edit</button></Link>  */}
+                        {/* <Link to={""}><button className="Peditbtn"></button></Link>  */}
                       </div>
                     </div>
                     <div className="Pemaildiv">
                       <p className="Pemail">
-                        <span>{trainer.email}</span>
+                        <span className='emailPhone'>{Trainer.email}</span>
                         <br />
-                        <span>{trainer.phoneNumber}</span>
+                        <span className='emailPhone'>{Trainer.phoneNumber}</span>
                       </p>
                     </div>
                     <div className="pedit">
@@ -135,11 +133,11 @@ function UserTrainerProfileScreen() {
                       </div>
                       <div className="center">
                         <h5 className="clients primary-Color">Clients</h5>
-                        <p className="clientscount">{trainer.coached}</p>
+                        <p className="clientscount">{Trainer.coached}</p>
                       </div>
                       <div className="right">
                         <h5 className="posts primary-Color">Slots</h5>
-                        <h5 className="postscount">{trainer.slots}</h5>
+                        <h5 className="postscount">{Trainer.slots}</h5>
                       </div>
                     </div>
                   </div>
@@ -148,7 +146,7 @@ function UserTrainerProfileScreen() {
             </div>
             {/* <TrainerProfilePostScreen /> */}
           </>
-        ))}
+
     </>
   )
 }

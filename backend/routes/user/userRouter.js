@@ -11,7 +11,8 @@ const {
   userPosts,
   addpost,
   deletePost,
-  allPosts
+  allPosts,
+  singletrainer
 } = require('../../controllers/usercontroller')
 
 router.get('/',getUser)
@@ -45,5 +46,8 @@ router.delete('/posts/delete/:id',protect,deletePost)
 
 // all-posts
 router.get('/allposts',protect,allPosts)
+
+// single-Trainer
+router.get("/singletrainer/:id",singletrainer)
 
 module.exports = router

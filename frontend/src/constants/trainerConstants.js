@@ -8,7 +8,9 @@ const url = {
 TRAINER_ADDPOST:'/addpost',
 TRAINER_POSTS:"/posts",
 TRAINER_POST_DELETE:"/post/delete/",
-ALL_POSTS:"/allposts"
+ALL_POSTS:"/allposts",
+ADD_PLAN:"/addplan"
+
 }
 export const  {
   GET_TRAINERS,
@@ -20,5 +22,6 @@ export const  {
   TRAINER_ADDPOST,
   TRAINER_POSTS,
   TRAINER_POST_DELETE,
-  ALL_POSTS
+  ALL_POSTS,
+  ADD_PLAN
 } =url

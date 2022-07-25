@@ -1,4 +1,5 @@
 import * as api from "../../API/Trainer"
+import * as userApi from "../../API/User"
 
 const AllTrainers = async()=>{
       const {data} =await api.AllTrainers()
@@ -10,8 +11,8 @@ const singleTrainerDetails = async(token,trId)=>{
                   Authorization:`Bearer ${token}`
             }
       }
-      // const {data}= await api.singleTrainerDetails(trId,config)
-      // return data
+      const {data}= await userApi.singleTrainerDetails(trId,config)
+      return data
 }
 export const FeatchTrainersService ={
           AllTrainers,

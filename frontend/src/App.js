@@ -36,6 +36,7 @@ import TrainerPlansScreen from './components/trainer/TrainerPlansScreen/TrainerP
 import AddPostScreen from './components/User/AddPostScreen/AddPostScreen'
 import TrainerAddPostScreen from './components/trainer/TrainerAddPostScreen/TrainerAddPostScreen'
 import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/TrainerProfileScreen'
+import AddPlanScreen from './components/trainer/AddPlanScreen/AddPlanScreen'
 
 
 function App() {
@@ -83,12 +84,12 @@ function App() {
             <Route path="/trainer">
               <Route index element={<TrainerLogin/>} />
               <Route path="home" >
-                {/* <Route index element={<TrainerHomeScreen />} /> */}
                 <Route index element={trainer ?<TrainerHome childern={<TrainerHomeScreen />} /> : <TrainerLogin/>} />
                 <Route path="clients"  element={trainer ?<TrainerHome childern={<TrainerClientScreen />} /> : <TrainerLogin/>}/>
                 <Route path='tplans' element={trainer ?<TrainerHome childern={<TrainerPlansScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='taddpost'  element={trainer ?<TrainerHome childern={<TrainerAddPostScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='tprofile'  element={trainer ?<TrainerHome childern={<TrainerProfileScreen/>} /> : <TrainerLogin/>}/>
+                <Route path='addplan'  element={trainer ?<TrainerHome childern={<AddPlanScreen/>} /> : <TrainerLogin/>}/>
               </Route>
             </Route>
           </Routes>

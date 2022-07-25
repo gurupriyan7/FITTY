@@ -96,6 +96,10 @@
           font-weight: 500;
           font-family: system-ui;
           margin-left: 212px;
+          .emailPhone{
+            font-family: system-ui;
+            font-size: 21px;
+          }
         }
       }
       .pedit {
@@ -116,7 +120,7 @@
       }
 
       .noPostsdiv {
-        height: 4rem;
+        height: 37%;
         border-bottom-right-radius: 32px;
         border-bottom-left-radius: 32px;
         display: flex;

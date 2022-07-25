@@ -1,0 +1,159 @@
+.traineraddplanscreen {
+  height: 100%;
+  width: 85%;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  .top {
+    height: 40vh;
+    .headdingdiv {
+      display: flex;
+      justify-content: center;
+      .headding {
+        font-size: 32px;
+        padding-top: 12px;
+        color: grey;
+      }
+    }
+    .imagediv {
+      width: 100%;
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      .imginnerdiv {
+        display: flex;
+        border-radius: 9px;
+        background-color: rgb(255 255 255);
+        height: 24vh;
+        width: 576px;
+        box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+        .emptyimg {
+          display: flex;
+          justify-content: center;
+          width: 100%;
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+          .emptyimgicondiv {
+            .emptyimgicon {
+              width: 119px;
+              padding-top: 9px;
+            }
+            .emptyimgtext {
+              font-size: 15px;
+              color: grey;
+            }
+          }
+        }
+        .postpreview {
+          width: 510px;
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+        }
+        .inputdiv {
+          display: flex;
+          .postimg {
+            border-bottom-right-radius: 9px;
+            width: 100%;
+            opacity: 0;
+            border: 0;
+
+            cursor: pointer;
+            z-index: 2;
+            border-top-right-radius: 9px;
+          }
+          .addimgicon {
+            position: absolute;
+            font-size: 47px;
+            margin-left: 64px;
+            margin-top: 55px;
+          }
+          .addimgicontext {
+            font-size: 14px;
+            margin-top: 111px;
+            margin-left: 42px;
+            color: grey;
+            position: absolute;
+          }
+        }
+      }
+    }
+  }
+  .bottom {
+    height: 100%;
+
+    .name-amount {
+      display: flex;
+//       background-color: green;
+      .name {
+        height: 4rem;
+        background-color: aliceblue;
+        width: 16rem;
+        margin-left: 15%;
+        border-radius: 8px;
+        border: 0;
+        box-shadow: rgb(0 0 0 / 35%) 0px 1px;
+      }
+      .amount {
+        height: 4rem;
+    width: 16rem;
+    margin-left: 7%;
+    border-radius: 8px;
+    background-color: aliceblue;
+    border: 0;
+    box-shadow: rgb(0 0 0 / 35%) 0px 1px;
+      }
+    }
+    //   justify-content: center;
+    .descriptiondiv {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      
+      .description {
+        background-color: aliceblue;
+        height: 59px;
+        width: 258px;
+        border-radius: 11px;
+        margin-top: 22px;
+        border: 0;
+        margin-left: 123px;
+        box-shadow: rgb(0 0 0 / 35%) 0px 1px;
+      }
+      .slots {
+        margin-top: 25px;
+        width: 31%;
+        margin-left: 7%;
+        border-radius: 8px;
+        background-color: aliceblue;
+        border: 0;
+        box-shadow: rgb(0 0 0 / 35%) 0px 1px;
+      }
+    }
+  }
+  .postbtndiv {
+    height: 100%;
+    // background-color: red;
+    .postbtninnerdiv {
+      // background-color: green;
+      display: flex;
+      justify-content: center;
+      padding: 25px;
+      .postbtn {
+        width: 568px;
+        height: 42px;
+        font-size: 15px;
+        border-radius: 8px;
+        border-color: rgb(11, 137, 195);
+        color: rgb(11, 137, 195);
+        margin-top: 6px;
+        background-color: transparent;
+        font-size: 22px;
+        font-weight: 600;
+        &:hover {
+          background-color: rgb(11, 137, 195);
+          color: white;
+        }
+      }
+    }
+  }
+}

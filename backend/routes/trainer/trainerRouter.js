@@ -11,7 +11,9 @@ const {
   addpost,
   trainerPosts,
   deletePost,
-  Allposts
+  Allposts,
+  AddPlans
+  
 } = require('../../controllers/trainerController')
 
 // Register-Traineer
@@ -25,11 +27,13 @@ router.put('/update',trainerProtect,UpdateTrainer)
 
 // Delete-Trainer
 router.delete('/delete/:id', deleteTrainer)
+ 
+
 
 // Get-all-Trainers
 router.get('/alltrainers', getAllTrainers)
 
-// change-trainer-status
+// change-trainer-status 
 router.put('/status/:id', ChangeStatusTrainer)
 
 // Trainer-addPost
@@ -43,4 +47,7 @@ router.delete("/post/delete/:id",trainerProtect,deletePost)
 
 // All-posts
 router.get("/allposts",trainerProtect,Allposts)
+
+// Add-plans
+router.post("/addplan",trainerProtect,AddPlans)
 module.exports = router

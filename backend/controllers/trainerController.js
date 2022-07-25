@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs')
 // require-Trainer-Model
 const Trainer = require('../models/trainerModel')
 
+// require-plans-module
+const Plans = require("../models/PlansModel")
+
 // require-trainerpost,userPost - model
 const { trainerpsot , userpost} = require('../models/postModel')
 
@@ -234,7 +237,27 @@ const Allposts = asyncHandler(async(req,res)=>{
     throw new Error("No post found")
   }
 })
-    
+
+// Add-Plan
+const AddPlans = asyncHandler(async(req,res)=>{
+    const trId = req.trainer._id
+    const {description,image,planName,days,planAmount}= req.body
+
+        const newPlan = await Plans.create({
+          description:description,
+          image:image,
+          planName:planName,
+          days:days,
+          planAmount:planAmount,
+          postedBy:trId
+        })
+        if(newPlan){
+          res.status(200).json("plan Adde successfully")
+        }else{
+          res.status(400)
+          throw new Error("something wrong Plan not added")
+        }
+}) 
 
 module.exports = {
   registerTrainer,
@@ -246,5 +269,7 @@ module.exports = {
   addpost,
   trainerPosts,
   deletePost,
-  Allposts
+  Allposts,
+  AddPlans
+ 
 }

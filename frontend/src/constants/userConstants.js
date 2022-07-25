@@ -7,7 +7,8 @@ const urls = {
   USER_ADDPOST:'/addpost',
   USER_POSTS:"/posts",
   USER_DELETE_POST:"/posts/delete",
-  USER_ALL_POSTS:"/allposts"
+  USER_ALL_POSTS:"/allposts",
+  SINGLE_TRAINER:"/singletrainer/"
 }
 
 export const {
@@ -19,5 +20,6 @@ export const {
   USER_ADDPOST,
   USER_POSTS,
   USER_DELETE_POST,
-  USER_ALL_POSTS
+  USER_ALL_POSTS,
+  SINGLE_TRAINER
 } = urls

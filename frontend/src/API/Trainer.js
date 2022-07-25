@@ -8,7 +8,8 @@ import {
   TRAINER_ADDPOST,
   TRAINER_POSTS,
   TRAINER_POST_DELETE,
-  ALL_POSTS
+  ALL_POSTS,
+  ADD_PLAN
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -42,3 +43,7 @@ export const loginTrainer = (trainerData) =>
 
   // all-posts
   export const allPosts=(config)=>API.get(ALL_POSTS,config)
+
+  // add-Plans
+  export const AddPlan=(config,planData)=>API.post(ADD_PLAN,planData,config)
+

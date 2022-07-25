@@ -321,12 +321,12 @@ function UserProfileScreen() {
                 </div>
               </div>
               <div className="Pemaildiv">
-                <p className="Pemail">
-                  <span>{formData.email}</span>
-                  <br />
-                  <span>{formData.phoneNumber}</span>
-                </p>
-              </div>
+                      <p className="Pemail">
+                        <span className='emailPhone'>{formData.email}</span>
+                        <br />
+                        <span className='emailPhone'>{formData.phoneNumber}</span>
+                      </p>
+                    </div>
               <div className="pedit">
                 {/* <buttom className="peditbtn">Edit</buttom> */}
               </div>

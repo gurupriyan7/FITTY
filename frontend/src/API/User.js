@@ -7,7 +7,8 @@ import {
   USER_ADDPOST,
   USER_POSTS,
   USER_DELETE_POST,
-  USER_ALL_POSTS
+  USER_ALL_POSTS,
+  SINGLE_TRAINER
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
 
@@ -29,3 +30,6 @@ export const editUser = (userData, config) =>
 
   // get-all-posts
   export const getAllPosts = (config)=>API.get(USER_ALL_POSTS,config)
+
+  // singleTrainerDetails
+  export const singleTrainerDetails=(trId,config)=>API.get(SINGLE_TRAINER+trId,config)

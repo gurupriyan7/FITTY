@@ -330,12 +330,12 @@ function TrainerProfileScreen() {
                 </div>
               </div>
               <div className="Pemaildiv">
-                <p className="Pemail">
-                  <span>{trainer.email}</span>
-                  <br />
-                  <span>{trainer.phoneNumber}</span>
-                </p>
-              </div>
+                      <p className="Pemail">
+                        <span className='emailPhone'>{formData.email}</span>
+                        <br />
+                        <span className='emailPhone'>{formData.phoneNumber}</span>
+                      </p>
+                    </div>
               <div className="pedit">
                 {/* <buttom className="peditbtn">Edit</buttom> */}
               </div>

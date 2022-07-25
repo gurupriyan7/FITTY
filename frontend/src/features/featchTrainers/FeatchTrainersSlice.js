@@ -8,7 +8,7 @@ const initialState = {
   message: '',
   isLoading: false,
   trainers: [],
-  singleTrainer:''
+  Trainer:{}
 }
 
 // All-trainers
@@ -46,7 +46,6 @@ const featchTrainersSlice = createSlice({
       state.isLoading = false
       state.isSuccess = false
       state.message = ''
-      state.trainers = []
     },
   },
   extraReducers: {
@@ -65,6 +64,20 @@ const featchTrainersSlice = createSlice({
       state.isSuccess = false
       state.message = action.payload
     },
+    [singleTrainer.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [singleTrainer.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.Trainer=action.payload
+    },
+    [singleTrainer.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.isSuccess=false
+      state.message=action.payload
+    }
   },
 })
 
