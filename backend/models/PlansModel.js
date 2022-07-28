@@ -19,6 +19,10 @@ const planSchema = mongoose.Schema(
       type: ObjectId,
       ref:"Trainer"
     },
+      description:{
+        type:String
+      }
+    
   },
   {
     timestamps: true,

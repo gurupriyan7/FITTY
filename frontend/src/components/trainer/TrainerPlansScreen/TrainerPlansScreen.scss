@@ -1,6 +1,26 @@
+.emptyPost{
+  width: 113%;
+// background-color: green;
+height: 100%;
+margin-top: 9%;
+.emptyimg{
+width: 26%;
+height: 33%;
+margin-left: 34%;
+}
+.emptyimgtext{
+font-size: 18px;
+font-weight: 600;
+margin-left: 38%;
+padding: 2%;
+color: darkgrey;
+font-family: system-ui;
+}
+}
 .addbtndiv {
   display: flex;
   justify-content: right;
+  
   .addbtn {
     width: 330px;
     height: 53px;
@@ -19,14 +39,13 @@
       border: 0;
     }
   }
+ 
 }
 
 .tplansscreen {
   height: 100%;
-  // background-color: white;
-  //   background-color: greenyellow;
   margin: 9px;
-  margin-left: 88px;
+  margin-left: 17px;
   border-radius: 8px;
   display: grid;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;

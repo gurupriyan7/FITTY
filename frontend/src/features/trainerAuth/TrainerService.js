@@ -31,7 +31,7 @@ const updateTrainer = async (token,trainerData)=>{
   }
   const {data} = await api.updateTrainer(config,trainerData)
   if(data){
-    await localStorage.setItem("trainer",JSON.stringify(data))
+     localStorage.setItem("trainer",JSON.stringify(data))
   }
   return data
 }

@@ -9,10 +9,13 @@ const User = require('../models/userModel')
 const { userpost } = require('../models/postModel')
 
 // require-trainerMOdel
-const Trainer = require("../models/trainerModel")
+const Trainer = require('../models/trainerModel')
 
 // require-trainerPost-model
 const { trainerpsot } = require('../models/postModel')
+
+// require-plans-model
+const Plans = require('../models/PlansModel')
 
 // require -generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
@@ -36,9 +39,8 @@ const userUpdate = asyncHandler(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    coverimage:req.body.coverimage,
-    profileimage:req.body.profileimage
-
+    coverimage: req.body.coverimage,
+    profileimage: req.body.profileimage,
   }
   const updatedUser = await User.findByIdAndUpdate(userid, userData, {
     new: true,
@@ -48,8 +50,8 @@ const userUpdate = asyncHandler(async (req, res) => {
     name: updatedUser.name,
     email: updatedUser.email,
     phoneNumber: updatedUser.phoneNumber,
-    coverimage:updatedUser.coverimage,
-    profileimage:updatedUser.profileimage,
+    coverimage: updatedUser.coverimage,
+    profileimage: updatedUser.profileimage,
     status: updatedUser.status,
     token: generateToken(updatedUser._id),
   }
@@ -92,10 +94,9 @@ const registerUser = asyncHandler(async (req, res) => {
       email: user.email,
       phoneNumber: user.phoneNumber,
       status: user.status,
-      coverimage:user.coverimage,
-      profileimage:user.profileimage,
+      coverimage: user.coverimage,
+      profileimage: user.profileimage,
       token: generateToken(user._id),
-
     })
   } else {
     res.status(400)
@@ -119,8 +120,8 @@ const loginUser = asyncHandler(async (req, res) => {
           email: user.email,
           phoneNumber: user.phoneNumber,
           status: user.status,
-          coverimage:user.coverimage,
-          profileimg:user.profileimage,
+          coverimage: user.coverimage,
+          profileimg: user.profileimage,
           postCount: user.postCount,
           token: generateToken(user._id),
         })
@@ -189,7 +190,7 @@ const addpost = asyncHandler(async (req, res) => {
 // single-user-posts
 const userPosts = asyncHandler(async (req, res) => {
   const userPosts = await userpost
-    .find({postedBy:req.user._id})
+    .find({ postedBy: req.user._id })
     .populate({ path: 'postedBy', select: ['name', 'profileimage'] })
   if (userPosts) {
     res.status(200).json(userPosts)
@@ -229,15 +230,56 @@ const allPosts = asyncHandler(async (req, res) => {
 })
 
 // singletrainer
-const singletrainer= asyncHandler(async(req,res)=>{
-  
+const singletrainer = asyncHandler(async (req, res) => {
   const trainer = await Trainer.findById(req.params.id)
-  if(trainer){
-    
-    res.status(200 ).json(trainer)
-  }else{
+  if (trainer) {
+    res.status(200).json(trainer)
+  } else {
     res.status(400)
-    throw new Error("someThing worong Trainer not found")
+    throw new Error('someThing worong Trainer not found')
+  }
+})
+
+// get-all-plans
+const getAllPlans = asyncHandler(async (req, res) => {
+  const plans = await Plans.find().populate({
+    path: 'postedBy',
+    select: ['name'],
+  })
+  if (plans) {
+    res.status(200).json(plans)
+  } else {
+    res.status(400)
+    throw new Error('No plans found')
+  }
+})
+
+// Get-single-plan
+const getSinglePlan = asyncHandler(async (req, res) => {
+  const singlePlan = await Plans.find({ _id: req.params.id }).populate({
+    path: 'postedBy',
+    select: ['name'],
+  })
+  if (singlePlan) {
+    res.status(200).json(singlePlan[0])
+  } else {
+    res.status(400)
+    throw new Error('plan not found')
+  }
+})
+
+// Get-single-traine-plans
+const getSingleTrainerPlans = asyncHandler(async (req, res) => {
+  const tplans = await Plans.find({ postedBy: req.params.id }).populate({
+    path: 'postedBy',
+    select: ['name'],
+  })
+
+  if (tplans) {
+    res.status(200).json(tplans)
+  } else {
+    res.status(400)
+    throw new Error('currently no plans')
   }
 })
 module.exports = {
@@ -251,5 +293,8 @@ module.exports = {
   addpost,
   deletePost,
   allPosts,
-  singletrainer
+  singletrainer,
+  getAllPlans,
+  getSinglePlan,
+  getSingleTrainerPlans,
 }

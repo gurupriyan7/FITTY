@@ -9,7 +9,10 @@ TRAINER_ADDPOST:'/addpost',
 TRAINER_POSTS:"/posts",
 TRAINER_POST_DELETE:"/post/delete/",
 ALL_POSTS:"/allposts",
-ADD_PLAN:"/addplan"
+ADD_PLAN:"/addplan",
+GET_TRAINERS_PLANS:"/gettrainerplan",
+GET_SINGLE_PLAN:"/singleplan/",
+DELETE_PLAN:"/deleteplan/"
 
 }
 export const  {
@@ -23,5 +26,8 @@ export const  {
   TRAINER_POSTS,
   TRAINER_POST_DELETE,
   ALL_POSTS,
-  ADD_PLAN
+  ADD_PLAN,
+  GET_TRAINERS_PLANS,
+  GET_SINGLE_PLAN,
+  DELETE_PLAN
 } =url

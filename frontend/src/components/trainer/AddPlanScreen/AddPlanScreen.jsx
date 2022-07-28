@@ -5,7 +5,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
-import {AddPlan} from "../../../features/TrainerPlans/TrainerPlanSlice"
+import {AddPlan,reset} from "../../../features/TrainerPlans/TrainerPlanSlice"
 import { useEffect } from 'react'
 function AddPlanScreen() {
   const dispatch = useDispatch()
@@ -18,6 +18,7 @@ useEffect(()=>{
 if(isSuccess){
   navigate("/trainer/home/tplans")
 }
+dispatch(reset())
 },[isSuccess,isError,isLoading,message])
   
   // form-data
@@ -47,15 +48,22 @@ if(isSuccess){
   const [load, setload] = useState(false)
   const onsubmit = async (e) => {
     e.preventDefault()
+    
     if (!image) {
       alert('image not selected')
     } else {
       setload(true)
       const data = await imageUpload(image)
+      
       formdata.image = data.secure_url.toString()
             dispatch(AddPlan(formdata))
       setload(false)
     }
+  }
+  if(load){
+    return(
+      <h1>heloo</h1>
+    )
   }
   return (
     <div className="traineraddplanscreen container">

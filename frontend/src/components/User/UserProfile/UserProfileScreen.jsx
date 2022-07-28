@@ -66,13 +66,15 @@ function UserProfileScreen() {
 
   useEffect(() => {
     dispatch(updateUser(formData))
-  }, [formData.coverimage, formData.profileimage])
+  }, [formData.coverimage,])
 
 // profile-image
   const [Pimage, setPimage] = useState(null)
+  const [imgchange,setimgchange]= useState(false)
   const onSubmit = async(e) => {
     e.preventDefault()
     setcload(true)
+    if(imgchange){
       const data = await imageUpload(Pimage)
       const pimge = await data.secure_url.toString()
       let newImage = { profileimage: pimge }
@@ -80,7 +82,10 @@ function UserProfileScreen() {
         ...formData,
         ...newImage,
       }))
-      setcload(false)
+    }
+    dispatch(updateUser(formData))
+    setcload(false)
+    setimgchange(false)
    
   }
 
@@ -123,6 +128,7 @@ function UserProfileScreen() {
     if (event.target.files && event.target.files[0]) {
       let Pimg = event.target.files[0]
       setPimage(Pimg)
+      setimgchange(true)
     }
   }
 

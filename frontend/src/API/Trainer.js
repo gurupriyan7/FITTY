@@ -9,7 +9,10 @@ import {
   TRAINER_POSTS,
   TRAINER_POST_DELETE,
   ALL_POSTS,
-  ADD_PLAN
+  ADD_PLAN,
+  GET_TRAINERS_PLANS,
+  GET_SINGLE_PLAN,
+  DELETE_PLAN
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -46,4 +49,13 @@ export const loginTrainer = (trainerData) =>
 
   // add-Plans
   export const AddPlan=(config,planData)=>API.post(ADD_PLAN,planData,config)
+  
+  // get-trainer-plan
+  export const getTrainerPlan=(config,trId)=>API.get(GET_TRAINERS_PLANS,config)
+
+  // get-single-plan
+  export const getSinglePlan=(config,planId)=>API.get(GET_SINGLE_PLAN+planId,config)
+
+  // delete-plan
+  export const deletePlan=(config,planId)=>API.delete(DELETE_PLAN+planId,config)
 

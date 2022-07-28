@@ -37,7 +37,7 @@ const AddTrainer = async (TrainerData) => {
 const AllTrainers = async () => {
   const { data } = await api.AllTrainers()
   if (data) {
-    localStorage.setItem('trainer', JSON.stringify(data))
+   
   }
   return data
 }

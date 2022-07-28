@@ -18,6 +18,8 @@ import GetPlansScreen from './components/User/GetplansScreen/GetPlansScreen'
 import MyPlansScreen from './components/User/MyPlansScreen/MyPlansScreen'
 import UserProfileScreen from './components/User/UserProfile/UserProfileScreen'
 import UserTrainerProfileScreen from './components/User/TrainerProfile/UserTrainerProfileScreen'
+import UserPaymentScreen from './components/User/UserPayment/UserPaymentScreen'
+
 
 // Admin-side
 import Home from './pages/admin/Home/Home'
@@ -37,6 +39,7 @@ import AddPostScreen from './components/User/AddPostScreen/AddPostScreen'
 import TrainerAddPostScreen from './components/trainer/TrainerAddPostScreen/TrainerAddPostScreen'
 import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/TrainerProfileScreen'
 import AddPlanScreen from './components/trainer/AddPlanScreen/AddPlanScreen'
+import TrainerSinglePlanScreen from './components/trainer/TrainerSinglePlanScreen/TrainerSinglePlanScreen'
 
 
 function App() {
@@ -51,7 +54,6 @@ function App() {
             <Route path="/">
               <Route index element={<LoginPage />} />
               <Route path="register" element={<RegisterPage />} />
-
               <Route path="home">
                 <Route index  element={user ? <UserHome childern={<UserHomeScreen />} /> : <LoginPage />} />
                 <Route path="getacoach"  element={user ? <UserHome childern={<GetACoachScreen />} /> : <LoginPage />} />
@@ -60,6 +62,8 @@ function App() {
                 <Route path='addpost'  element={user ? <UserHome childern={<AddPostScreen/>} /> : <LoginPage />}/>
                 <Route path="profile"  element={user ? <UserHome childern={<UserProfileScreen />} /> : <LoginPage />} />
                 <Route path="coach/:id"   element={user ? <UserHome childern={<UserTrainerProfileScreen />} /> : <LoginPage />}/>
+                <Route path="payment/:id"   element={user ? <UserHome childern={<UserPaymentScreen/>} /> : <LoginPage />}/>
+
               </Route>
             </Route>
             {/* user-side */}
@@ -90,6 +94,8 @@ function App() {
                 <Route path='taddpost'  element={trainer ?<TrainerHome childern={<TrainerAddPostScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='tprofile'  element={trainer ?<TrainerHome childern={<TrainerProfileScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='addplan'  element={trainer ?<TrainerHome childern={<AddPlanScreen/>} /> : <TrainerLogin/>}/>
+                <Route path='singleplan/:id'  element={trainer ?<TrainerHome childern={<TrainerSinglePlanScreen/>} /> : <TrainerLogin/>}/>
+              
               </Route>
             </Route>
           </Routes>

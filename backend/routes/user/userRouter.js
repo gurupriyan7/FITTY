@@ -12,7 +12,10 @@ const {
   addpost,
   deletePost,
   allPosts,
-  singletrainer
+  singletrainer,
+  getAllPlans,
+  getSinglePlan,
+  getSingleTrainerPlans
 } = require('../../controllers/usercontroller')
 
 router.get('/',getUser)
@@ -49,5 +52,14 @@ router.get('/allposts',protect,allPosts)
 
 // single-Trainer
 router.get("/singletrainer/:id",singletrainer)
+
+// Get-all-plans
+router.get("/allplans",protect,getAllPlans)
+
+// Get-single-plan
+router.get("/singleplan/:id",protect,getSinglePlan)
+
+// Get-single-trainer-plans
+router.get("/trainerplans/:id",protect,getSingleTrainerPlans)
 
 module.exports = router

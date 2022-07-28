@@ -94,7 +94,7 @@ const loginTrainer = asyncHandler(async (req, res) => {
           status: trainer.status,
           slots: trainer.slots,
           coached: trainer.coached,
-          coverimage:trainer.coverimgae,
+          coverimage:trainer.coverimage,
           profileimage:trainer.profileimage,
           token: generateToken(trainer._id),
         })
@@ -259,6 +259,49 @@ const AddPlans = asyncHandler(async(req,res)=>{
         }
 }) 
 
+// get-trainer-plans
+const getTrainerPlan = asyncHandler(async(req,res)=>{
+  const trId = req.trainer.id
+  console.log("helloo",trId);
+
+  const trainerPlans = await Plans.find({postedBy:trId})
+  .populate({path:"postedBy",select:["name"]})
+ 
+  if(trainerPlans){
+    console.log("plan",trainerPlans)
+    res.status(200).json(trainerPlans)
+  }else{
+    res.status(400)
+    throw new Error("No plans")
+  }
+})
+
+// Get-single-plan
+const getsinglePlan= asyncHandler(async(req,res)=>{
+  const planId = req.params.id
+  console.log("id",planId)
+  const singlePlan=await Plans.find({_id:planId})
+  .populate({path:"postedBy",select:["name"]})
+  if(singlePlan){
+    res.status(200).json(singlePlan[0])
+  }else{
+    res.status(400)
+    throw new Error("No Plans found")
+  }
+})
+
+// Delete-plan
+const deletePlan = asyncHandler(async(req,res)=>{
+  const plan = await Plans.findById(req.params.id)
+  if(plan){
+    await plan.remove()
+    res.status(200).json({id:req.params.id})
+  }else{
+     res.status(400)
+     throw new Error("plan not found")
+  }
+})
+
 module.exports = {
   registerTrainer,
   loginTrainer,
@@ -270,6 +313,9 @@ module.exports = {
   trainerPosts,
   deletePost,
   Allposts,
-  AddPlans
+  AddPlans,
+  getTrainerPlan,
+  getsinglePlan,
+  deletePlan
  
 }

@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { singleTrainer } from '../../../features/featchTrainers/FeatchTrainersSlice'
+import TrainersPlanViewScreen from '../TrainersPlanViewScreen/TrainersPlanViewScreen'
 
 const style = {
   position: 'absolute',
@@ -146,6 +147,7 @@ function UserTrainerProfileScreen() {
             </div>
             {/* <TrainerProfilePostScreen /> */}
           </>
+          <TrainersPlanViewScreen value={Trainer._id} />
 
     </>
   )

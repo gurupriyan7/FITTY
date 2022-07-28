@@ -15,5 +15,7 @@ export const imageUpload = async (pics) => {
     } else {
       return console.log('picture not uploaded')
     }
+  }else{
+    alert("format not supported")
   }
 }
