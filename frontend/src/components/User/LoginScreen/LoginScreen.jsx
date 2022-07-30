@@ -116,6 +116,7 @@ function LoginScreen() {
                         onSuccess={onLoginSuccess}
                         onFailure={onLoginFailure}
                         cookiePolicy={'single_host_origin'}
+                        prompt="select_account"
                         
                       ></GoogleLogin>
                       {/* <GoogleLogout /> */}
