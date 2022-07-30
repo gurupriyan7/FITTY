@@ -10,6 +10,14 @@ const trainerLogin = async (trainerData) => {
   }
   return data
 }
+// googleLogin
+const tgoogleLogin = async(trainerData)=>{
+  const {data}= await api.tgoogleLogin(trainerData)
+  if (data) {
+    localStorage.setItem('trainer', JSON.stringify(data))
+  }
+  return data
+}
 
 // Logout-Trainer
 const trainerLogout = () => {
@@ -39,7 +47,8 @@ const trainerService = {
   trainerLogin,
   trainerLogout,
   AllTrainers,
-  updateTrainer
+  updateTrainer,
+  tgoogleLogin
 }
 
 export default trainerService

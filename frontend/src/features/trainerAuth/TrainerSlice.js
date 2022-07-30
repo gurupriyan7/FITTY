@@ -25,6 +25,18 @@ export const trainerLogin = createAsyncThunk(
     }
   },
 )
+// google-login
+export const tgoogleLogin = createAsyncThunk(
+  "tgoogleLogin",
+  async(trainerData,thunkAPI)=>{
+    try {
+      return await trainerService.tgoogleLogin(trainerData)
+      
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
 
 // trainer-Logout
 export const trainerLogout = createAsyncThunk(
@@ -66,16 +78,37 @@ export const trainerSlice = createSlice({
   extraReducers: {
     // Login-case
     [trainerLogin.pending]: (state) => {
+      
       state.isLoading = true
     },
     [trainerLogin.fulfilled]: (state, action) => {
       state.isError = false
       state.isLoading = false
       state.isSuccess = true
-      state.message = ''
       state.trainer = action.payload
     },
     [trainerLogin.rejected]: (state, action) => {
+      console.log("error",action.payload)
+      state.isError = true
+      state.isSuccess = false
+      state.isLoading = false
+      state.message = action.payload
+      state.trainer = null
+    },
+    // google-login
+    [tgoogleLogin.pending]: (state) => {
+      console.log("pendinggg");
+      state.isLoading = true
+    },
+    [tgoogleLogin.fulfilled]: (state, action) => {
+      console.log("success",action);
+      state.isError = false
+      state.isLoading = false
+      state.isSuccess = true
+      state.trainer = action.payload
+    },
+    [tgoogleLogin.rejected]: (state, action) => {
+      console.log("error",action.payload);
       state.isError = true
       state.isSuccess = false
       state.isLoading = false

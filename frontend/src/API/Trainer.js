@@ -12,7 +12,8 @@ import {
   ADD_PLAN,
   GET_TRAINERS_PLANS,
   GET_SINGLE_PLAN,
-  DELETE_PLAN
+  DELETE_PLAN,
+  GOOGLE_LOGIN
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -58,6 +59,10 @@ export const loginTrainer = (trainerData) =>
 
   // delete-plan
   export const deletePlan=(config,planId)=>API.delete(DELETE_PLAN+planId,config)
+
+  // login-with-google
+  export const tgoogleLogin=(trainerData)=>API.post(GOOGLE_LOGIN,trainerData)
+  
 
  
 

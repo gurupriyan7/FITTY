@@ -3,7 +3,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './TrainerLoginScreen.scss'
-import { reset, trainerLogin } from '../../../features/trainerAuth/TrainerSlice'
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { gapi } from 'gapi-script'
+import { reset, trainerLogin ,tgoogleLogin} from '../../../features/trainerAuth/TrainerSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import google from "../../../images/google.svg"
@@ -28,6 +30,21 @@ function TrainerLoginScreen() {
     (state) => state.trainerAuth,
   )
 
+  const onLoginSuccess = (response) => {
+    const start = () => {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        scope: '',
+      })
+      gapi.load('client:auth2', start)
+    }
+    dispatch(tgoogleLogin(response.profileObj))
+    console.log('happy hello', response.profileObj)
+  }
+  const onLoginFailure = (response) => {
+    console.log('error', response)
+    toast.error(response.message)
+  }
   const onsubmit = (e) => {
     e.preventDefault()
     const trainerData = { email, password }
@@ -93,12 +110,17 @@ function TrainerLoginScreen() {
                       </button>
                     </div>
                     <div className="d-grid mb-3">
-                      <button
-                        className="btn  btn-primary btn-login fw-bold text-uppercase"
-                        type="submit"
-                      > <img src={google} alt="" className="google" />
-                        Login with Google
-                      </button>
+                      
+                      <GoogleLogin
+                        className="btn-login"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText="Sign In with Google"
+                        onSuccess={onLoginSuccess}
+                        onFailure={onLoginFailure}
+                        cookiePolicy={'single_host_origin'}
+                        prompt="select_account"
+                        
+                      ></GoogleLogin>
                     </div>
                   </form>
                 </div>

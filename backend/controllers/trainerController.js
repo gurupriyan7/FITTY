@@ -116,6 +116,36 @@ const loginTrainer = asyncHandler(async (req, res) => {
   }
 })
 
+//Login-with-google
+const googleLogin = asyncHandler(async(req,res)=>{
+  const {email}=req.body
+  console.log("tra",req.body.email);
+  const trainer = await Trainer.findOne({ email:email })
+  if(trainer){
+if(trainer.status){
+  res.status(200).json({
+    _id: trainer._id,
+    name: trainer.name,
+    email: trainer.email,
+    phoneNumber: trainer.phoneNumber,
+    category: trainer.category,
+    status: trainer.status,
+    slots: trainer.slots,
+    coached: trainer.coached,
+    coverimage:trainer.coverimage,
+    profileimage:trainer.profileimage,
+    token: generateToken(trainer._id),
+  })
+}else{
+  res.status(400)
+      throw new Error('You Have been Blocked by admin')
+}
+  }else{
+    console.log("sorry");
+    res.status(400)
+    throw new Error('Invalid Email')
+  }
+})
 // Update-Trainer
 const UpdateTrainer = asyncHandler(async (req, res) => {
   const trainerId = req.trainer._id
@@ -123,7 +153,7 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
 
   const trainer = await Trainer.findById(trainerId)
   if (!trainer) {
-    res.status(400)
+     res.status(400)
     throw new Error('Trainer Not Found')
   }
   const updatedTrainer = await Trainer.findByIdAndUpdate(trainerId, req.body, {
@@ -348,6 +378,7 @@ module.exports = {
   getTrainerPlan,
   getsinglePlan,
   deletePlan,
-  getTrainerClients
+  getTrainerClients,
+  googleLogin
  
 }
