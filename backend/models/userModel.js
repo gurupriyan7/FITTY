@@ -27,7 +27,8 @@ const userSchema = mongoose.Schema(
     },
     coverimage:{
       type:String
-    }
+    },
+    expry:String,
   },
   {
     timestamps: true,

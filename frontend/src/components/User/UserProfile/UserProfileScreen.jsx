@@ -43,10 +43,12 @@ function UserProfileScreen() {
   // post-count
   const { userposts } = useSelector((state) => state.userPost)
   const [postCount, setPostCount] = useState(0)
+  const [pupdate,setPupdata]= useState(false)
 
   useEffect(() => {
     if (isSuccess) {
       edithandleClose()
+      setPupdata(false)
     }
   }, [user, isSuccess, isError, isLoading, message])
 
@@ -66,26 +68,31 @@ function UserProfileScreen() {
 
   useEffect(() => {
     dispatch(updateUser(formData))
-  }, [formData.coverimage,])
+  }, [formData.coverimage,pupdate])
 
 // profile-image
   const [Pimage, setPimage] = useState(null)
   const [imgchange,setimgchange]= useState(false)
+  const [cload, setcload] = useState(false)
   const onSubmit = async(e) => {
     e.preventDefault()
     setcload(true)
     if(imgchange){
       const data = await imageUpload(Pimage)
       const pimge = await data.secure_url.toString()
+      console.log("daata",pimge)
+
       let newImage = { profileimage: pimge }
       setFormData((formData) => ({
         ...formData,
         ...newImage,
       }))
     }
-    dispatch(updateUser(formData))
-    setcload(false)
     setimgchange(false)
+    console.log("form",formData);
+
+    setPupdata(true)
+    setcload(false)
    
   }
 
@@ -93,7 +100,7 @@ function UserProfileScreen() {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  const [cload, setcload] = useState(false)
+  
   // profile-img
   const [Popen, setPopen] = useState(false)
   const PhandleOpen = () => setPopen(true)

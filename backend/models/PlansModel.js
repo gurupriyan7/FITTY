@@ -21,6 +21,9 @@ const planSchema = mongoose.Schema(
     },
       description:{
         type:String
+      },
+      expry:{
+        type:String
       }
     
   },

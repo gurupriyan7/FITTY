@@ -17,7 +17,7 @@ import {
 
 const BACKEND_URL = 'http://localhost:5000/api'
 
-const API = axios.create({
+export const API = axios.create({
   baseURL: `${BACKEND_URL}/trainer`,
   withCredentials: true,
 })
@@ -58,4 +58,6 @@ export const loginTrainer = (trainerData) =>
 
   // delete-plan
   export const deletePlan=(config,planId)=>API.delete(DELETE_PLAN+planId,config)
+
+ 
 

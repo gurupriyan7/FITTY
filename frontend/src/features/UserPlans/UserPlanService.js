@@ -33,10 +33,21 @@ const getSingleTrainerPlans = async(token,trId)=>{
   console.log("data",data);
   return data
 }
+// getUserOwnPlans
+const getUserOwnPlans = async(token)=>{
+  const config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}= await api.getUserOwnPlans(config)
+  return data
+}
 export const UserPlanService = {
   getAllPlans,
   getSinglePlan,
-  getSingleTrainerPlans
+  getSingleTrainerPlans,
+  getUserOwnPlans
 }
 
 export default UserPlanService

@@ -35,7 +35,6 @@ const updateTrainer = async (token,trainerData)=>{
   }
   return data
 }
-
 const trainerService = {
   trainerLogin,
   trainerLogout,

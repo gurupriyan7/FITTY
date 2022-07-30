@@ -11,7 +11,9 @@ const urls = {
   SINGLE_TRAINER: '/singletrainer/',
   GET_ALL_PLANS: '/allplans',
   GET_SINGLE_PLAN: '/singleplan/',
-  GET_SINGLE_TRAINER_PLANS:"/trainerplans/"
+  GET_SINGLE_TRAINER_PLANS:"/trainerplans/",
+  USER_OWN_PLAN:"/userownplan",
+  GOOGLE_LOGIN:"/googlelogin"
 }
 
 
@@ -28,5 +30,7 @@ export const {
   SINGLE_TRAINER,
   GET_ALL_PLANS,
   GET_SINGLE_PLAN,
-  GET_SINGLE_TRAINER_PLANS
+  GET_SINGLE_TRAINER_PLANS,
+  USER_OWN_PLAN,
+  GOOGLE_LOGIN
 } = urls

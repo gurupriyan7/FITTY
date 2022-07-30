@@ -5,6 +5,9 @@ const bcrypt = require('bcryptjs')
 // require-Trainer-Model
 const Trainer = require('../models/trainerModel')
 
+// require-user-model
+const User = require("../models/userModel")
+
 // require-plans-module
 const Plans = require("../models/PlansModel")
 
@@ -13,6 +16,7 @@ const { trainerpsot , userpost} = require('../models/postModel')
 
 // require-generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
+const orderModel = require('../models/orderModel')
 
 // Trainer-registration
 const registerTrainer = asyncHandler(async (req, res) => {
@@ -301,6 +305,33 @@ const deletePlan = asyncHandler(async(req,res)=>{
      throw new Error("plan not found")
   }
 })
+// get-trainer-own-clients
+const getTrainerClients = asyncHandler(async(req,res)=>{
+  console.log("id",req.trainer._id);
+//   const newData = await orderModel.aggregate([{$match:{trainer:req.trainer._id}},
+//   {
+//    $lookup:{
+//     from:"User",
+//     localField:"user",
+//     foreignField:"_id",
+//     as:"result"
+//    }
+//   },
+// // {
+// //   $unwind:"$result"
+// // }
+// ])
+const newData = await orderModel.find({trainer:req.trainer._id})
+.populate("user")
+console.log("data",newData);
+const data = []
+newData.map(async(user)=>{
+ 
+  user.user.expry =user.expry
+  data.push(user.user)
+})
+res.status(200).json(data)
+})
 
 module.exports = {
   registerTrainer,
@@ -316,6 +347,7 @@ module.exports = {
   AddPlans,
   getTrainerPlan,
   getsinglePlan,
-  deletePlan
+  deletePlan,
+  getTrainerClients
  
 }

@@ -9,7 +9,8 @@ const initialState = {
   message: '',
   allPlans: [],
   singleplan: [],
-  trainerPlans:[]
+  trainerPlans:[],
+  userOwnPlans:[]
 }
 
 // All-plans
@@ -45,6 +46,19 @@ export const getSingleTrainerPlans = createAsyncThunk(
     try {
       const token = await thunkAPI.getState().auth.user.token
       return UserPlanService.getSingleTrainerPlans(token,trId)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
+
+// Get-user-own-plans
+export const getUserOwnPlans=createAsyncThunk(
+  "userPlan/getUserOwnPlans",
+  async(u,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().auth.user.token
+      return UserPlanService.getUserOwnPlans(token)
     } catch (error) {
       thunkAPI.rejectWithValue(errorMessage(error))
     }
@@ -106,7 +120,22 @@ const UserPlanSlice = createSlice({
     state.isError=true
     state.isLoading=false
     state.message=action.payload
-   }
+   },
+  //  getUserOwnPlans
+  [getUserOwnPlans.pending]:(state)=>{
+    state.isLoading=true
+  },
+  [getUserOwnPlans.fulfilled]:(state,action)=>{
+    state.isLoading=false
+    state.isError=false
+    state.userOwnPlans=action.payload
+  },
+  [getUserOwnPlans.rejected]:(state,action)=>{
+    state.isLoading=false
+    state.isError=true
+    state.message=action.payload
+  }
+
   
   },
 })

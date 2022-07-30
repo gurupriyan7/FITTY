@@ -12,13 +12,17 @@ import {
   GET_ALL_PLANS,
   GET_SINGLE_PLAN,
   GET_SINGLE_TRAINER_PLANS,
+  USER_OWN_PLAN,
+  GOOGLE_LOGIN
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
 
-const API = axios.create({
+ export const API = axios.create({
   baseURL: `${BACKEND_URL}/user`,
   withCredentials: true,
 })
+
+
 
 // traner-endpoints
 export const registerUser = (userData) => API.post(USER_REGISTER, userData)
@@ -54,3 +58,13 @@ export const getSinglePlan = (config, planId) =>
 // getSingleTrainerPlans
 export const getSingleTrainerPlans = (config, trId) =>
   API.get(GET_SINGLE_TRAINER_PLANS + trId, config)
+
+  // getUserOwnPlans
+  export const getUserOwnPlans = (config)=>API.get(USER_OWN_PLAN,config)
+
+  // google-login
+  export const googleLogin = (userData)=>API.post(GOOGLE_LOGIN,userData)
+
+
+
+ 

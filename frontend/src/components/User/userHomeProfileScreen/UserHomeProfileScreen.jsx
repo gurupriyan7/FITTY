@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import GroupAddIcon from '@mui/icons-material/GroupAdd'
 import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList'
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
@@ -17,15 +17,21 @@ function UserHomeProfileScreen() {
     mp: false,
   })
 
+
   const {user}= useSelector((state)=>state.auth)
+  const [client,setClient]= useState(user)
+  useEffect(()=>{
+setClient(user)
+  },[user])
+  console.log("pic",client.profileimage);
 
   return (
     <div className="userProfileCard">
       <div className="top">
-        {user.coverimage ?
+        {client.coverimage ?
         <img
         className="coverpic"
-        src={user.coverimage}
+        src={client.coverimage}
         alt=""
       /> :
       <img
@@ -37,10 +43,10 @@ function UserHomeProfileScreen() {
         
        
       </div>
-      {user.profileimage
+      {client.profileimage
       ? <img
       className="roundpic"
-      src={user.profileimage}
+      src={client.profileimage}
       alt=""
     /> :
     <img
@@ -64,7 +70,7 @@ function UserHomeProfileScreen() {
             style={{ textDecoration: 'none', color: 'black' }}
             to={'/home/profile'}
           >
-            {user.name}
+            {client.name}
           </Link>{' '}
         </div>
       </div>

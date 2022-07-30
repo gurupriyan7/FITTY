@@ -12,7 +12,8 @@ ALL_POSTS:"/allposts",
 ADD_PLAN:"/addplan",
 GET_TRAINERS_PLANS:"/gettrainerplan",
 GET_SINGLE_PLAN:"/singleplan/",
-DELETE_PLAN:"/deleteplan/"
+DELETE_PLAN:"/deleteplan/",
+GET_TRAINER_CLIENTS:"/getclients"
 
 }
 export const  {
@@ -29,5 +30,6 @@ export const  {
   ADD_PLAN,
   GET_TRAINERS_PLANS,
   GET_SINGLE_PLAN,
-  DELETE_PLAN
+  DELETE_PLAN,
+  GET_TRAINER_CLIENTS
 } =url

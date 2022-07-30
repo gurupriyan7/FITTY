@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const { protect } = require('../../middleware/authMiddleware')
+  
+  const {getRazorpayKey,createOrder,payorder,getOrders} = require("../../controllers/orderController")
 const {
   getUser,
   userUpdate,
@@ -15,7 +17,10 @@ const {
   singletrainer,
   getAllPlans,
   getSinglePlan,
-  getSingleTrainerPlans
+  getSingleTrainerPlans,
+  getUserOwnPlans,
+  googlelogin
+
 } = require('../../controllers/usercontroller')
 
 router.get('/',getUser)
@@ -25,6 +30,9 @@ router.post('/register', registerUser)
 
 // Login-user
 router.post('/login', loginUser)
+
+// google-login
+router.post('/googlelogin',googlelogin)
 
 // Update-user
 router.put('/update',protect,userUpdate)
@@ -61,5 +69,20 @@ router.get("/singleplan/:id",protect,getSinglePlan)
 
 // Get-single-trainer-plans
 router.get("/trainerplans/:id",protect,getSingleTrainerPlans)
+
+// Get-razorpay-key-id
+router.get("/get-razorpay-key",getRazorpayKey)
+
+// create-order
+router.post("/create-order",createOrder)
+
+// pay-order
+router.post("/pay-order",payorder)
+
+//Get-all-orders
+router.get("/list-orders",getOrders)
+
+// Get-user-own-plans
+router.get("/userownplan",protect,getUserOwnPlans)
 
 module.exports = router

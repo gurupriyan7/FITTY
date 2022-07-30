@@ -17,6 +17,9 @@ const { trainerpsot } = require('../models/postModel')
 // require-plans-model
 const Plans = require('../models/PlansModel')
 
+// require-order-model
+const Order = require("../models/orderModel")
+
 // require -generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
 
@@ -121,7 +124,7 @@ const loginUser = asyncHandler(async (req, res) => {
           phoneNumber: user.phoneNumber,
           status: user.status,
           coverimage: user.coverimage,
-          profileimg: user.profileimage,
+          profileimage: user.profileimage,
           postCount: user.postCount,
           token: generateToken(user._id),
         })
@@ -137,6 +140,36 @@ const loginUser = asyncHandler(async (req, res) => {
   } else {
     res.status(400)
     throw new Error('invalid Email')
+  }
+})
+
+// google-login
+const googlelogin = asyncHandler(async(req,res)=>{
+  const {email}=req.body
+  console.log("datasss",email);
+  const user = await User.findOne({ email:email })
+
+  if(user){
+ if(user.status){
+
+   res.status(200).json({
+     _id: user._id,
+     name: user.name,
+     email: user.email,
+     phoneNumber: user.phoneNumber,
+     status: user.status,
+     coverimage: user.coverimage,
+     profileimage: user.profileimage,
+     postCount: user.postCount,
+     token: generateToken(user._id),
+   })
+ }else{
+  res.status(400)
+  throw new Error("You have blocked by admin")
+ }
+  }else{
+    res.status(400)
+    throw new Error('There is no user in this email')
   }
 })
 
@@ -258,7 +291,7 @@ const getAllPlans = asyncHandler(async (req, res) => {
 const getSinglePlan = asyncHandler(async (req, res) => {
   const singlePlan = await Plans.find({ _id: req.params.id }).populate({
     path: 'postedBy',
-    select: ['name'],
+    select: ['name','slots'],
   })
   if (singlePlan) {
     res.status(200).json(singlePlan[0])
@@ -272,7 +305,7 @@ const getSinglePlan = asyncHandler(async (req, res) => {
 const getSingleTrainerPlans = asyncHandler(async (req, res) => {
   const tplans = await Plans.find({ postedBy: req.params.id }).populate({
     path: 'postedBy',
-    select: ['name'],
+    select: ['name','slots'],
   })
 
   if (tplans) {
@@ -282,6 +315,33 @@ const getSingleTrainerPlans = asyncHandler(async (req, res) => {
     throw new Error('currently no plans')
   }
 })
+// Get-user-own-plans
+const getUserOwnPlans = asyncHandler(async(req,res)=>{
+  const newData = await Order.aggregate([{$match:{user:req.user._id}},
+  {
+    $lookup:{
+      from:"plans",
+      localField:"plan",
+      foreignField:"_id",
+      as:"result"
+    }
+  },
+  {
+    $unwind:"$result"
+  }, 
+])
+const data = []
+  newData.map(async(plan)=>{
+  data.push(plan.result)
+})
+res.status(200).json(data)
+
+
+// setTimeout(()=>{
+//   res.status(200).json(data)
+//  },1000) 
+})
+
 module.exports = {
   getUser,
   userUpdate,
@@ -297,4 +357,6 @@ module.exports = {
   getAllPlans,
   getSinglePlan,
   getSingleTrainerPlans,
+  getUserOwnPlans,
+  googlelogin
 }

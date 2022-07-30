@@ -19,7 +19,9 @@
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.4.0"
+    "moment": "^2.29.4",
+    "mongoose": "^6.4.0",
+    "razorpay": "^2.8.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"

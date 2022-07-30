@@ -15,7 +15,8 @@ const {
   AddPlans,
   getTrainerPlan,
   getsinglePlan,
-  deletePlan
+  deletePlan,
+  getTrainerClients
   
 } = require('../../controllers/trainerController')
 
@@ -62,4 +63,7 @@ router.get("/singleplan/:id",trainerProtect,getsinglePlan)
 
 // Delete-plan
 router.delete("/deleteplan/:id",trainerProtect,deletePlan)
+
+// get-trainer-clients
+router.get("/getclients",trainerProtect,getTrainerClients)
 module.exports = router

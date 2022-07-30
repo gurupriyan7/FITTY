@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { reset, login } from '../../../features/auth/authSlice'
+import { reset, login,googleLogin } from '../../../features/auth/authSlice'
 import { toast } from 'react-toastify'
+import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { gapi } from 'gapi-script'
 import './LoginScreen.css'
-import google from "../../../images/google.svg"
+
 import { useDispatch, useSelector } from 'react-redux'
 
 function LoginScreen() {
@@ -13,6 +15,22 @@ function LoginScreen() {
   const { user, isLoading, isSuccess, isError, message } = useSelector(
     (state) => state.auth,
   )
+
+  const onLoginSuccess = (response) => {
+    const start = () => {
+      gapi.client.init({
+        clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+        scope: '',
+      })
+      gapi.load('client:auth2', start)
+    }
+    dispatch(googleLogin(response.profileObj))
+    console.log('happy hello', response.profileObj)
+  }
+  const onLoginFailure = (response) => {
+    console.log('error', response)
+    toast.error(response.message)
+  }
 
   useEffect(() => {
     if (isError) {
@@ -91,12 +109,16 @@ function LoginScreen() {
                       </button>
                     </div>
                     <div className="d-grid mb-3">
-                      <button
-                        className="btn  btn-primary btn-login fw-bold text-uppercase"
-                        type="submit"
-                      > <img src={google} alt="" className="google" />
-                        Login with Google
-                      </button>
+                      <GoogleLogin
+                        className="btn-login"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText="Sign In with Google"
+                        onSuccess={onLoginSuccess}
+                        onFailure={onLoginFailure}
+                        cookiePolicy={'single_host_origin'}
+                        
+                      ></GoogleLogin>
+                      {/* <GoogleLogout /> */}
                     </div>
 
                     <NavLink
@@ -110,9 +132,13 @@ function LoginScreen() {
                       </span>
                     </NavLink>
                   </form>
-                  <button onClick={()=>navigate("/trainer")} className='trbtn'>Trainer Login</button>
-                      {/* <NavLink style={{ textDecorationLine: 'none' }}  to='/trainer'><span className="tlink">Trainer Login</span></NavLink> */}
-                
+                  <button
+                    onClick={() => navigate('/trainer')}
+                    className="trbtn"
+                  >
+                    Trainer Login
+                  </button>
+                  {/* <NavLink style={{ textDecorationLine: 'none' }}  to='/trainer'><span className="tlink">Trainer Login</span></NavLink> */}
                 </div>
               </div>
             </div>

@@ -1,5 +1,6 @@
 import * as api from '../../API/User'
 
+
 // Register- user
 const register = async (userdata) => {
   const { data } = await api.registerUser(userdata)
@@ -36,12 +37,21 @@ const updateUser = async (token, userdata) => {
   }
   return data
 }
+// login-with-login
+const googleLogin = async(userdata)=>{
+  const {data} = await api.googleLogin(userdata)
+  if (data) {
+    localStorage.setItem('user', JSON.stringify(data))
+  }
+  return data
+}
 
 const authService = {
   register,
   logout,
   login,
   updateUser,
+  googleLogin
 }
 
 export default authService
