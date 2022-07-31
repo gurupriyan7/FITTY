@@ -1,6 +1,7 @@
 import * as React from 'react'
 import './UserProfileScreen.scss'
 import emptyprofilepic from '../../../images/profile-pic-avather.png'
+
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import ProfilePostsScreen from '../ProfilePostsScreen/ProfilePostsScreen'
 import Box from '@mui/material/Box'
@@ -13,6 +14,7 @@ import { reset, updateUser } from '../../../features/auth/authSlice'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
+import Spinner from '../../spinner/Spinner'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -74,6 +76,7 @@ function UserProfileScreen() {
   const [Pimage, setPimage] = useState(null)
   const [imgchange,setimgchange]= useState(false)
   const [cload, setcload] = useState(false)
+  
   const onSubmit = async(e) => {
     e.preventDefault()
     setcload(true)
@@ -145,9 +148,10 @@ function UserProfileScreen() {
       [e.target.name]: e.target.value,
     }))
   }
-  if (cload) {
-    return <h1>hello world</h1>
+  if(isLoading){
+    return <Spinner/>
   }
+  
   return (
     <>
       {/* edit-profile */}
@@ -362,6 +366,7 @@ function UserProfileScreen() {
           </div>
         </div>
       </div>
+      
       <ProfilePostsScreen />
     </>
   )

@@ -12,7 +12,7 @@ const initialState = {
   user: user ? user : null,
   isError: false,
   isSuccess: false,
-  isLoading: false,
+  isAdiminLoading: false,
   message: "",
 };
 
@@ -77,7 +77,7 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     reset: (state) => {
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.isSuccess = false;
       state.isError = false;
       state.message = "";
@@ -86,15 +86,15 @@ export const authSlice = createSlice({
   extraReducers: {
     // Register-case
     [register.pending]: (state) => {
-      state.isLoading = true;
+      state.isAdiminLoading = true;
     },
     [register.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.user = action.payload;
       state.isSuccess = true;
     },
     [register.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.isError = true;
       state.message = action.payload;
       state.user = null;
@@ -108,45 +108,45 @@ export const authSlice = createSlice({
 
     // Login-case
     [login.pending]: (state) => {
-      state.isLoading = true;
+      state.isAdiminLoading = true;
     },
     [login.fulfilled]: (state, action) => {
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.user = action.payload;
       state.isSuccess = true;
     },
     [login.rejected]: (state, action) => {
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.isError = true;
       state.message = action.payload;
       state.user = null;
     },
     //update-user-case
     [updateUser.pending] :(state)=>{
-      state.isLoading=true
+      state.isAdiminLoading=true
     },
     [updateUser.fulfilled]:(state,action)=>{
       state.isError=false
       state.isSuccess=true
-      state.isLoading=false
+      state.isAdiminLoading=false
       state.user=action.payload
     },
     [updateUser.rejected]:(state,action)=>{
       state.isError=true
-      state.isLoading=false
+      state.isAdiminLoading=false
       state.isSuccess=false
     },
     // google-login
     [googleLogin.pending]:(state)=>{
-      state.isLoading=true
+      state.isAdiminLoading=true
     },
     [googleLogin.fulfilled]:(state,action)=>{
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.user = action.payload;
       state.isSuccess = true;
     },
     [googleLogin.rejected]:(state,action)=>{
-      state.isLoading = false;
+      state.isAdiminLoading = false;
       state.isError = true;
       state.message = action.payload;
       state.user = null;

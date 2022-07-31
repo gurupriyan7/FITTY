@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import {AddPlan,reset} from "../../../features/TrainerPlans/TrainerPlanSlice"
 import { useEffect } from 'react'
+import Spinner from '../../spinner/Spinner'
 function AddPlanScreen() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -64,6 +65,9 @@ dispatch(reset())
     return(
       <h1>heloo</h1>
     )
+  }
+  if(isLoading){
+    return <Spinner/>
   }
   return (
     <div className="traineraddplanscreen container">

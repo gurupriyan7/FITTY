@@ -7,10 +7,13 @@ import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import emptimg from "../../../images/profile-pic-avather.png"
 import {useSelector} from "react-redux"
+import Spinner from '../../spinner/Spinner';
 function TrainerProfileCard() {
   const navigate=useNavigate()
-  const {trainer}=useSelector((state)=>state.trainerAuth)
-  
+  const {trainer,isLoading}=useSelector((state)=>state.trainerAuth)
+  if(isLoading){
+        return <Spinner/>
+      }
   return (
           <div className="trainerProfileCard">
                     <div className="top">

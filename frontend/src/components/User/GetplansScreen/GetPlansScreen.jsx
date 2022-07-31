@@ -3,13 +3,17 @@ import './GetPlansScreen.scss'
 import {getAllPlans,reset} from "../../../features/UserPlans/UserPlanSlice"
 import {useDispatch,useSelector} from 'react-redux'
 import { Link } from 'react-router-dom'
+import Spinner from '../../spinner/Spinner'
 
 function GetPlansScreen() {
   const dispatch = useDispatch()
-  const {allPlans} = useSelector((state)=>state.userPlan)
+  const {allPlans,isLoading} = useSelector((state)=>state.userPlan)
   useEffect(()=>{
     dispatch(getAllPlans())
   },[])
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="container">
       <div className="row">

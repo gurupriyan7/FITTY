@@ -10,12 +10,13 @@ import { Link, useParams,useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import ShoppingCartRoundedIcon from '@mui/icons-material/ShoppingCartRounded'
 import { useState } from 'react'
+import Spinner from '../../spinner/Spinner'
 function UserPaymentScreen() {
   const dispatch = useDispatch()
   const navigate=useNavigate()
   const { id } = useParams()
 
-  const { singleplan } = useSelector((state) => state.userPlan)
+  const { singleplan,isLoading } = useSelector((state) => state.userPlan)
   const {user}=useSelector((state)=>state.auth)
  
     useEffect(() => {
@@ -83,6 +84,9 @@ function UserPaymentScreen() {
       }
     }
     document.body.appendChild(script)
+  }
+  if(isLoading){
+    return <Spinner/>
   }
   return (
     <>

@@ -5,6 +5,7 @@ import './GetACoachScreen.scss'
 import {AllTrainers,reset} from "../../../features/featchTrainers/FeatchTrainersSlice"
 
 import { useNavigate,Link } from 'react-router-dom'
+import Spinner from '../../spinner/Spinner'
 function GetACoachScreen() {
 
   const dispatch =  useDispatch()
@@ -15,6 +16,9 @@ function GetACoachScreen() {
 
     dispatch(AllTrainers())
   },[dispatch])
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="container">
       <div className="row">

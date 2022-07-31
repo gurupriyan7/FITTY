@@ -14,10 +14,11 @@ import {
   reset,
   deletePost
 } from '../../../features/trainerPosts/TrainerPostSlice'
+import Spinner from '../../spinner/Spinner'
 function TrainerProfilePostScreen() {
   const dispatch = useDispatch()
   // get-userposts
-  const { trainerPosts,isDeleted } = useSelector((state) => state.trainerPost)
+  const { trainerPosts,isDeleted,isLoading } = useSelector((state) => state.trainerPost)
   const [posts, setPosts] = useState([])
  
 
@@ -36,6 +37,9 @@ function TrainerProfilePostScreen() {
     //  setDelId(id)
   }
   const liked = (id) => {}
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="trainerprofilepostsscreen">
       <span className="poststext">Posts</span>

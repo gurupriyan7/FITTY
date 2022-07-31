@@ -4,6 +4,7 @@ import {getUserOwnPlans} from "../../../features/UserPlans/UserPlanSlice"
 import {useDispatch,useSelector} from "react-redux"
 import { useEffect } from 'react'
 import { useState } from 'react'
+import Spinner from '../../spinner/Spinner'
 function MyPlansScreen() {
   const dispatch = useDispatch()
 
@@ -19,8 +20,8 @@ if(isLoading){
   },[isLoading])
   console.log("planssssss",userOwnPlans);
   
-  if(load){
-    <h4>Loading.....</h4>
+  if(isLoading){
+    return <Spinner/>
   }
   return (
     <div className="container">

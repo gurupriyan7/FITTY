@@ -9,6 +9,7 @@ import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import {
   reset,trainerAddpost
 } from '../../../features/trainerPosts/TrainerPostSlice'
+import Spinner from '../../spinner/Spinner'
 function TrainerAddPostScreen() {
   const imageRef = useRef()
   const dispatch = useDispatch()
@@ -62,6 +63,9 @@ function TrainerAddPostScreen() {
       dispatch(trainerAddpost(formdata))
       setload(false)
     }
+  }
+  if(isLoading){
+    return <Spinner/>
   }
   return (
     <div className="traineraddpostscreen container">

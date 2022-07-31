@@ -7,6 +7,7 @@ import { AddPost, reset } from '../../../features/UserPosts/PostsSlice'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Spinner from '../../spinner/Spinner'
 function AddPostScreen() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -59,7 +60,9 @@ function AddPostScreen() {
       setLoad(false)
     }
   }
-
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="useraddpostscreen container">
       <div className="row">

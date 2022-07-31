@@ -10,6 +10,7 @@ import emptyimg from "../../../images/no_img.svg"
 import { useEffect } from 'react'
 import { userPost, reset,postDelete} from '../../../features/UserPosts/PostsSlice'
 import { useState } from 'react'
+import Spinner from '../../spinner/Spinner'
 function ProfilePostsScreen() {
   const dispatch = useDispatch()
   // get-state
@@ -32,6 +33,9 @@ function ProfilePostsScreen() {
 
 const deleteUPost =(id)=>{
 dispatch(postDelete(id))
+  }
+  if(isLoading){
+    return <Spinner/>
   }
   return (
     <>

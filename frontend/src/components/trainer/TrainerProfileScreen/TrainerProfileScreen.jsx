@@ -15,6 +15,7 @@ import TrainerProfilePostScreen from '../TrainerProfilePostScreen/TrainerProfile
 import {updateTrainer} from "../../../features/trainerAuth/TrainerSlice"
 import { formControlLabelClasses } from '@mui/material'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
+import Spinner from '../../spinner/Spinner'
 const style = {
   position: 'absolute',
   top: '40%',
@@ -127,9 +128,9 @@ function TrainerProfileScreen() {
       [e.target.name]: e.target.value,
     }))
   }
-  if(load){
-    <h1>Loading....</h1>
-  }
+  // if(isLoading||load){
+  //   return <Spinner/>
+  // }
   return (
     <>
       {/* edit-image */}

@@ -5,6 +5,7 @@ import {useDispatch,useSelector} from "react-redux"
 import {getTrainerPlan,reset} from "../../../features/TrainerPlans/TrainerPlanSlice"
 import { useEffect } from 'react'
 import emptyimg from "../../../images/no_img.svg"
+import Spinner from '../../spinner/Spinner'
 function TrainerPlansScreen() {
   const  dispatch = useDispatch()
  const user = localStorage.getItem("user")
@@ -14,7 +15,9 @@ function TrainerPlansScreen() {
   useEffect(()=>{
     dispatch(getTrainerPlan(id))
   },[])
-  console.log("plansss",trainerPlans);
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="container">
       <div className="row">

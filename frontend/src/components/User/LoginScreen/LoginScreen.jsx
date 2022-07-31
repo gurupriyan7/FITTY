@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { reset, login,googleLogin } from '../../../features/auth/authSlice'
+import { reset, login, googleLogin } from '../../../features/auth/authSlice'
 import { toast } from 'react-toastify'
 import { GoogleLogin, GoogleLogout } from 'react-google-login'
 import { gapi } from 'gapi-script'
@@ -117,7 +117,6 @@ function LoginScreen() {
                         onFailure={onLoginFailure}
                         cookiePolicy={'single_host_origin'}
                         prompt="select_account"
-                        
                       ></GoogleLogin>
                       {/* <GoogleLogout /> */}
                     </div>

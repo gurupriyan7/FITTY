@@ -6,14 +6,17 @@ import InsertCommentIcon from '@mui/icons-material/InsertComment'
 import { reset, AllPosts } from '../../../features/UserPosts/PostsSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import Spinner from "../../../components/spinner/Spinner"
 function UserHomeScreen() {
   const dispatch = useDispatch()
-  const { allPosts } = useSelector((state) => state.userPost)
+  const { allPosts,isLoading } = useSelector((state) => state.userPost)
   useEffect(() => {
     dispatch(AllPosts())
   }, [AllPosts])
   
-
+if(isLoading){
+  return <Spinner/>
+}
   return (
     <div className="userhomescreen">
       <span className="poststext">Posts</span>

@@ -6,15 +6,19 @@ import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import { useEffect } from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import { AllPosts} from "../../../features/trainerPosts/TrainerPostSlice"
+import Spinner from '../../spinner/Spinner'
 function TrainerHomeScreen() {
   const dispatch= useDispatch()
 
-  const {allPosts} = useSelector((state)=>state.trainerPost)
+  const {allPosts,isLoading} = useSelector((state)=>state.trainerPost)
 
 
   useEffect(()=>{
 dispatch(AllPosts())
   },[allPosts])
+  // if(isLoading){
+  //   return <Spinner/>
+  // }
 
   return (
     <div className="trainerhomescreen">

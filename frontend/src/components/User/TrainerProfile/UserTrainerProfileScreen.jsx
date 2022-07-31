@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { singleTrainer } from '../../../features/featchTrainers/FeatchTrainersSlice'
 import TrainersPlanViewScreen from '../TrainersPlanViewScreen/TrainersPlanViewScreen'
+import Spinner from '../../spinner/Spinner'
 
 const style = {
   position: 'absolute',
@@ -43,6 +44,9 @@ function UserTrainerProfileScreen() {
   const [Popen, setPopen] = useState(false)
   const PhandleOpen = () => setPopen(true)
   const PhandleClose = () => setPopen(false)
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <>
       

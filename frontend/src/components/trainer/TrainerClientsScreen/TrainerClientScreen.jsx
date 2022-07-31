@@ -5,8 +5,9 @@ import {API} from '../../../API/Trainer'
 import {useSelector,useDispatch} from "react-redux"
 import { useEffect } from 'react'
 import { useState } from 'react'
+import Spinner from '../../spinner/Spinner'
 function TrainerClientScreen() {
- const {trainer} = useSelector((state) => state.trainerAuth)
+ const {trainer,isLoading} = useSelector((state) => state.trainerAuth)
   
 
     const token =  trainer.token
@@ -15,16 +16,21 @@ function TrainerClientScreen() {
         Authorization:`Bearer ${token}`
       }
     }
+    const [load,setLoad]=useState(false)
     console.log("token",token);
     const [clients,setClients]=useState([])
     const getClient = async()=>{
+      setLoad(true)
       const {data}= await API.get(GET_TRAINER_CLIENTS,config)
       setClients(data)
+      setLoad(false)
     }
     useEffect(()=>{
      getClient()
     },[])
-            console.log("clients",clients);
+    if(isLoading||load){
+      return <Spinner/> 
+    }
   return (
           <div className="container">
           <div className="row">

@@ -5,6 +5,7 @@ import emptyimg from "../../../images/no_img.svg"
 import {useDispatch,useSelector} from "react-redux"
 import {getSingleTrainerPlans,reset} from "../../../features/UserPlans/UserPlanSlice"
 import { useEffect } from 'react'
+import Spinner from '../../spinner/Spinner'
 function TrainersPlanViewScreen({value}) {
   const dispatch = useDispatch()
   const {trainerPlans,isLoading} = useSelector((state)=>state.userPlan)
@@ -12,7 +13,9 @@ const {id}= useParams()
   useEffect(()=>{
     dispatch(getSingleTrainerPlans(id))
   },[])
-  console.log("plans",trainerPlans);
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
           <div className="container">
           <div className="row">

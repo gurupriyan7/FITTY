@@ -9,6 +9,7 @@ import './UserHomeProfileScreen.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import Spinner from '../../spinner/Spinner'
 
 function UserHomeProfileScreen() {
   const [active, setActive] = useState({
@@ -18,13 +19,16 @@ function UserHomeProfileScreen() {
   })
 
 
-  const {user}= useSelector((state)=>state.auth)
+  const {user,isLoading}= useSelector((state)=>state.auth)
   const [client,setClient]= useState(user)
   useEffect(()=>{
 setClient(user)
   },[user])
   console.log("pic",client.profileimage);
 
+  if(isLoading){
+    return <Spinner/>
+  }
   return (
     <div className="userProfileCard">
       <div className="top">
