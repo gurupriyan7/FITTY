@@ -1,43 +1,45 @@
 import React from 'react'
 import "./Charts.scss"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import {getCategory} from "../../../features/adminAuth/AdminSlice"
 function Charts() {
-
+  const dispatch = useDispatch()
+  const {category}=useSelector((state)=>state.adminAuth)
+ useEffect(()=>{
+dispatch(getCategory())
+ },[])
+ 
   const data = [
     {
-      name: 'category 1',
-      Trainers: 24,
+      name: 'Fittness',
+      Trainers:category.fittness,
       amt: 2400,
     },
     {
-      name: 'category 2',
-      Trainers: 13,
+      name: 'Stamina',
+      Trainers: category.stamina,
       amt: 2210,
     },
     {
-      name: 'category 3',
-      Trainers: 98,
+      name: 'Yoga',
+      Trainers: category.yoga,
       amt: 2290,
     },
     {
-      name: 'category 4',
-      Trainers: 39,
+      name: 'Dietitian',
+      Trainers: category.Dietitian,
       amt: 2000,
     },
     {
-      name: 'category 5',
-      Trainers: 48,
+      name: 'Nutritian',
+      Trainers: category.Nutrition,
       amt: 2181,
     },
     {
-      name: 'category 6',
-      Trainers: 38,
-      amt: 2500,
-    },
-    {
       name: 'Others',
-      Trainers: 43,
+      Trainers: category.other,
       amt: 2100,
     },
   ];

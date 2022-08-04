@@ -67,7 +67,36 @@ const getAllOrders = async(token)=>{
   const {data}=await api.getAllOrders(config)
   return data
 }
-
+// payPayment
+const payPayment=async(token,orderId)=>{
+  const config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}=await api.payPayment(config,orderId)
+  return data
+}
+// getAllPlans
+const getAllPlans = async(token)=>{
+  const config ={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}=await api.getAllPlans(config)
+  return data
+}
+// getAllData
+const getAllData = async(token)=>{
+  const config ={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}=await api.getAllData(config)
+  return data
+}
 
 const adminService = {
   login,
@@ -79,6 +108,9 @@ const adminService = {
   changeTrainerStatus,
   changeUserStatus,
   deleteTrainer,
-  getAllOrders
+  getAllOrders,
+  payPayment,
+  getAllPlans,
+  getAllData
 }
 export default adminService

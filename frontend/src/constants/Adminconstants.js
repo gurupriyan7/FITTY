@@ -8,7 +8,10 @@ const url = {
   ALL_TRAINERS: '/trainer/alltrainers',
   CHANGE_TRAINER_STATUS: '/trainer/changestatus/',
   DELETE_TRAINER: '/trainer/delete/',
-  GET_ALL_ORDERS:'/trainer/allorders'
+  GET_ALL_ORDERS:'/trainer/allorders',
+  PAY_PAYMENT:"/trainer/paypayment/",
+  GET_ALL_PLANS:'/trainer/plans',
+  GET_ALL_DATA:'/getalldata'
 }
 
 export const {
@@ -21,5 +24,8 @@ export const {
   ALL_TRAINERS,
   CHANGE_TRAINER_STATUS,
   DELETE_TRAINER,
-  GET_ALL_ORDERS
+  GET_ALL_ORDERS,
+  PAY_PAYMENT,
+  GET_ALL_PLANS,
+  GET_ALL_DATA
 } = url

@@ -16,7 +16,7 @@ function Home() {
         <div className="widgets">
           < Widgets type='users' />
           < Widgets type='Trainers'/>
-          < Widgets type='sails'/>
+          < Widgets type='orders'/>
           < Widgets type='plans'/>
         </div>
         <div className="charts">

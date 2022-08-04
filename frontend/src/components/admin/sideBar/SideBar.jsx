@@ -78,19 +78,20 @@ useEffect(()=>{
           </li>
           <li>
             <CurrencyExchangeSharpIcon className="icon primary-Color" />
-            <span>Payment Request</span>
+            <Link style={{textDecoration:"none"}} to='/admin/trainers/paymentreq'> <span>Payment Request</span></Link>
+            
           </li>
           </ul>
           
         
-        <ul>
+        {/* <ul>
         <p className="title primary-Color">Plans</p>
           <li>
            
             <FeaturedPlayListIcon className="icon primary-Color" />
             <span>Plans</span>
           </li>
-        </ul>
+        </ul> */}
         {/* <ul>
         <p className="title primary-Color">Sales</p>
           <li>

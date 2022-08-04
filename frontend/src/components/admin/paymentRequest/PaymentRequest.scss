@@ -1,0 +1,65 @@
+.paymentTable {
+  -webkit-box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+  -moz-box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+  box-shadow: -6px 6px 39px -1px rgba(107, 126, 140, 1);
+  padding: 20px;
+  margin: 20px;
+  border-radius: 6px;
+  .title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  .table {
+    margin: 20px;
+
+    .success {
+      color: green;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+    .pending {
+      color: rgb(196, 196, 30);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: monospace;
+    }
+
+    .tableCell {
+      height: 60px;
+      .notreq {
+        color: yellow;
+        font-weight: 600;
+        font-size: 15px;
+        text-shadow: 1px 1px 1px rgb(11 137 195), 0 0 0px #ffc10700,
+          0 0 0px darkblue;
+      }
+      .paid {
+        color: green;
+        font-weight: 500;
+        font-size: 17px;
+        margin-left: 17px;
+        text-shadow: 1px 1px 1px rgb(11 137 195), 0 0 0px rgb(255 193 7 / 0%),
+          0 0 0px darkblue;
+      }
+      .sentPayment {
+        border-radius: 8px;
+        border-color: #37a5de;
+        background-color: white;
+        width: 97%;
+        height: 80%;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: math;
+        &:hover {
+          color: white;
+          background-color: #37a5de;
+        }
+      }
+    }
+    .tableCellh {
+      font-weight: 600;
+      height: 60px;
+    }
+  }
+}

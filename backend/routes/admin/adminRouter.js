@@ -4,7 +4,8 @@ const router = express.Router()
 const {
   registerAdmin,
   loginAdmin,
-  getAllOrders
+  getAllOrders,
+  paymentToTrainer,getAllPlans,getAllData
 } = require('../../controllers/adminController')
 const {
   registerTrainer,
@@ -47,4 +48,14 @@ router.delete('/trainer/delete/:id', deleteTrainer)
 
 // Get-all-orders
 router.get("/trainer/allorders",getAllOrders)
+
+// pay-payment-to-trainer
+router.put('/trainer/paypayment/:id',paymentToTrainer)
+
+// get-all-plans
+router.get("/trainer/plans",getAllPlans)
+
+// get-all-data
+router.get('/getalldata',getAllData)
+
 module.exports = router

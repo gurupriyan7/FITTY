@@ -13,9 +13,13 @@ const initialState = {
   users: [],
   trainers: [],
   isModified: false,
-  isDeleted:false,
-  orders:[]
+  isDeleted: false,
+  isPaymentSent: false,
+  orders: [],
+  category: {},
+  allData: {},
 }
+
 
 // login-admin
 export const adminLogin = createAsyncThunk(
@@ -97,14 +101,16 @@ export const changeTrainerStatus = createAsyncThunk(
 )
 
 // delete-trainer
-export const deleteTrainer = createAsyncThunk('adminAuth/deleteTrainer',
-async(trId,thunkAPI)=>{
-  try {
-    return await adminService.deleteTrainer(trId)
-  } catch (error) {
-    return thunkAPI.rejectWithValue(errorMessage(error))
-  }
-})
+export const deleteTrainer = createAsyncThunk(
+  'adminAuth/deleteTrainer',
+  async (trId, thunkAPI) => {
+    try {
+      return await adminService.deleteTrainer(trId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
+)
 // Change-user-status
 export const changeUserStatus = createAsyncThunk(
   'adminAuth/changeUserStatus',
@@ -118,12 +124,47 @@ export const changeUserStatus = createAsyncThunk(
 )
 // all-orders
 export const getAllOrders = createAsyncThunk(
-  "adminAuth/getAllOrders",
-  async(a,thunkAPI)=>{
+  'adminAuth/getAllOrders',
+  async (a, thunkAPI) => {
     try {
-      
       const token = await thunkAPI.getState().adminAuth.admin.token
       return await adminService.getAllOrders(token)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
+)
+// payPayment
+export const payPayment = createAsyncThunk(
+  'adminAuth/payPayment',
+  async (orderId, thunkAPI) => {
+    try {
+      const token = await thunkAPI.getState().adminAuth.admin.token
+      return await adminService.payPayment(token, orderId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
+)
+// get-all-plans
+export const getCategory = createAsyncThunk(
+  'adminAuth/getCategory',
+  async (a, thunkAPI) => {
+    try {
+      const token = await thunkAPI.getState().adminAuth.admin.token
+      return await adminService.getAllPlans(token)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
+)
+// getAllData
+export const getAllData=createAsyncThunk(
+  "adminAuth/getAllData",
+  async(admin,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().adminAuth.admin.token
+      return await adminService.getAllData(token)
     } catch (error) {
       return thunkAPI.rejectWithValue(errorMessage(error))
     }
@@ -140,6 +181,7 @@ export const adminSlice = createSlice({
       state.isSuccess = false
       state.isError = false
       state.message = ''
+      state.isPaymentSent = false
     },
   },
   extraReducers: {
@@ -252,31 +294,73 @@ export const adminSlice = createSlice({
       state.message = action.payload
     },
     // delete-trainer
-    [deleteTrainer.pending]:(state)=>{
-      state.isLoading=true
-      state.isDeleted=false
+    [deleteTrainer.pending]: (state) => {
+      state.isLoading = true
+      state.isDeleted = false
     },
-    [deleteTrainer.fulfilled]:(state)=>{
-      state.isDeleted=true
-      state.isLoading=false
-      state.isError=false
+    [deleteTrainer.fulfilled]: (state) => {
+      state.isDeleted = true
+      state.isLoading = false
+      state.isError = false
     },
-    [deleteTrainer.rejected]:(state,action)=>{
-      state.isDeleted=false
-      state.isLoading=false
-      state.isError=true
-      state.message=action.payload
+    [deleteTrainer.rejected]: (state, action) => {
+      state.isDeleted = false
+      state.isLoading = false
+      state.isError = true
+      state.message = action.payload
     },
     // getAllOrders
-    [getAllOrders.pending]:(state)=>{
+    [getAllOrders.pending]: (state) => {
+      state.isLoading = true
+    },
+    [getAllOrders.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.orders = action.payload
+      state.isError = false
+    },
+    [getAllOrders.rejected]: (state, action) => {
+      state.isError = true
+      state.message = action.payload
+    },
+    // payPayment
+    [payPayment.pending]: (state) => {
+      state.isLoading = true
+    },
+    [payPayment.fulfilled]: (state, action) => {
+      state.isLoading = false
+      state.isError = false
+      state.isPaymentSent = true
+    },
+    [payPayment.rejected]: (state, action) => {
+      state.isLoading = false
+      state.isError = true
+      state.message = action.payload
+    },
+    // getPlans
+    [getCategory.pending]: (state) => {
+      state.isLoading = true
+    },
+    [getCategory.fulfilled]: (state, action) => {
+      state.isError = false
+      state.isLoading = false
+      state.category = action.payload
+    },
+    [getCategory.rejected]: (state, action) => {
+      state.isLoading = false
+      state.isError = true
+      state.message = action.payload
+    },
+    // getAllData
+    [getAllData.pending]:(state)=>{
       state.isLoading=true
     },
-    [getAllOrders.fulfilled]:(state,action)=>{
+    [getAllData.fulfilled]:(state,action)=>{
       state.isLoading=false
-      state.orders=action.payload
       state.isError=false
+      state.allData=action.payload
     },
-    [getAllOrders.rejected]:(state,action)=>{
+    [getAllData.rejected]:(state,action)=>{
+      state.isLoading=false
       state.isError=true
       state.message=action.payload
     }

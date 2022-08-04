@@ -1,19 +1,19 @@
-import React from "react";
-import "./FeatureCharts.scss";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import MoreVertOutlinedIcon from "@mui/icons-material/MoreVertOutlined";
-import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
-import "react-circular-progressbar/dist/styles.css";
-import CircleIcon from "@mui/icons-material/Circle";
+import React from 'react'
+import './FeatureCharts.scss'
+import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from 'recharts'
+import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined'
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee'
+import 'react-circular-progressbar/dist/styles.css'
+import CircleIcon from '@mui/icons-material/Circle'
+import { useDispatch, useSelector } from 'react-redux'
+import {getAllOrders} from "../../../features/adminAuth/AdminSlice"
+import { useEffect } from 'react'
 
-const data = [
-  { name: "RazorPay", value: 40 },
-  { name: "PayPal", value: 60 },
-];
 
-const COLORS = ["#FF8042", "#0088FE"];
 
-const RADIAN = Math.PI / 180;
+const COLORS = ['#FF8042', '#0088FE']
+
+const RADIAN = Math.PI / 180
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -23,23 +23,34 @@ const renderCustomizedLabel = ({
   percent,
   index,
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5
+  const x = cx + radius * Math.cos(-midAngle * RADIAN)
+  const y = cy + radius * Math.sin(-midAngle * RADIAN)
 
   return (
     <text
       x={x}
       y={y}
       fill="white"
-      textAnchor={x > cx ? "start" : "end"}
+      textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
     >
       {`${(percent * 100).toFixed(0)}%`}
     </text>
-  );
-};
+  )
+}
 function FeatureCharts() {
+  const dispatch = useDispatch()
+  useEffect(()=>{
+dispatch(getAllOrders())
+  },[])
+  const {orders}=useSelector((state)=>state.adminAuth)
+  const success = orders.filter((data)=>data.isPaid)
+  const pending = orders.filter((data)=>!data.isPaid)
+  const data = [
+  { name: 'Pending', value: pending.length },
+  { name: 'Success', value:success.length },
+]
   return (
     <div className="featured">
       <div className="top primary-Color">
@@ -75,27 +86,27 @@ function FeatureCharts() {
         </div>
         <div className="d-flex ">
           <p className="title ">
-            <span style={{ color: "#FF8042", fontSize: "7px" }}>
+            <span style={{ color: '#FF8042', fontSize: '7px' }}>
               <CircleIcon />
             </span>
-            RazorPay
+            Pending
           </p>
           <p className="title ">
-            <span style={{ color: "#0088FE", fontSize: "7px" }}>
+            <span style={{ color: '#0088FE', fontSize: '7px' }}>
               <CircleIcon />
             </span>
-            PayPal
+            Success
           </p>
         </div>
         {data.map((data, index) => (
           <p className="title">
-            <span style={{ fontSize: "20px" }}>{data.name} :</span>
+            <span style={{ fontSize: '20px' }}>{data.name} :</span>
             {data.value}Nos
           </p>
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default FeatureCharts;
+export default FeatureCharts

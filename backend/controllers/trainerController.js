@@ -72,6 +72,7 @@ const registerTrainer = asyncHandler(async (req, res) => {
       coached: trainer.coached,
       coverimage:trainer.coverimage,
       profileimage:trainer.profileimage,
+      wallet:trainer.wallet,
       token: generateToken(trainer._id),
     })
   } else {
@@ -101,6 +102,7 @@ const loginTrainer = asyncHandler(async (req, res) => {
           coached: trainer.coached,
           coverimage:trainer.coverimage,
           profileimage:trainer.profileimage,
+          wallet:trainer.wallet,
           token: generateToken(trainer._id),
         })
       } else {
@@ -135,6 +137,7 @@ if(trainer.status){
     coached: trainer.coached,
     coverimage:trainer.coverimage,
     profileimage:trainer.profileimage,
+    wallet:trainer.wallet,
     token: generateToken(trainer._id),
   })
 }else{
@@ -170,6 +173,7 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
     coached: updatedTrainer.coached,
     profileimage:updatedTrainer.profileimage,
     coverimage:updatedTrainer.coverimage,
+    wallet:updatedTrainer.wallet,
     token: generateToken(updatedTrainer._id),
   }
   res.status(200).json(newTrainer)

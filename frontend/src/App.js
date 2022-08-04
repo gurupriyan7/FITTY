@@ -28,6 +28,7 @@ import LoginAdmin from './pages/admin/LoginAdmin/LoginAdmin'
 import NewUser from './pages/admin/newUser/NewUser'
 import AddTrainer from './pages/admin/addTrainer/AddTrainer'
 import ListTrainer from './pages/admin/ListTrainer/ListTrainer'
+import AdminLayout from './pages/admin/adminLayout/AdminLayout'
 
 // Trainer-side
 import TrainerLogin from './pages/trainer/trainerLogin/TrainerLogin'
@@ -82,6 +83,7 @@ function App() {
               <Route path="trainers">
                 <Route index element={<ListTrainer />} />
                 <Route path="new" element={<AddTrainer />} />
+                <Route path='paymentreq' element={<AdminLayout/>}/>
               </Route>
             </Route>
 
