@@ -1,6 +1,6 @@
 import "./Tables.scss";
 
-import * as React from "react";
+import  React, { useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,6 +9,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import {getAllOrders} from "../../../features/adminAuth/AdminSlice"
+import { useDispatch, useSelector } from "react-redux";
+
 
 const columns = [
   { id: "trackId", label: "Tracking ID", minWidth: 100 },
@@ -74,149 +77,23 @@ function createData(
   };
 }
 
-const rows = [
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-  createData(
-    "123456789",
-    "Full Body",
-    2000,
-    "Gurupriyan",
-    "trainer",
-    "20-06-2022",
-    "PayPal",
-    "Success"
-  ),
-];
+
+// const rows = [
+//   createData(
+//     "123456789",
+//     "Full Body",
+//     2000,
+//     "Gurupriyan",
+//     "trainer",
+//     "20-06-2022",
+//     "PayPal",
+//     "Success"
+//   ),
+ 
+  
+// ];
 function Tables() {
+  const dispatch = useDispatch()
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -228,6 +105,16 @@ function Tables() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  
+  const {orders}=useSelector((state)=>state.adminAuth)
+  useEffect(()=>{
+    dispatch(getAllOrders())
+  },[])
+
+  const rows = orders.map((data)=>{
+    return createData(data._id,data.planeName,data.amount,data.user.name,data.trainer.name,data.date,"Razorpay","Success")
+  })
+  
 
   return (
     <div className="tables">

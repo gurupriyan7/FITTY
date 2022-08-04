@@ -24,6 +24,9 @@ const planSchema = mongoose.Schema(
       },
       expry:{
         type:String
+      },
+      purchasedBy:{
+        type:Array
       }
     
   },

@@ -1,3 +1,23 @@
+.walletbox{
+border-radius: 8px;
+background-color: white;
+  .walletText{
+    font-size: 27px;
+      font-weight: 600;
+      font-family: inherit;
+  }
+  .walletSubText{
+    font-size: 17px;
+      font-weight: 500;
+      font-family: system-ui;
+      color: grey;
+      .walletAmount{
+        font-size: 20px;
+      }
+  }
+}
+
+
 .editPimage{
   width: 116px;
   height: 110px;
@@ -111,6 +131,13 @@
             font-family: system-ui;
             font-weight: 500;
             background-color: gainsboro;
+          }
+          .wallet{
+            margin-left: 16%;
+            font-size: 258%;
+            margin-right: 1%;
+            margin-top: -1%;
+            cursor: pointer;
           }
         }
       }

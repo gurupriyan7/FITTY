@@ -63,6 +63,7 @@ export const updateTrainer = createAsyncThunk(
   }
 )
 
+
 // create-slice
 export const trainerSlice = createSlice({
   name: 'trainerAuth',
@@ -135,7 +136,7 @@ export const trainerSlice = createSlice({
       state.isLoading=false
       state.isSuccess=false
       state.message=action.payload
-    }
+    },
    
   },
 })

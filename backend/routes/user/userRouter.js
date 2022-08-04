@@ -26,7 +26,7 @@ const {
 router.get('/',getUser)
 
 // Register-user
-router.post('/register', registerUser)
+router.post('/register',registerUser)
 
 // Login-user
 router.post('/login', loginUser)

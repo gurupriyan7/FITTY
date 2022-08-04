@@ -13,7 +13,9 @@ import {
   GET_TRAINERS_PLANS,
   GET_SINGLE_PLAN,
   DELETE_PLAN,
-  GOOGLE_LOGIN
+  GOOGLE_LOGIN,
+  TRAINER_ORDERS,
+  TRAINER_PAYMENT_REQUEST
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -63,6 +65,12 @@ export const loginTrainer = (trainerData) =>
   // login-with-google
   export const tgoogleLogin=(trainerData)=>API.post(GOOGLE_LOGIN,trainerData)
   
+  // getTrainerOrders
+  export const getTrainerOrders= (config)=>API.get(TRAINER_ORDERS,config)
+
+  // paymentRequest
+  // export const paymentRequest = (orderId,config)=>console.log("config",config);
+  export const paymentRequest = (orderId,config)=>API.put(TRAINER_PAYMENT_REQUEST+orderId,config)
 
  
 

@@ -9,6 +9,7 @@ import {
   ALL_TRAINERS,
   CHANGE_TRAINER_STATUS,
   DELETE_TRAINER,
+  GET_ALL_ORDERS
 } from '../constants/Adminconstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -28,3 +29,4 @@ export const changeTrainerStatus = (trId) =>
   API.put(CHANGE_TRAINER_STATUS + trId)
 export const deleteTrainer = (trId) => API.delete(DELETE_TRAINER + trId)
 export const changeUserStatus = (userId) => API.put(CHANGE_USER_STATUS + userId)
+export const getAllOrders= (config)=>API.get(GET_ALL_ORDERS,config)

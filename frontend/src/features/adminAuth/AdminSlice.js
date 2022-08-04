@@ -13,7 +13,8 @@ const initialState = {
   users: [],
   trainers: [],
   isModified: false,
-  isDeleted:false
+  isDeleted:false,
+  orders:[]
 }
 
 // login-admin
@@ -114,6 +115,19 @@ export const changeUserStatus = createAsyncThunk(
       return thunkAPI.rejectWithValue(errorMessage(error))
     }
   },
+)
+// all-orders
+export const getAllOrders = createAsyncThunk(
+  "adminAuth/getAllOrders",
+  async(a,thunkAPI)=>{
+    try {
+      
+      const token = await thunkAPI.getState().adminAuth.admin.token
+      return await adminService.getAllOrders(token)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
 )
 
 // create-slice
@@ -250,6 +264,19 @@ export const adminSlice = createSlice({
     [deleteTrainer.rejected]:(state,action)=>{
       state.isDeleted=false
       state.isLoading=false
+      state.isError=true
+      state.message=action.payload
+    },
+    // getAllOrders
+    [getAllOrders.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [getAllOrders.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.orders=action.payload
+      state.isError=false
+    },
+    [getAllOrders.rejected]:(state,action)=>{
       state.isError=true
       state.message=action.payload
     }

@@ -39,6 +39,10 @@ const trainerSchema = mongoose.Schema(
     coverimage:{
       type:String
     },
+    wallet:{
+      type:Number,
+      default:0
+    }
     
   },
   {

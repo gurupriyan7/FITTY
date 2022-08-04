@@ -36,7 +36,7 @@ function TrainerProfileCard() {
                                 <Link to={''}></Link>
                                         <li  className='cardtext '><GroupAddIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"/trainer/home/clients"}>Clients</NavLink> </li>
                                         <li className='cardtext '><FeaturedPlayListIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"/trainer/home/tplans"}>Plans</NavLink></li>
-                                        <li className='cardtext '><ContactPageIcon className='picon'/>Income</li>
+                                        <li className='cardtext '><ContactPageIcon className='picon'/><NavLink style={{textDecoration:"none" , color:"black"}} to={"/trainer/home/income"}>Income</NavLink></li>
                               </ul>
                               <div className="addpost">
                                       <Link style={{textDecoration:"none"}} to={"/trainer/home/taddpost"}> <button className="addpostbutton primary-Color"><AddBoxOutlinedIcon/>Add Post</button></Link> 

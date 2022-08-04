@@ -14,7 +14,9 @@ GET_TRAINERS_PLANS:"/gettrainerplan",
 GET_SINGLE_PLAN:"/singleplan/",
 DELETE_PLAN:"/deleteplan/",
 GET_TRAINER_CLIENTS:"/getclients",
-GOOGLE_LOGIN:"/googlelogin"
+GOOGLE_LOGIN:"/googlelogin",
+TRAINER_ORDERS:'/trainerorder',
+TRAINER_PAYMENT_REQUEST:"/paymentrequest/"
 
 }
 export const  {
@@ -33,5 +35,7 @@ export const  {
   GET_SINGLE_PLAN,
   DELETE_PLAN,
   GET_TRAINER_CLIENTS,
-  GOOGLE_LOGIN
+  GOOGLE_LOGIN,
+  TRAINER_ORDERS,
+  TRAINER_PAYMENT_REQUEST
 } =url

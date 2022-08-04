@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './TrainerLoginScreen.scss'
-import { GoogleLogin, GoogleLogout } from 'react-google-login'
+import { GoogleLogin } from 'react-google-login'
 import { gapi } from 'gapi-script'
 import { reset, trainerLogin ,tgoogleLogin} from '../../../features/trainerAuth/TrainerSlice'
 import { useEffect } from 'react'
@@ -119,7 +119,6 @@ function TrainerLoginScreen() {
                         onFailure={onLoginFailure}
                         cookiePolicy={'single_host_origin'}
                         prompt="select_account"
-                        
                       ></GoogleLogin>
                     </div>
                   </form>

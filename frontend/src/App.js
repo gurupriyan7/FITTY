@@ -40,6 +40,7 @@ import TrainerAddPostScreen from './components/trainer/TrainerAddPostScreen/Trai
 import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/TrainerProfileScreen'
 import AddPlanScreen from './components/trainer/AddPlanScreen/AddPlanScreen'
 import TrainerSinglePlanScreen from './components/trainer/TrainerSinglePlanScreen/TrainerSinglePlanScreen'
+import TrainerIncomeScreen from './components/trainer/TrainerIncomeScreen/TrainerIncomeScreen'
 
 
 function App() {
@@ -95,6 +96,7 @@ function App() {
                 <Route path='tprofile'  element={trainer ?<TrainerHome childern={<TrainerProfileScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='addplan'  element={trainer ?<TrainerHome childern={<AddPlanScreen/>} /> : <TrainerLogin/>}/>
                 <Route path='singleplan/:id'  element={trainer ?<TrainerHome childern={<TrainerSinglePlanScreen/>} /> : <TrainerLogin/>}/>
+                <Route path='income'  element={trainer ?<TrainerHome childern={<TrainerIncomeScreen/>} /> : <TrainerLogin/>}/>
               
               </Route>
             </Route>

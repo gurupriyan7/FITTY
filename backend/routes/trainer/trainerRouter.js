@@ -17,7 +17,9 @@ const {
   getsinglePlan,
   deletePlan,
   getTrainerClients,
-  googleLogin
+  googleLogin,
+  TrainerOrders,
+  paymentRequest
   
 } = require('../../controllers/trainerController')
 
@@ -70,6 +72,12 @@ router.delete("/deleteplan/:id",trainerProtect,deletePlan)
 
 // get-trainer-clients
 router.get("/getclients",trainerProtect,getTrainerClients)
+
+// get-trainer-orders
+router.get("/trainerorder",trainerProtect,TrainerOrders)
+
+// payment-request
+router.put("/paymentrequest/:orderId",paymentRequest)
 
 
 module.exports = router

@@ -11,6 +11,7 @@ const initialState = {
   trainerPlans: [],
   singlePlan: '',
   isDelete: false,
+  trainerOrders:[]
 }
 // Add-plans
 export const AddPlan = createAsyncThunk(
@@ -61,6 +62,31 @@ export const getSinglePlan = createAsyncThunk(
       thunkAPI.rejectWithValue(errorMessage(error))
     }
   }, 
+)
+
+// get-order
+export const getTrainerOrders = createAsyncThunk(
+  "trainerPlan/getTrainerOrders",
+  async(t,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return TrainerPlanService.getTrainerOrders(token)
+    } catch (error) {
+      thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
+// payment-request
+export const paymentRequest = createAsyncThunk(
+  "trainerPlan/paymentRequest",
+  async(orderId,thunkAPI)=>{
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return TrainerPlanService.paymentRequest(token,orderId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
 )
 // create-slice
 const TrainerPlanSlice = createSlice({
@@ -136,6 +162,34 @@ const TrainerPlanSlice = createSlice({
       state.message = action.payload
       state.isDelete = false
     },
+    // getTrainerOrders
+    [getTrainerOrders.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [getTrainerOrders.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.trainerOrders=action.payload
+    },
+    [getTrainerOrders.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.message=action.payload
+    },
+    // paymentRequest
+    [paymentRequest.pending]:(state)=>{
+      state.isLoading=true;
+    },
+    [paymentRequest.fulfilled]:(state,action)=>{
+      state.isLoading=false
+      state.isError=false
+      state.isSuccess=true
+    },
+    [paymentRequest.rejected]:(state,action)=>{
+      state.isLoading=false
+      state.isError=true
+      state.message=action.payload
+    }
   },
 })
 

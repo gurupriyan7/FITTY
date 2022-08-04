@@ -85,6 +85,7 @@ function UserPaymentScreen() {
     }
     document.body.appendChild(script)
   }
+  const userId = user._id
   if(isLoading){
     return <Spinner/>
   }
@@ -112,12 +113,18 @@ function UserPaymentScreen() {
             </div>
             <div className="card-plan-link"></div>
           </div>
+            {singleplan.purchasedBy?.includes(userId) ? 
+            <div className="card-payment-button">
+
+              <button >You Alredy Purchsed</button>
+            </div>
+            :
           <div className="card-payment-button">
             {singleplan?.postedBy?.slots ?  <button onClick={loadRazorpay}>Proceed to Payment</button> :
             <button >No Slots Available</button>
             }
-           
           </div>
+            }
           <div className="card-cancel-button">
             <Link to={'/home/getplans'}>
               <button>Back</button>

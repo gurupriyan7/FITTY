@@ -57,6 +57,17 @@ const changeUserStatus = async (userId) => {
   const { data } = await api.changeUserStatus(userId)
   return data
 }
+// getAllOrders
+const getAllOrders = async(token)=>{
+  const config ={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}=await api.getAllOrders(config)
+  return data
+}
+
 
 const adminService = {
   login,
@@ -68,5 +79,6 @@ const adminService = {
   changeTrainerStatus,
   changeUserStatus,
   deleteTrainer,
+  getAllOrders
 }
 export default adminService

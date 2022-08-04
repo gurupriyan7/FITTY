@@ -1,0 +1,33 @@
+.TrainerIncomeScreen {
+  .green {
+    color: green;
+    font-weight: 600;
+  }
+  .red {
+    color: crimson;
+    font-weight: 600;
+  }
+  .reqBtn {
+    color: #008deb;
+    border-radius: 8px;
+    border-color: #008deb;
+    background-color: white;
+    &:hover {
+      border-color: #008deb;
+      background-color: #008deb;
+      color: white;
+    }
+  }
+  .requested {
+    color: #cdcd1b;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: system-ui;
+  }
+  .success {
+    color: green;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: system-ui;
+  }
+}

@@ -8,6 +8,7 @@ const url = {
   ALL_TRAINERS: '/trainer/alltrainers',
   CHANGE_TRAINER_STATUS: '/trainer/changestatus/',
   DELETE_TRAINER: '/trainer/delete/',
+  GET_ALL_ORDERS:'/trainer/allorders'
 }
 
 export const {
@@ -19,5 +20,6 @@ export const {
   ADD_TRAINER,
   ALL_TRAINERS,
   CHANGE_TRAINER_STATUS,
-  DELETE_TRAINER
+  DELETE_TRAINER,
+  GET_ALL_ORDERS
 } = url

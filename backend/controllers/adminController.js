@@ -8,6 +8,9 @@ const { generateToken } = require('../generateToken/generateToken')
 // require-AdminController
 const Admin = require('../models/adminModel')
 
+// Require-OrderModel 
+const OrderModel = require("../models/orderModel")
+
 // Admin-Registration
 const registerAdmin = asyncHandler(async (req, res) => {
   const { Name, email, password, phoneNumber } = req.body
@@ -70,7 +73,21 @@ const loginAdmin = asyncHandler(async (req, res) => {
   }
 })
 
+// get-all-orders
+const getAllOrders=asyncHandler(async(req,res)=>{
+  console.log("heloo");
+  const orders = await OrderModel.find()
+  .populate({path:"user",select:["name"]})
+  .populate({path:"trainer",select:["name"]})
+  if(!orders){
+    res.status(400)
+    throw new Error("NO order found")
+  }
+  console.log("trainer",orders);
+  res.status(200).json(orders)
+})
 module.exports = {
   registerAdmin,
   loginAdmin,
+  getAllOrders
 }

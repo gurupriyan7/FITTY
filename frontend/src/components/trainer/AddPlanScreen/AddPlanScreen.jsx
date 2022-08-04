@@ -61,11 +61,7 @@ dispatch(reset())
       setload(false)
     }
   }
-  if(load){
-    return(
-      <h1>heloo</h1>
-    )
-  }
+ 
   if(isLoading){
     return <Spinner/>
   }

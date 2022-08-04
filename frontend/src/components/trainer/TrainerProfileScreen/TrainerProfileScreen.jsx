@@ -5,6 +5,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto'
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import Typography from '@mui/material/Typography'
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 
 import { useState } from 'react'
 import { useRef } from 'react'
@@ -12,7 +13,7 @@ import { Link } from 'react-router-dom'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import TrainerProfilePostScreen from '../TrainerProfilePostScreen/TrainerProfilePostScreen'
-import {updateTrainer} from "../../../features/trainerAuth/TrainerSlice"
+import { updateTrainer } from '../../../features/trainerAuth/TrainerSlice'
 import { formControlLabelClasses } from '@mui/material'
 import { imageUpload } from '../../../util/cloudniary/imageUpload'
 import Spinner from '../../spinner/Spinner'
@@ -34,52 +35,60 @@ const Editstyle = {
   boxShadow: 24,
   p: 4,
 }
-
-
+const walletStyle = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+}
 
 function TrainerProfileScreen() {
   const dispatch = useDispatch()
 
   // edit-form-data
-  const { trainer,isSuccess,isError,isLoading, } = useSelector((state) => state.trainerAuth)
+  const { trainer, isSuccess, isError, isLoading } = useSelector(
+    (state) => state.trainerAuth,
+  )
 
   const [formData, setFormData] = useState({
     name: trainer.name,
     email: trainer.email,
     phoneNumber: trainer.phoneNumber,
-    slots:trainer.slots,
-    coached:trainer.coached,
-    coverimage:trainer.coverimage,
-    profileimage:trainer.profileimage
+    slots: trainer.slots,
+    coached: trainer.coached,
+    coverimage: trainer.coverimage,
+    profileimage: trainer.profileimage,
   })
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(updateTrainer(formData))
-  },[formData.coverimage,formData.profileimage])
-  useEffect(()=>{ 
-    if(isSuccess){
-      
+  }, [formData.coverimage, formData.profileimage])
+  useEffect(() => {
+    if (isSuccess) {
       edithandleClose()
     }
-  },[isSuccess,trainer])
+  }, [isSuccess, trainer])
 
   const [Pimage, setPimage] = useState(null)
 
-  const onSubmit =async (e) => {
-    e.preventDefault() 
-    if(Pimage){
+  const onSubmit = async (e) => {
+    e.preventDefault()
+    if (Pimage) {
       setLoad(true)
-            const data = await imageUpload(Pimage)
-            const newImage = {profileimage:data.secure_url.toString()}
-      setFormData((formData)=>({
+      const data = await imageUpload(Pimage)
+      const newImage = { profileimage: data.secure_url.toString() }
+      setFormData((formData) => ({
         ...formData,
-        ...newImage
+        ...newImage,
       }))
       setLoad(false)
-    }else{
+    } else {
       dispatch(updateTrainer(formData))
     }
   }
-  
 
   // cover-image
   const [open, setOpen] = useState(false)
@@ -93,24 +102,27 @@ function TrainerProfileScreen() {
   const [editopen, setEditopen] = useState(false)
   const edithandleOpen = () => setEditopen(true)
   const edithandleClose = () => setEditopen(false)
+  // wallet
+  const [walletopen, setWalletOpen] = useState(false)
+  const wallethandleOpen = () => setWalletOpen(true)
+  const wallethandelClose = () => setWalletOpen(false)
 
   // onchange-prview-cover
   const [Cimage, setCimage] = useState(null)
-  const [load,setLoad]=useState(formControlLabelClasses)
+  const [load, setLoad] = useState(formControlLabelClasses)
   const imageRef = useRef()
-  const onChangeCoverimg =async (event) => {
+  const onChangeCoverimg = async (event) => {
     if (event.target.files && event.target.files[0]) {
       let Cimg = event.target.files[0]
       setCimage(Cimg)
-          setLoad(true)
-          const data = await imageUpload(Cimg)
-          const newImage = {coverimage:data.secure_url.toString()}
-    setFormData((formData)=>({
-      ...formData,
-      ...newImage
-    }))
-    setLoad(false)
-          
+      setLoad(true)
+      const data = await imageUpload(Cimg)
+      const newImage = { coverimage: data.secure_url.toString() }
+      setFormData((formData) => ({
+        ...formData,
+        ...newImage,
+      }))
+      setLoad(false)
     }
   }
   // onchange-prview-profile
@@ -118,7 +130,6 @@ function TrainerProfileScreen() {
     if (event.target.files && event.target.files[0]) {
       let Pimg = event.target.files[0]
       setPimage(Pimg)
-      
     }
   }
 
@@ -163,7 +174,11 @@ function TrainerProfileScreen() {
                               className="PeditPimg"
                             />
                           ) : trainer.profileimage ? (
-                            <img src={trainer.profileimage} alt="" className="PeditPimg" />
+                            <img
+                              src={trainer.profileimage}
+                              alt=""
+                              className="PeditPimg"
+                            />
                           ) : (
                             <img
                               src={emptyprofilepic}
@@ -278,6 +293,30 @@ function TrainerProfileScreen() {
       </Modal>
       {/* profile image */}
 
+      {/* wallet */}
+      <Modal
+        open={walletopen}
+        onClose={wallethandelClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={walletStyle}>
+          <div className="walletbox">
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <p className="walletText primary-Color">Wallet</p>
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <p className="walletSubText">
+                Wallet Balance:{' '}
+                <span className="walletAmount primary-Color">
+                  ₹{trainer.wallet ? trainer.wallet : 0}
+                </span>
+              </p>
+            </Typography>
+          </div>
+        </Box>
+      </Modal>
+      {/* wallet */}
       {/* Edit-Profile */}
       {/* Edit-Profile */}
       <div className="singleplanscreen container-fluid">
@@ -328,15 +367,20 @@ function TrainerProfileScreen() {
                   <button onClick={edithandleOpen} className="Peditbtn">
                     Edit
                   </button>
+                  <br />
+                  <AccountBalanceWalletIcon
+                    onClick={wallethandleOpen}
+                    className="wallet primary-Color"
+                  />
                 </div>
               </div>
               <div className="Pemaildiv">
-                      <p className="Pemail">
-                        <span className='emailPhone'>{formData.email}</span>
-                        <br />
-                        <span className='emailPhone'>{formData.phoneNumber}</span>
-                      </p>
-                    </div>
+                <p className="Pemail">
+                  <span className="emailPhone">{formData.email}</span>
+                  <br />
+                  <span className="emailPhone">{formData.phoneNumber}</span>
+                </p>
+              </div>
               <div className="pedit">
                 {/* <buttom className="peditbtn">Edit</buttom> */}
               </div>

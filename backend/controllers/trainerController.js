@@ -17,6 +17,7 @@ const { trainerpsot , userpost} = require('../models/postModel')
 // require-generateToken-function
 const { generateToken } = require('../generateToken/generateToken')
 const orderModel = require('../models/orderModel')
+const { rawListeners } = require('../models/userModel')
 
 // Trainer-registration
 const registerTrainer = asyncHandler(async (req, res) => {
@@ -283,7 +284,7 @@ const AddPlans = asyncHandler(async(req,res)=>{
           planName:planName,
           days:days,
           planAmount:planAmount,
-          postedBy:trId
+          postedBy:trId,
         })
         if(newPlan){
           res.status(200).json("plan Adde successfully")
@@ -363,6 +364,35 @@ newData.map(async(user)=>{
 res.status(200).json(data)
 })
 
+// Trainer-orders
+const TrainerOrders = asyncHandler(async(req,res)=>{
+  const trId = req.trainer._id
+  console.log('id',trId);
+  const orders =await orderModel.find({trainer:trId})
+  .populate({path:"user",select:["name"]})
+  if(orders){
+  res.status(200).json(orders)
+  }else{
+    res.status(400)
+    throw new Error("No orders")
+  }
+})
+// Payment-request
+ const paymentRequest= asyncHandler(async(req,res)=>{
+  const orderId = req.params.orderId
+  const order = await orderModel.updateOne({_id:orderId},{$set:{
+    trainerPaymentStatus:"requested"
+  }})
+
+  console.log("dataa",order);
+  if(!order){
+    res.status(400)
+    throw new Error("order not found")
+  }
+  res.status(200)
+  .json(order)
+
+ })
 module.exports = {
   registerTrainer,
   loginTrainer,
@@ -379,6 +409,8 @@ module.exports = {
   getsinglePlan,
   deletePlan,
   getTrainerClients,
-  googleLogin
+  googleLogin,
+  TrainerOrders,
+  paymentRequest
  
 }

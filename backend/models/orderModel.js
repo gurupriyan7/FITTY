@@ -10,7 +10,10 @@ const orderSchema = mongoose.Schema(
       type:ObjectId,
       ref:"User"
     },
-    trainer:ObjectId,
+    trainer:{
+      type:ObjectId,
+      ref:"Trainer"
+    },
     date:String,
     expry:String,
     plan:{
@@ -22,6 +25,13 @@ const orderSchema = mongoose.Schema(
       paymentId: String,
       signature: String,
     },
+    planeName:{
+      type:String
+    },
+    trainerPaymentStatus:{
+      type:String,
+      default:""
+    }
   },
   {
     timestamp: true,

@@ -36,10 +36,12 @@ const protect = asyncHandler(async (req, res, next) => {
 // trainer-protect-route
 const trainerProtect = asyncHandler(async (req, res, next) => {
   let token
+  console.log("got it",req.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
   ) {
+    console.log('got itttt');
     try {
       // Get-Token-from-header
       token = await req.headers.authorization.split(' ')[1]

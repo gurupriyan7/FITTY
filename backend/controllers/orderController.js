@@ -42,6 +42,7 @@ const payorder = asyncHandler(async (req, res) => {
       plan,
       user
     } = req.body
+    const planeName = await PlansModel.findById(plan)
     const date = moment(new Date()).format('YYYY/MM/DD')
     const expry = moment(date).add(30,'days').format('YYYY/MM/DD')
     const newOrder = Order({
@@ -52,13 +53,17 @@ const payorder = asyncHandler(async (req, res) => {
       plan:plan,
       date:date,
       expry:expry,
+      planeName:planeName.planName,
       razorpay: {
         orderId: razorpayOrderId,
         paymentId: razorpayPaymentId,
         signature: razorpaySignature,
       },
-    })
+    }) 
     await newOrder.save()
+    await PlansModel.updateOne({_id:plan},{
+      $push:{purchasedBy:user}
+    })
     res.status(200).json({ msg: 'Payment was successfull' })
   } catch (error) {
     console.log('error', error)

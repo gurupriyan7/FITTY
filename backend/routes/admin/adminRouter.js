@@ -4,6 +4,7 @@ const router = express.Router()
 const {
   registerAdmin,
   loginAdmin,
+  getAllOrders
 } = require('../../controllers/adminController')
 const {
   registerTrainer,
@@ -44,4 +45,6 @@ router.put('/trainer/changestatus/:id', ChangeStatusTrainer)
 // Delete-Trainer
 router.delete('/trainer/delete/:id', deleteTrainer)
 
+// Get-all-orders
+router.get("/trainer/allorders",getAllOrders)
 module.exports = router
