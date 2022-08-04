@@ -1,52 +1,57 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch,useSelector } from "react-redux";
-import "./AdminLogin.scss";
-import {reset,adminLogin} from "../../../features/adminAuth/AdminSlice"
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import './AdminLogin.scss'
+import { reset, adminLogin } from '../../../features/adminAuth/AdminSlice'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 function AdminLogin() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'all' })
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-const dispatch = useDispatch()
-const navigate = useNavigate()
-
-const {admin,isError,isSuccess,isLoading,message} = useSelector((state)=>{
-  return state.adminAuth
-})
+  const { admin, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => {
+      return state.adminAuth
+    },
+  )
 
   function changeValue(e) {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }));
+    }))
   }
-  const onsubmit=(e)=>{
-    e.preventDefault()
-    const adminData={email,password};
+  const onsubmit = (e) => {
+    const { email, password } = e
+    const adminData = { email, password }
     dispatch(adminLogin(adminData))
-
   }
 
-  useEffect(()=>{
-    if(isError){
+  useEffect(() => {
+    if (isError) {
       toast.error(message)
     }
-    if(isSuccess||admin){
-      navigate("/admin/dashboard")
+    if (isSuccess || admin) {
+      navigate('/admin/dashboard')
     }
     dispatch(reset())
-  },[admin,isError,isSuccess,message,navigate,dispatch])
-  
+  }, [admin, isError, isSuccess, message, navigate, dispatch])
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+    email: '',
+    password: '',
+  })
 
-  const { email, password } = formData;
-
+  const { email, password } = formData
+  const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return (
     <div>
       <body>
@@ -59,17 +64,22 @@ const {admin,isError,isSuccess,isLoading,message} = useSelector((state)=>{
                   <h3 className=" Login-text text-center  fs-7 primary-Color">
                     Welcome Back Admin!
                   </h3>
-                  <form>
+                  <form onSubmit={handleSubmit(onsubmit)}>
                     <div className="form-floating mb-3 Linput">
                       <input
                         type="email"
                         className="form-control"
                         id="floatingInputEmail"
-                        onChange={changeValue}
-                        value={email}
                         name="email"
                         placeholder="name@example.com"
+                        {...register('email', {
+                          required: true,
+                          pattern: pattern,
+                        })}
                       />
+                      {errors.email && (
+                        <p style={{ color: 'red' }}>Please check the Email</p>
+                      )}
                       <label htmlFor="floatingInputEmail">Email address</label>
                     </div>
 
@@ -77,18 +87,25 @@ const {admin,isError,isSuccess,isLoading,message} = useSelector((state)=>{
                       <input
                         type="password"
                         className="form-control"
-                        value={password}
-                        onChange={changeValue}
                         name="password"
                         id="floatingPassword"
                         placeholder="Password"
+                        {...register('password', {
+                          required: true,
+                          minLength: 5,
+                        })}
                       />
+                      {errors.password && (
+                        <p style={{ color: 'red' }}>
+                          Please check the Password
+                        </p>
+                      )}
                       <label htmlFor="floatingPassword">Password</label>
                     </div>
 
                     <div className="d-grid ">
                       <button
-                        onClick={onsubmit}
+                        // onClick={onsubmit}
                         className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
                         type="submit"
                       >
@@ -103,7 +120,7 @@ const {admin,isError,isSuccess,isLoading,message} = useSelector((state)=>{
         </div>
       </body>
     </div>
-  );
+  )
 }
 
-export default AdminLogin;
+export default AdminLogin

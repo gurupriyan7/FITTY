@@ -8,23 +8,19 @@ import { gapi } from 'gapi-script'
 import { reset, trainerLogin ,tgoogleLogin} from '../../../features/trainerAuth/TrainerSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import google from "../../../images/google.svg"
+import { useForm } from 'react-hook-form'
 function TrainerLoginScreen() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'all' })
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
-  const { email, password } = formData
+  
 
-  const changeValue = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
+  
 
   const { trainer, isSuccess, isError, isLoading, message } = useSelector(
     (state) => state.trainerAuth,
@@ -46,10 +42,11 @@ function TrainerLoginScreen() {
     toast.error(response.message)
   }
   const onsubmit = (e) => {
-    e.preventDefault()
+   const {email,password}=e
     const trainerData = { email, password }
     dispatch(trainerLogin(trainerData))
   }
+  const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   useEffect(() => {
     if (isError) {
@@ -73,17 +70,22 @@ function TrainerLoginScreen() {
                   <h3 className=" Login-text text-center   fs-9">
                     Welcome Trainer
                   </h3>
-                  <form>
+                  <form onSubmit={handleSubmit(onsubmit)}>
                     <div className="form-floating mb-3 Linput">
                       <input
                         type="email"
                         className="form-control"
                         id="floatingInputEmail"
-                        onChange={changeValue}
-                        value={email}
+                        {...register('email', {
+                          required: true,
+                          pattern: pattern,
+                        })}
                         name="email"
                         placeholder="name@example.com"
                       />
+                      {errors.email && (
+                        <p style={{ color: 'red' }}>Please check the Email</p>
+                      )}
                       <label htmlFor="floatingInputEmail">Email address</label>
                     </div>
 
@@ -91,18 +93,24 @@ function TrainerLoginScreen() {
                       <input
                         type="password"
                         className="form-control"
-                        value={password}
-                        onChange={changeValue}
+                        {...register('password', {
+                          required: true,
+                          minLength: 5,
+                        })}
                         name="password"
                         id="floatingPassword"
                         placeholder="Password"
                       />
+                       {errors.password && (
+                        <p style={{ color: 'red' }}>
+                          Please check the Password
+                        </p>
+                      )}
                       <label htmlFor="floatingPassword">Password</label>
                     </div>
 
                     <div className="d-grid ">
                       <button
-                        onClick={onsubmit}
                         className="btn btn-lg btn-primary btn-login fw-bold text-uppercase"
                         type="submit"
                       >

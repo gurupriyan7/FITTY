@@ -3,11 +3,16 @@ import { useSelector, useDispatch } from "react-redux";
 import "./RegisterScreen.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../../../features/auth/authSlice";
-
+import { registeruser, reset } from "../../../features/auth/authSlice";
+import { useForm } from 'react-hook-form'
 import Header from "../Headder/Header";
 
 function RegisterScreen() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'all' })
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,8 +48,10 @@ function RegisterScreen() {
   }
 
   const onSubmit = (e) => {
-    e.preventDefault();
-
+const {name,
+  email,
+  phoneNumber,
+  password,password2}=e
     if (password !== password2) {
       toast.error("Re-enterd password not match");
     } else {
@@ -54,11 +61,12 @@ function RegisterScreen() {
         phoneNumber,
         password,
       };
+      console.log("form",userdata);
 
-      dispatch(register(userdata));
+      dispatch(registeruser(userdata));
     }
   };
-
+  const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   return (
     <>
       <Header />
@@ -71,29 +79,41 @@ function RegisterScreen() {
                   <div className="card-img-left d-none d-md-flex"></div>
                   <div className="card-body p-4 p-sm-5 card login-card">
                     <h3 className=" Login-text text-center   fs-9">Register</h3>
-                    <form onSubmit={onSubmit}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <div className="form-floating mb-1 Linput2">
                         <input
                           type="text"
                           className="form-control"
-                          onChange={changeValue}
-                          value={name}
                           id="floatingInputName"
                           name="name"
                           placeholder="Name"
+                          {...register('name', {
+                            required: true,
+                            
+                          })}
                         />
+                        {errors.name && (
+                        <p style={{ color: 'red' }}>
+                          Please check the name
+                        </p>
+                      )}
                         <label htmlFor="floatingInputName">Name</label>
                       </div>
                       <div className="form-floating mb-1 Linput2">
                         <input
                           type="email"
                           className="form-control"
-                          onChange={changeValue}
-                          value={email}
+                          {...register('email', {
+                            required: true,
+                            pattern: pattern,
+                          })}
                           id="floatingInputEmail"
                           name="email"
                           placeholder="name@example.com"
                         />
+                         {errors.email && (
+                        <p style={{ color: 'red' }}>Please check the Email</p>
+                      )}
                         <label htmlFor="floatingInputEmail">
                           Email address
                         </label>
@@ -102,36 +122,58 @@ function RegisterScreen() {
                         <input
                           type="text"
                           className="form-control"
-                          onChange={changeValue}
-                          value={phoneNumber}
+                          {...register('phoneNumber', {
+                            required: true,
+                            maxLength:10
+                            
+                          })}
                           id="floatingInputPhone"
                           name="phoneNumber"
                           placeholder="PhoneNumber"
                         />
+                        {errors.phoneNumber && (
+                        <p style={{ color: 'red' }}>
+                          Please check the phoneNumber
+                        </p>
+                      )}
                         <label htmlFor="floatingInputPhone">PhoneNumber</label>
                       </div>
                       <div className="form-floating mb-1 Linput2">
                         <input
                           type="password"
                           className="form-control"
-                          onChange={changeValue}
-                          value={password}
+                          {...register('password', {
+                            required: true,
+                            minLength: 5,
+                          })}
                           id="floatingPassword"
                           name="password"
                           placeholder="Password"
                         />
+                        {errors.password && (
+                        <p style={{ color: 'red' }}>
+                          Please check the Password
+                        </p>
+                      )}
                         <label htmlFor="floatingPassword">Password</label>
                       </div>
                       <div className="form-floating mb-1 Linput2">
                         <input
                           type="password"
                           className="form-control"
-                          onChange={changeValue}
-                          value={password2}
+                          {...register('password2', {
+                            required: true,
+                            minLength: 5,
+                          })}
                           id="floatingPassword2"
                           name="password2"
                           placeholder="Re-Enter Password"
                         />
+                        {errors.password2 && (
+                        <p style={{ color: 'red' }}>
+                          Please check the Re-Entered Password
+                        </p>
+                      )}
                         <label htmlFor="floatingPassword2">
                           Re-Enter Password
                         </label>
