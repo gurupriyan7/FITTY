@@ -12,7 +12,8 @@ const initialState = {
   isLoading: false,
   userposts:[],
   isDeleted:false,
-  allPosts:[]
+  allPosts:[],
+  isLiked:false
 }
 
 // Add-userPosts
@@ -56,16 +57,31 @@ export const postDelete =createAsyncThunk(
 
 // get-all-posts
 export const AllPosts = createAsyncThunk(
-  "posts/allPosts",
+  "posts/AllPosts",
   async(u,thunkAPI)=>{
     try {
       const token = await thunkAPI.getState().auth.user.token
       return await PostsService.getAllPosts(token)
     } catch (error) {
-      thunkAPI.rejectWithValue(errorMessage(error))
+     return thunkAPI.rejectWithValue(errorMessage(error))
     }
   }
 )
+
+// likeUserPost
+export const likeUserPost = createAsyncThunk(
+  "posts/allPosts",
+  async(postId,thunkAPI)=>{
+    try {
+     
+      const token = await thunkAPI.getState().auth.user.token
+      return await PostsService.likeUserPost(token,postId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  }
+)
+
 
 // create-slice
 const PostSlice = createSlice({
@@ -78,6 +94,7 @@ const PostSlice = createSlice({
       state.isSuccess = false
       state.message = false
       state.isDeleted=false
+      state.isLiked=false
     },
   },
   extraReducers: {
@@ -130,6 +147,7 @@ const PostSlice = createSlice({
       state.isLoading=true
     } ,
     [AllPosts.fulfilled]:(state,action)=>{
+      console.log("daaaa",action.payload);
        state.isSuccess=true
        state.isError=false
        state.isLoading=false
@@ -140,6 +158,20 @@ const PostSlice = createSlice({
       state.isLoading=false
       state.isSuccess=false
       state.message=action.payload
+    },
+    // likeUserPost
+    [likeUserPost.pending]:(state)=>{
+      state.isLoading=true
+    },
+    [likeUserPost.fulfilled]:(state,action)=>{
+      state.isError=false
+      state.isLoading=false
+      state.isLiked=true
+    },
+    [likeUserPost.rejected]:(state,action)=>{
+      state.isLiked=false
+      state.isError=true
+      state.isLiked=false
     }
   },
 })

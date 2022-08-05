@@ -64,6 +64,8 @@ export const getUserOwnPlans=createAsyncThunk(
     }
   }
 )
+
+
 // Create-slice
 const UserPlanSlice = createSlice({
   name: 'userPlan',
@@ -134,7 +136,8 @@ const UserPlanSlice = createSlice({
     state.isLoading=false
     state.isError=true
     state.message=action.payload
-  }
+  },
+  
 
   
   },

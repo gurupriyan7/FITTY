@@ -29,7 +29,6 @@ const registerTrainer = asyncHandler(async (req, res) => {
     password,
     category,
     slots,
-    status,
   } = req.body
   if (!name || !email || !phoneNumber || !password || !category || !slots) {
     res.status(400)
@@ -56,7 +55,6 @@ const registerTrainer = asyncHandler(async (req, res) => {
     category: category,
     password: hashPassword,
     slots: slots,
-    status: status,
   })
 
   // check-the-creation-is- success

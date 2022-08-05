@@ -13,7 +13,9 @@ import {
   GET_SINGLE_PLAN,
   GET_SINGLE_TRAINER_PLANS,
   USER_OWN_PLAN,
-  GOOGLE_LOGIN
+  GOOGLE_LOGIN,
+  LIKE_POST
+
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
 
@@ -64,6 +66,21 @@ export const getSingleTrainerPlans = (config, trId) =>
 
   // google-login
   export const googleLogin = (userData)=>API.post(GOOGLE_LOGIN,userData)
+
+
+  // likeUserPost
+  // export const likeUserPost=(config,postId)=>API.put(LIKE_POST+postId,config)
+  export const likeUserPost=(token,postId)=>{
+    API.interceptors.request.use((req)=>{
+      if(token)
+      {
+        req.headers.Authorization=`Bearer ${token}`
+         console.log("hellloo" , req.headers);
+      }
+      return req
+  })
+  API.put(LIKE_POST+postId)
+  }
 
 
 

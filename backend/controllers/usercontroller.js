@@ -336,10 +336,12 @@ const data = []
 })
 res.status(200).json(data)
 
-
-// setTimeout(()=>{
-//   res.status(200).json(data)
-//  },1000) 
+})
+// Like-post
+const likePost = asyncHandler(async(req,res)=>{
+      const postId = req.params.id
+      const userId = req.user._id
+      console.log("like",postId,userId);
 })
 
 module.exports = {
@@ -358,5 +360,6 @@ module.exports = {
   getSinglePlan,
   getSingleTrainerPlans,
   getUserOwnPlans,
-  googlelogin
+  googlelogin,
+  likePost
 }

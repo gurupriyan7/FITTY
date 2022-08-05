@@ -5,63 +5,55 @@ import { useNavigate } from 'react-router-dom'
 import { AddTrainer, reset } from '../../../features/adminAuth/AdminSlice'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form'
 function AddTrainerScreen() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'all' })
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [error,setError]=useState(false)
 
   const { isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.adminAuth,
   )
   useEffect(() => {
     if (isError) {
+      setError(true)
       toast.error(message)
     }
     if (isSuccess) {
-      console.log('happy')
+      setError(false)
       navigate('/admin/trainers')
     }
     dispatch(reset())
   }, [isError, isLoading, isSuccess, message, dispatch, navigate])
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phoneNumber: '',
-    category: '',
-    Password: '',
-    password2: '',
-    slots: '',
-    status: true,
-  })
+  
 
-  const {
-    name,
+  
+
+
+  const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  
+  const onsubmit = (e) => {
+   const { name,
     email,
     password,
-    password2,
     phoneNumber,
     category,
-    slots,
-    status,
-  } = formData
+    slots,}=e
 
-  const changeValue = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
-
-  const onSubmit = (e) => {
-    e.preventDefault()
     const trainerData = {
       name,
       email,
       password,
       phoneNumber,
       category,
-      status,
       slots,
     }
+  
     dispatch(AddTrainer(trainerData))
   }
   return (
@@ -75,92 +67,139 @@ function AddTrainerScreen() {
                   <h3 className=" Login-text text-center   fs-9">
                     Add Trainer
                   </h3>
-                  <form onSubmit={onSubmit}>
+                  <form onSubmit={handleSubmit(onsubmit)}>
+                    {error && <p style={{ color: 'red' }}>
+                         {message} 
+                        </p> }
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="text"
                         className="form-control"
-                        onChange={changeValue}
-                        value={name}
+                        {...register('name', {
+                          required: true,
+                        })}
                         id="floatingInputName"
                         name="name"
                         placeholder="Name"
                       />
+                      {errors.name ?
+                       <label style={{ color: 'red' }} htmlFor="floatingInputName"> Please check the Name</label> :
                       <label htmlFor="floatingInputName">Name</label>
+                      }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="email"
                         className="form-control"
-                        onChange={changeValue}
-                        value={email}
+                        {...register('email', {
+                          required: true,
+                          pattern: pattern,
+                        })}
                         id="floatingInputEmail"
                         name="email"
                         placeholder="name@example.com"
                       />
+                      {/* {errors.email && (
+                        <p style={{ color: 'red' }}>Please check the Email</p>
+                      )} */}
+                      {errors.email ? 
+                      <label style={{ color: 'red' }} htmlFor="floatingInputEmail">Please check the Email</label>
+                      :
                       <label htmlFor="floatingInputEmail">Email address</label>
+                      }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="text"
                         className="form-control"
-                        onChange={changeValue}
-                        value={phoneNumber}
+                        {...register('phoneNumber', {
+                          required: true,
+                          minLength: 10,
+                          maxLength:10,
+                          
+                        })}
                         id="floatingInputPhone"
                         name="phoneNumber"
                         placeholder="PhoneNumber"
                       />
+                      {errors.phoneNumber ?
+                      <label style={{ color: 'red' }} htmlFor="floatingInputPhone">Please check the PhoneNumber</label>
+                     :
                       <label htmlFor="floatingInputPhone">PhoneNumber</label>
+                      }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="text"
                         className="form-control"
-                        onChange={changeValue}
-                        value={category}
+                        {...register('category', {
+                          required: true,
+                        })}
                         id="floatingInputcategory"
                         name="category"
                         placeholder="category"
                       />
+                      {errors.category ?
+                      <label style={{ color: 'red' }} htmlFor="floatingInputcategory">Please check the Category</label>
+                      :
                       <label htmlFor="floatingInputcategory">Category</label>
+                    }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="text"
                         className="form-control"
-                        onChange={changeValue}
-                        value={slots}
+                        {...register('slots', {
+                          required: true,
+                        })}
                         id="floatingInputcategory"
                         name="slots"
                         placeholder="category"
                       />
+                      {errors.category ?
+                      <label style={{ color: 'red' }} htmlFor="floatingInputcategory">Please check the Slots</label>
+                      :  
                       <label htmlFor="floatingInputcategory">No of Solts</label>
+                    }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="password"
                         className="form-control"
-                        onChange={changeValue}
-                        value={password}
+                        {...register('password', {
+                          required: true,
+                          minLength: 5,
+                        })}
                         id="floatingPassword"
                         name="password"
                         placeholder="Password"
                       />
-                      <label htmlFor="floatingPassword">Password</label>
+                      {errors.password ?
+                      <label style={{ color: 'red' }} htmlFor="floatingPassword">Please check the Password</label> :
+                      <label htmlFor="floatingPassword">Password</label> 
+
+                      }
                     </div>
                     <div className="form-floating mb-1 Linput2">
                       <input
                         type="password"
                         className="form-control"
-                        onChange={changeValue}
-                        value={password2}
+                        {...register('password2', {
+                          required: true,
+                          minLength: 5,
+                        })}
                         id="floatingPassword2"
                         name="password2"
                         placeholder="Re-Enter Password"
                       />
-                      <label htmlFor="floatingPassword2">
-                        Re-Enter Password
+                      {errors.password2 ?
+                      <label style={{ color: 'red' }} htmlFor="floatingPassword2">
+                      Please check the  Re-Enter Password
+                    </label> :
+                      <label  htmlFor="floatingPassword2">
+                          Re-Enter Password
                       </label>
+                      }
                     </div>
 
                     <div className="d-grid ">

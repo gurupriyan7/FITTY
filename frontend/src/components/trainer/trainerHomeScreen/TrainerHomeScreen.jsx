@@ -15,7 +15,7 @@ function TrainerHomeScreen() {
 
   useEffect(()=>{
 dispatch(AllPosts())
-  },[allPosts])
+  },[])
   // if(isLoading){
   //   return <Spinner/>
   // }

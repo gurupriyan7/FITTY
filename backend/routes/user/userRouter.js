@@ -19,7 +19,8 @@ const {
   getSinglePlan,
   getSingleTrainerPlans,
   getUserOwnPlans,
-  googlelogin
+  googlelogin,
+  likePost
 
 } = require('../../controllers/usercontroller')
 
@@ -84,5 +85,8 @@ router.get("/list-orders",getOrders)
 
 // Get-user-own-plans
 router.get("/userownplan",protect,getUserOwnPlans)
+
+// Like-post
+router.put("/likepost/:id",protect,likePost)
 
 module.exports = router

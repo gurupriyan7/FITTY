@@ -6,7 +6,7 @@ const Traineer = require('../models/trainerModel')
 
 const protect = asyncHandler(async (req, res, next) => {
   let token
-
+console.log("responsessskguioygs",req.headers.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')
@@ -21,7 +21,7 @@ const protect = asyncHandler(async (req, res, next) => {
       // Get-user-form-the-Token
       req.user = await User.findById(decoded.id).select('-password')
 
-      next()
+      next()  
     } catch (error) {
       res.status(401)
       throw new Error('Not authorized')

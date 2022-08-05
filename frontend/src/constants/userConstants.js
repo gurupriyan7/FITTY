@@ -13,7 +13,8 @@ const urls = {
   GET_SINGLE_PLAN: '/singleplan/',
   GET_SINGLE_TRAINER_PLANS:"/trainerplans/",
   USER_OWN_PLAN:"/userownplan",
-  GOOGLE_LOGIN:"/googlelogin"
+  GOOGLE_LOGIN:"/googlelogin",
+  LIKE_POST:"/likepost/"
 }
 
 
@@ -32,5 +33,6 @@ export const {
   GET_SINGLE_PLAN,
   GET_SINGLE_TRAINER_PLANS,
   USER_OWN_PLAN,
-  GOOGLE_LOGIN
+  GOOGLE_LOGIN,
+  LIKE_POST
 } = urls

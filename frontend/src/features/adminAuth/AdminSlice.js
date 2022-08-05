@@ -69,6 +69,7 @@ export const AddTrainer = createAsyncThunk(
   'adminAuth/AddTrainer',
   async (trainerData, thunkAPI) => {
     try {
+      console.log("data got it",trainerData);
       return await adminService.AddTrainer(trainerData)
     } catch (error) {
       return thunkAPI.rejectWithValue(errorMessage(error))

@@ -42,6 +42,7 @@ import TrainerProfileScreen from './components/trainer/TrainerProfileScreen/Trai
 import AddPlanScreen from './components/trainer/AddPlanScreen/AddPlanScreen'
 import TrainerSinglePlanScreen from './components/trainer/TrainerSinglePlanScreen/TrainerSinglePlanScreen'
 import TrainerIncomeScreen from './components/trainer/TrainerIncomeScreen/TrainerIncomeScreen'
+import Messenger from './pages/user/messenger/Messenger'
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                 <Route path="profile"  element={user ? <UserHome childern={<UserProfileScreen />} /> : <LoginPage />} />
                 <Route path="coach/:id"   element={user ? <UserHome childern={<UserTrainerProfileScreen />} /> : <LoginPage />}/>
                 <Route path="payment/:id"   element={user ? <UserHome childern={<UserPaymentScreen/>} /> : <LoginPage />}/>
+                <Route path="messenger"   element={user ? <UserHome childern={<Messenger/>} /> : <LoginPage />}/>
 
               </Route>
             </Route>

@@ -24,24 +24,29 @@ const userposts = async (token) => {
 }
 
 // post-delete
-const postDelete = async(token,postId)=>{
-  const config={
-    headers:{
-      Authorization:`Bearer ${token}`
-    }
+const postDelete = async (token, postId) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   }
-  const {data}= await api.postDelete(config,postId)
+  const { data } = await api.postDelete(config, postId)
   return data
 }
 
 // get-all-posts
-const getAllPosts =async(token)=>{
-  const config={
-    headers:{
-      Authorization:`Bearer ${token}`
-    }
+const getAllPosts = async (token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
   }
-  const {data} = await api.getAllPosts(config)
+  const { data } = await api.getAllPosts(config)
+  return data
+}
+// likeUserPost
+const likeUserPost = async (token, postId) => {
+  const { data } = await api.likeUserPost(token, postId)
   return data
 }
 
@@ -49,6 +54,7 @@ export const PostsService = {
   userAddpost,
   userposts,
   postDelete,
-  getAllPosts
+  getAllPosts,
+  likeUserPost,
 }
 export default PostsService
