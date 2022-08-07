@@ -342,9 +342,63 @@ res.status(200).json(data)
 })
 // Like-post
 const likePost = asyncHandler(async(req,res)=>{
-      const postId = req.params.id
+      const postId = mongoose.Types.ObjectId(req.params.id)
       const userId = req.user._id
-      console.log("like",postId,userId);
+      console.log(userId,postId);
+      const uPost =await userpost.findById(postId)
+      const tPost =await trainerpsot.findById(postId)
+      console.log("ddd",uPost,tPost);
+      let post
+      let model
+      if(uPost){
+        post=uPost
+        model=userpost
+      }else if(tPost){
+        post=tPost
+        model=trainerpsot
+      }
+      if(post.like.includes(userId)){
+       res.status(403)
+       console.log("error");
+        throw new Error("user Alredy liked")
+      }
+      console.log("got ot");
+      const liked = await model.findByIdAndUpdate(postId,{
+        $push:{like:userId}
+      })
+res.status(200).json({liked})
+
+})
+
+// unLikeUserPost
+const unLike = asyncHandler(async(req,res)=>{
+  const postId = mongoose.Types.ObjectId(req.params.id)
+      const userId = req.user._id
+      console.log(userId,postId);
+      const uPost =await userpost.findById(postId)
+      const tPost =await trainerpsot.findById(postId)
+      console.log("ddd",uPost,tPost);
+      let post
+      let model
+      if(uPost){
+        post=uPost
+        model=userpost
+      }else if(tPost){
+        post=tPost
+        model=trainerpsot
+      }
+      if(post.like.includes(userId)){
+        
+        const unLiked = await model.findByIdAndUpdate(postId,{
+          $pull:{like:userId}
+        })
+  res.status(200).json({unLiked})
+
+       }else{
+        res.status(403)
+        console.log("error");
+         throw new Error("user not like this post")
+       }
 })
 
 // Get-singleUser
@@ -385,5 +439,6 @@ module.exports = {
   getUserOwnPlans,
   googlelogin,
   likePost,
-  singleUser
+  singleUser,
+  unLike
 }

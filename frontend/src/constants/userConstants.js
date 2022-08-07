@@ -15,6 +15,7 @@ const urls = {
   USER_OWN_PLAN:"/userownplan",
   GOOGLE_LOGIN:"/googlelogin",
   LIKE_POST:"/likepost/",
+  UNLIKE_POST:"/unlikepost/",
   GET_CONVERSATIONS:"/conversations/",
   GET_SINGLE_USER:'/singleuser/',
   GET_MESSAGES:"/messages/",
@@ -42,5 +43,6 @@ export const {
   GET_CONVERSATIONS,
   GET_SINGLE_USER,
   GET_MESSAGES,
-  ADD_MESSAGES
+  ADD_MESSAGES,
+  UNLIKE_POST
 } = urls

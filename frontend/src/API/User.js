@@ -18,7 +18,8 @@ import {
   GET_CONVERSATIONS,
   GET_SINGLE_USER,
   GET_MESSAGES,
-  ADD_MESSAGES
+  ADD_MESSAGES,
+  UNLIKE_POST
 
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -85,6 +86,16 @@ export const getSingleTrainerPlans = (config, trId) =>
       return req
   })
   API.put(LIKE_POST+postId)
+  }
+  // unlikeUserPost
+  export const unlikeUserPost=(token,postId)=>{
+    API.interceptors.request.use((req)=>{
+      if(token){
+        req.headers.Authorization=`Bearer ${token}`
+      }
+      return req
+    })
+    API.put(UNLIKE_POST+postId)
   }
 
 

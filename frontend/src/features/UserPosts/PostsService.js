@@ -49,6 +49,11 @@ const likeUserPost = async (token, postId) => {
   const { data } = await api.likeUserPost(token, postId)
   return data
 }
+// unlikeUserPost
+const unlikeUserPost=async(token,postId)=>{
+const {data} =await api.unlikeUserPost(token,postId)
+return data
+}
 
 export const PostsService = {
   userAddpost,
@@ -56,5 +61,6 @@ export const PostsService = {
   postDelete,
   getAllPosts,
   likeUserPost,
+  unlikeUserPost
 }
 export default PostsService
