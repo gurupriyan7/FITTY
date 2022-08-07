@@ -1,5 +1,5 @@
 .messenger {
-  height: 100vh;
+  height: 94vh;
   display: flex;
   background-color:white;
   border-radius: 9px;
@@ -20,14 +20,38 @@
 }
 .chatBoxWarpper{
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    position: relative;
+    background-color: #add8e63b;
+    border-radius: 10px;
 }
 .chatBoxtop{
-  height: 84vh!important;
+  height: 78vh!important;
   overflow-y: scroll;
   padding-right: 10px;
+}
+.headder{
+  display: flex;
+  height: 48px;
+  background-color: #1877f2;
+  border-radius: 5px;
+}
+.proftext{
+  margin-left: 7%;
+  margin-top: 2%;
+    font-size: 19px;
+    font-weight: 600;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    width: 73%;
+}
+.prof{
+  width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 5%;
+    margin-top: 1%;
 }
 .chatBoxBottom{
   margin-top: 5px;
@@ -36,13 +60,16 @@
   justify-content: space-between;
 }
 .chatMessageInput{
-  width: 80%;
-  height: 90%;
-  padding: 10px;
+  width: 76%;
+    height: 39px!important;
+    border-radius: 7px;
+    padding: 6px;
+    border-color: steelblue;
 }
 .chatSubmitButton{
-  width: 70px;
-  height: 40px;
+  width: 85px;
+  height: 38px;
+  margin-right: 2%;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -57,4 +84,11 @@
 .chatMenuWarpper
 {
   padding: 10px;
+}
+.noConversation{
+  position: absolute;
+  top: 277%;
+  font-size: 34px;
+  color: rgb(166, 166, 166);
+  cursor: default;
 }

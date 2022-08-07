@@ -58,11 +58,13 @@ function UserPaymentScreen() {
             razorpayOrderId:response.razorpay_order_id,
             razorpaysignature:response.razorpay_signature,
           });
+          const resp=await API.post("/conversations",{
+            senderId:user._id,
+            receiverId:singleplan?.postedBy?._id
+          })
           
           toast.success("Payment was Successfull")
           navigate('/home/myplans')
-          
-        
         },
         prefill:{
           name:"FITTY",

@@ -28,8 +28,8 @@ app.use(cors({ origin: true, credentials: true }));
 app.use('/api/user',userRouter)
 app.use('/api/trainer',trainerRouter)
 app.use('/api/admin',adminRouter)
-app.use('/api/conversations',conversationRouter)
-app.use('/api/messages',messageRouter)
+app.use('/api/user/conversations',conversationRouter)
+app.use('/api/user/messages',messageRouter)
 
 
 // Error-handling

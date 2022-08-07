@@ -5,6 +5,7 @@ import {useDispatch,useSelector} from "react-redux"
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Spinner from '../../spinner/Spinner'
+import {NavLink} from "react-router-dom"
 function MyPlansScreen() {
   const dispatch = useDispatch()
 
@@ -54,7 +55,8 @@ if(isLoading){
               <p className="slotsavailable primary-Color">{plan?.postedBy?.name}</p>
             </div>
             <div className="enrol">
-              <button className="enrolbtn">Start Now</button>
+              <NavLink to="/home/messenger"><button className="enrolbtn">Start Now</button></NavLink>
+              
             </div>
           </div>
         </div>

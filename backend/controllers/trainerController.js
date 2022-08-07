@@ -162,6 +162,7 @@ const UpdateTrainer = asyncHandler(async (req, res) => {
     new: true,
   })
   const newTrainer = {
+    _id:updatedTrainer._id,
     name: updatedTrainer.name,
     email: updatedTrainer.email,
     phoneNumber: updatedTrainer.phoneNumber,

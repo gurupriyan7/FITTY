@@ -14,7 +14,11 @@ import {
   GET_SINGLE_TRAINER_PLANS,
   USER_OWN_PLAN,
   GOOGLE_LOGIN,
-  LIKE_POST
+  LIKE_POST,
+  GET_CONVERSATIONS,
+  GET_SINGLE_USER,
+  GET_MESSAGES,
+  ADD_MESSAGES
 
 } from '../constants/userConstants'
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -23,6 +27,7 @@ const BACKEND_URL = 'http://localhost:5000/api'
   baseURL: `${BACKEND_URL}/user`,
   withCredentials: true,
 })
+
 
 
 
@@ -81,6 +86,19 @@ export const getSingleTrainerPlans = (config, trId) =>
   })
   API.put(LIKE_POST+postId)
   }
+
+
+  // getConversation
+  export const getConversation =(config,userId)=>API.get(GET_CONVERSATIONS+userId,config)
+
+  // getSigleUser
+  export const getSigleUser = (userId)=>API.get(GET_SINGLE_USER+userId)
+
+  // get-messages
+  export const getMessages=(convId)=>API.get(GET_MESSAGES+convId)
+
+  // Add-message
+  export const addMessage =(message)=>API.post(ADD_MESSAGES,message)
 
 
 

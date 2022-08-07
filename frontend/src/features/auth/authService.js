@@ -46,12 +46,24 @@ const googleLogin = async(userdata)=>{
   return data
 }
 
+// getConversation
+const getConversation = async(token,userId)=>{
+  const config={
+    headers:{
+      Authorization:`Bearer ${token}`
+    }
+  }
+  const {data}= await api.getConversation(config,userId)
+  return data
+}
+
 const authService = {
   register,
   logout,
   login,
   updateUser,
-  googleLogin
+  googleLogin,
+  getConversation
 }
 
 export default authService

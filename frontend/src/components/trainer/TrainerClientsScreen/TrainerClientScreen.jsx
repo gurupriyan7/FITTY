@@ -5,6 +5,7 @@ import {API} from '../../../API/Trainer'
 import {useSelector,useDispatch} from "react-redux"
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import Spinner from '../../spinner/Spinner'
 function TrainerClientScreen() {
  const {trainer,isLoading} = useSelector((state) => state.trainerAuth)
@@ -60,7 +61,8 @@ function TrainerClientScreen() {
                     <p className="slotsavailable primary-Color">Expiry date {user.expry} </p>
                   </div>
                   <div className="enrol">
-                    <button className="enrolbtn">Start</button>
+                    <NavLink to="/trainer/home/messenger"><button className="enrolbtn">Start</button></NavLink>
+                    
                   </div>
                 </div>
               </div>

@@ -6,7 +6,6 @@ const Traineer = require('../models/trainerModel')
 
 const protect = asyncHandler(async (req, res, next) => {
   let token
-console.log("responsessskguioygs",req.headers.headers);
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith('Bearer')

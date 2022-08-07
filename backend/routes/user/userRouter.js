@@ -20,7 +20,8 @@ const {
   getSingleTrainerPlans,
   getUserOwnPlans,
   googlelogin,
-  likePost
+  likePost,
+  singleUser
 
 } = require('../../controllers/usercontroller')
 
@@ -43,6 +44,9 @@ router.delete('/delete/:id',deleteUser)
 
 // Find-user
 router.get('/find',getUser)
+
+// get-singleUser-details
+router.get("/singleuser/:id",singleUser)
 
 // change-status-(block/unblock)
 router.put('/status/:id', changeUserStatus)

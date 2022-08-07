@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const mongoose = require("mongoose")
 
 // Require-conversationModel
 const Conversation = require('../models/conversation')
@@ -22,9 +23,12 @@ const createConversation = asyncHandler(async (req, res) => {
 // Get-user-conversation
 const getUserConversation = asyncHandler(async (req, res) => {
   try {
+    
+    
     const conversation = await Conversation.find({
-      members: { $in: [req.params.userId] },
+      members: { $in: [req.params.id.toString()] },
     })
+  
     res.status(200).json(conversation)
   } catch (error) {
     res.status(500)
@@ -35,7 +39,6 @@ const getUserConversation = asyncHandler(async (req, res) => {
 // Add-message
 const addMessage = asyncHandler(async (req, res) => {
   const newMessage = new Message(req.body)
-
   try {
     const savedMessage = await newMessage.save()
     res.status(200).json(savedMessage)
@@ -45,4 +48,26 @@ const addMessage = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { createConversation, getUserConversation, addMessage }
+// getMessages
+const getMessages = asyncHandler(async (req, res) => {
+  try {
+   
+    const convId = mongoose.Types.ObjectId(req.params.conversationId);
+   
+    const messages = await Message.find({
+      conversationId: convId,
+    })
+    
+    res.status(200).json(messages)
+  } catch (error) {
+    res.status(500)
+    throw new Error(error)
+  }
+})
+
+module.exports = {
+  createConversation,
+  getUserConversation,
+  addMessage,
+  getMessages,
+}

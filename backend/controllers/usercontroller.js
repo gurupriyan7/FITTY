@@ -1,6 +1,9 @@
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const mongoose=require("mongoose")
+const Schema = mongoose.Schema
+const ObjectId = Schema.Types.ObjectId
 
 // rerquire-userModel
 const User = require('../models/userModel')
@@ -344,6 +347,26 @@ const likePost = asyncHandler(async(req,res)=>{
       console.log("like",postId,userId);
 })
 
+// Get-singleUser
+const singleUser = asyncHandler(async(req,res)=>{
+  try {
+    console.log("idddd",req.params._id);
+    var userId = mongoose.Types.ObjectId(req.params.id);
+  
+    const user =await User.findById(userId)
+    const trainer = await Trainer.findById(userId)
+    console.log("user",user,trainer);
+   if(user){
+     res.status(200).json(user)
+   }else if(trainer){
+    res.status(200).json(trainer)
+   }
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
 module.exports = {
   getUser,
   userUpdate,
@@ -361,5 +384,6 @@ module.exports = {
   getSingleTrainerPlans,
   getUserOwnPlans,
   googlelogin,
-  likePost
+  likePost,
+  singleUser
 }
