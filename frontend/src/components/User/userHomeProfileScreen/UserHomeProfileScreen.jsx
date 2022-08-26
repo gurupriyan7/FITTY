@@ -4,158 +4,115 @@ import FeaturedPlayListIcon from '@mui/icons-material/FeaturedPlayList'
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined'
 import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle'
 import FactCheckSharpIcon from '@mui/icons-material/FactCheckSharp'
-import empty from "../../../images/profile-pic-avather.png"
+import empty from '../../../images/profile-pic-avather.png'
 import './UserHomeProfileScreen.scss'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import Spinner from '../../spinner/Spinner'
 
 function UserHomeProfileScreen() {
-  const [active, setActive] = useState({
-    gc: false,
-    gp: false,
-    mp: false,
-  })
+  
 
+  const { user, isLoading } = useSelector((state) => state.auth)
+  const [client, setClient] = useState(user)
+  useEffect(() => {
+    setClient(user)
+  }, [user])
+ 
 
-  const {user,isLoading}= useSelector((state)=>state.auth)
-  const [client,setClient]= useState(user)
-  useEffect(()=>{
-setClient(user)
-  },[user])
-  console.log("pic",client.profileimage);
-
-  if(isLoading){
-    return <Spinner/>
+  if (isLoading) {
+    return <Spinner />
   }
   return (
     <div className="userProfileCard">
       <div className="top">
-        {client.coverimage ?
-        <img
-        className="coverpic"
-        src={client.coverimage}
-        alt=""
-      /> :
-      <img
-      className="coverpic"
-      src={empty}
-      alt=""
-    />
-        }
-        
-       
+        {client.coverimage ? (
+          <img className="coverpic" src={client.coverimage} alt="" />
+        ) : (
+          <img className="coverpic" src={empty} alt="" />
+        )}
       </div>
-      {client.profileimage
-      ? <img
-      className="roundpic"
-      src={client.profileimage}
-      alt=""
-    /> :
-    <img
-        className="roundpic"
-        src={empty}
-        alt=""
-      />
-     }
-     
-      
+      {client.profileimage ? (
+        <img className="roundpic" src={client.profileimage} alt="" />
+      ) : (
+        <img className="roundpic" src={empty} alt="" />
+      )}
+
       <div className="name">
-        <div onClick={() => {
-              setActive((prev) => ({
-                ...prev,
-                gc: false,
-                gp: false,
-                mp: false,
-              }))
-            }} className="nametext">
-          <Link
+        <div
+  
+          className="nametext"
+        >
+          <NavLink
             style={{ textDecoration: 'none', color: 'black' }}
             to={'/home/profile'}
           >
             {client.name}
-          </Link>{' '}
+          </NavLink>{' '}
         </div>
       </div>
       <div className="bottom">
         <ul>
           <li
-            onClick={() => {
-              setActive((prev) => ({
-                ...prev,
-                gc: true,
-                gp: false,
-                mp: false,
-              }))
-            }}
-            className={active.gc ? 'active cardtext ' : 'cardtext '}
+           
+            className='cardtext '
           >
             <GroupAddIcon className="picon" />
-            <Link
-              className={active.gc ? 'active' : 'userli'}
+            <NavLink
+              className= 'userli'
               style={{ textDecoration: 'none' }}
               to={'/home/getacoach'}
             >
               Get a Coach
-            </Link>
+            </NavLink>
           </li>
           <li
-            onClick={() => {
-              setActive((prev) => ({
-                ...prev,
-                gc: false,
-                gp: true,
-                mp: false,
-              }))
-            }}
-            className={active.gp ? 'active cardtext ' : 'cardtext '}
+            
+              
+            className= 'cardtext '
           >
             <FeaturedPlayListIcon className="picon" />
-            <Link
-              className={active.gp ? 'active' : 'userli'}
+            <NavLink
+              className='userli'
               style={{ textDecoration: 'none' }}
               to={'/home/getplans'}
             >
               {' '}
               Get Plans
-            </Link>
+            </NavLink>
           </li>
           <li
-            onClick={() => {
-              setActive((prev) => ({
-                ...prev,
-                gc: false,
-                gp: false,
-                mp: true,
-              }))
-            }}
-            className={active.mp ? 'active cardtext ' : 'cardtext '}
+           
+            className='cardtext '
           >
             <FactCheckSharpIcon className="picon" />
-            <Link
-              className={active.mp ? 'active' : 'userli'}
+            <NavLink
+              className= 'userli'
               style={{ textDecoration: 'none' }}
               to={'/home/myplans'}
             >
               My Plans
-            </Link>
+            </NavLink>
           </li>
         </ul>
         <div className="addpost">
-          <Link style={{textDecoration:"none"}} to={"/home/addpost"}>
-          <button onClick={() => {
-              setActive((prev) => ({
-                ...prev,
-                gc: false,
-                gp: false,
-                mp: false,
-              }))
-            }} className="addpostbutton primary-Color">
-            <AddBoxOutlinedIcon />
-            Add Post
-          </button>
-          </Link>
+          <NavLink style={{ textDecoration: 'none' }} to={'/home/addpost'}>
+            <button
+              // onClick={() => {
+              //   setActive((prev) => ({
+              //     ...prev,
+              //     gc: false,
+              //     gp: false,
+              //     mp: false,
+              //   }))
+              // }}
+              className="addpostbutton primary-Color"
+            >
+              <AddBoxOutlinedIcon />
+              Add Post
+            </button>
+          </NavLink>
         </div>
       </div>
     </div>

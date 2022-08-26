@@ -16,7 +16,9 @@ DELETE_PLAN:"/deleteplan/",
 GET_TRAINER_CLIENTS:"/getclients",
 GOOGLE_LOGIN:"/googlelogin",
 TRAINER_ORDERS:'/trainerorder',
-TRAINER_PAYMENT_REQUEST:"/paymentrequest/"
+TRAINER_PAYMENT_REQUEST:"/paymentrequest/",
+LIKE_POST:"/likepost/",
+  UNLIKE_POST:"/unlikepost/",
 
 }
 export const  {
@@ -37,5 +39,7 @@ export const  {
   GET_TRAINER_CLIENTS,
   GOOGLE_LOGIN,
   TRAINER_ORDERS,
-  TRAINER_PAYMENT_REQUEST
+  TRAINER_PAYMENT_REQUEST,
+  LIKE_POST,
+  UNLIKE_POST
 } =url

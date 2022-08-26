@@ -3,8 +3,6 @@ import './UserPost.scss'
 import ThumbUpIcon from '@mui/icons-material/ThumbUp'
 import InsertCommentIcon from '@mui/icons-material/InsertComment'
 import {
-  reset,
-  AllPosts,
   likeUserPost,
   unlikeUserPost,
 } from '../../../features/UserPosts/PostsSlice'
@@ -31,7 +29,7 @@ function UserPost({ post }) {
   
   return (
     <div className="userhomescreen">
-      <span className="poststext">Posts</span>
+      <span className="poststext"></span>
       {/* single-Post */}
 
       <>

@@ -15,7 +15,9 @@ import {
   DELETE_PLAN,
   GOOGLE_LOGIN,
   TRAINER_ORDERS,
-  TRAINER_PAYMENT_REQUEST
+  TRAINER_PAYMENT_REQUEST,
+  UNLIKE_POST,
+  LIKE_POST
 } from '../constants/trainerConstants'
 
 const BACKEND_URL = 'http://localhost:5000/api'
@@ -72,5 +74,26 @@ export const loginTrainer = (trainerData) =>
   // export const paymentRequest = (orderId,config)=>console.log("config",config);
   export const paymentRequest = (orderId,config)=>API.put(TRAINER_PAYMENT_REQUEST+orderId,config)
 
- 
+  // likeUserPost
+  export const likeUserPost=(token,postId)=>{
+    API.interceptors.request.use((req)=>{
+      if(token)
+      {
+        req.headers.Authorization=`Bearer ${token}`
+         console.log("hellloo" , req.headers);
+      }
+      return req
+  })
+  API.put(LIKE_POST+postId)
+  }
+  // unlikeUserPost
+  export const unlikeUserPost=(token,postId)=>{
+    API.interceptors.request.use((req)=>{
+      if(token){
+        req.headers.Authorization=`Bearer ${token}`
+      }
+      return req
+    })
+    API.put(UNLIKE_POST+postId)
+  }
 

@@ -9,7 +9,9 @@ const initialState = {
   message: '',
   isDeleted:false,
   trainerPosts:[],
-  allPosts:[]
+  allPosts:[],
+  isLiked: false,
+  isUnliked: false,
 }
 
 // Trainer-Add-Post
@@ -61,6 +63,31 @@ export const AllPosts = createAsyncThunk(
       thunkAPI.rejectWithValue(errorMessage(error))
     }
   }
+)
+// likeUserPost
+export const likeUserPost = createAsyncThunk(
+  'trainerposts/allPosts',
+  async (postId, thunkAPI) => {
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return await TrainerPostService.likeUserPost(token, postId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
+)
+
+// unlike-posts
+export const unlikeUserPost = createAsyncThunk(
+  'trainerposts/unlikeUserPost',
+  async (postId, thunkAPI) => {
+    try {
+      const token = await thunkAPI.getState().trainerAuth.trainer.token
+      return await TrainerPostService.unlikeUserPost(token, postId)
+    } catch (error) {
+      return thunkAPI.rejectWithValue(errorMessage(error))
+    }
+  },
 )
 
 // create-slice
@@ -136,6 +163,30 @@ const TrainerPostSlice = createSlice({
       state.isError=true
       state.isSuccess=false
       state.message=action.payload 
+    },
+    // likeUserPost
+    [likeUserPost.pending]: (state) => {},
+    [likeUserPost.fulfilled]: (state, action) => {
+      state.isError = false
+      state.isLoading = false
+      state.isLiked = true
+    },
+    [likeUserPost.rejected]: (state, action) => {
+      state.isLiked = false
+      state.isError = true
+      state.isLiked = false
+    },
+    // unlikeUserPost
+    [unlikeUserPost.fulfilled]: (state, action) => {
+      state.isError = false
+      state.isLoading=false
+      state.isUnliked=true
+    },
+    [unlikeUserPost.rejected]:(state,action)=>{
+      state.isUnliked=false
+      state.isLoading=false
+      state.isError=true
+      state.message=action.payload
     }
   },
 })

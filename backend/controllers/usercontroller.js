@@ -409,7 +409,6 @@ const singleUser = asyncHandler(async(req,res)=>{
   
     const user =await User.findById(userId)
     const trainer = await Trainer.findById(userId)
-    console.log("user",user,trainer);
    if(user){
      res.status(200).json(user)
    }else if(trainer){

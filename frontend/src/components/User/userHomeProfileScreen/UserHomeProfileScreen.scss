@@ -105,13 +105,14 @@
       .userli {
         color: black;
       }
+      .active {
+        color: rgb(11, 137, 195);
+      }
       .picon {
         margin: 5px;
         font-size: 29px;
 
-        .active {
-          color: rgb(11, 137, 195);
-        }
+        
       }
     }
     .addpost {

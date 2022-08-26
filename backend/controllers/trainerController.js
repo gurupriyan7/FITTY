@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const mongoose =require('mongoose')
 
 // require-Trainer-Model
 const Trainer = require('../models/trainerModel')
@@ -342,19 +343,7 @@ const deletePlan = asyncHandler(async(req,res)=>{
 // get-trainer-own-clients
 const getTrainerClients = asyncHandler(async(req,res)=>{
   console.log("id",req.trainer._id);
-//   const newData = await orderModel.aggregate([{$match:{trainer:req.trainer._id}},
-//   {
-//    $lookup:{
-//     from:"User",
-//     localField:"user",
-//     foreignField:"_id",
-//     as:"result"
-//    }
-//   },
-// // {
-// //   $unwind:"$result"
-// // }
-// ])
+
 const newData = await orderModel.find({trainer:req.trainer._id})
 .populate("user")
 console.log("data",newData);
@@ -396,6 +385,67 @@ const TrainerOrders = asyncHandler(async(req,res)=>{
   .json(order)
 
  })
+
+//  Like-post
+const likePost = asyncHandler(async(req,res)=>{
+  const postId = mongoose.Types.ObjectId(req.params.id)
+  const trainerId = req.trainer._id
+  console.log("myrrr",trainerId,postId);
+  const uPost =await userpost.findById(postId)
+  const tPost =await trainerpsot.findById(postId)
+  console.log("ddd",uPost,tPost);
+  let post
+  let model
+  if(uPost){
+    post=uPost
+    model=userpost
+  }else if(tPost){
+    post=tPost
+    model=trainerpsot
+  }
+  if(post.like.includes(trainerId)){
+   res.status(403)
+   console.log("error");
+    throw new Error("user Alredy liked")
+  }
+  console.log("got ot");
+  const liked = await model.findByIdAndUpdate(postId,{
+    $push:{like:trainerId}
+  })
+res.status(200).json({liked})
+
+})
+
+// unLikeUserPost
+const unLike = asyncHandler(async(req,res)=>{
+  const postId = mongoose.Types.ObjectId(req.params.id)
+      const trainerId = req.trainer._id
+      console.log(trainerId,postId);
+      const uPost =await userpost.findById(postId)
+      const tPost =await trainerpsot.findById(postId)
+      console.log("ddd",uPost,tPost);
+      let post
+      let model
+      if(uPost){
+        post=uPost
+        model=userpost
+      }else if(tPost){
+        post=tPost
+        model=trainerpsot
+      }
+      if(post.like.includes(trainerId)){
+        
+        const unLiked = await model.findByIdAndUpdate(postId,{
+          $pull:{like:trainerId}
+        })
+  res.status(200).json({unLiked})
+
+       }else{
+        res.status(403)
+        console.log("error");
+         throw new Error("user not like this post")
+       }
+})
 module.exports = {
   registerTrainer,
   loginTrainer,
@@ -414,6 +464,8 @@ module.exports = {
   getTrainerClients,
   googleLogin,
   TrainerOrders,
-  paymentRequest
+  paymentRequest,
+  likePost,
+  unLike
  
 }

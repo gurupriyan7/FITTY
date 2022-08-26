@@ -19,7 +19,9 @@ const {
   getTrainerClients,
   googleLogin,
   TrainerOrders,
-  paymentRequest
+  paymentRequest,
+  likePost,
+  unLike
   
 } = require('../../controllers/trainerController')
 
@@ -79,5 +81,9 @@ router.get("/trainerorder",trainerProtect,TrainerOrders)
 // payment-request
 router.put("/paymentrequest/:orderId",paymentRequest)
 
+// Like-post
+router.put("/likepost/:id",trainerProtect,likePost)
 
+// UnLike-post
+router.put("/unlikepost/:id",trainerProtect,unLike)
 module.exports = router

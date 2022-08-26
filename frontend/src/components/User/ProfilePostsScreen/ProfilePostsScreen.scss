@@ -99,24 +99,7 @@ font-family: system-ui;
         // background-color: blue;
         position: relative;
         display: inline-block;
-        .tooltiptext {
-          visibility: hidden;
-          width: 80px;
-          background-color: white;
-          color: red;
-          text-align: center;
-          border-radius: 6px;
-          padding: 5px 0;
-
-          /* Position the tooltip */
-          position: absolute;
-          z-index: 1;
-        }
-        &:hover {
-          .tooltiptext {
-            visibility: visible;
-          }
-        }
+        
         .liketext {
           padding: 32px;
           cursor: pointer;

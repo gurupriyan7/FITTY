@@ -11,17 +11,16 @@ const urls = {
   SINGLE_TRAINER: '/singletrainer/',
   GET_ALL_PLANS: '/allplans',
   GET_SINGLE_PLAN: '/singleplan/',
-  GET_SINGLE_TRAINER_PLANS:"/trainerplans/",
-  USER_OWN_PLAN:"/userownplan",
-  GOOGLE_LOGIN:"/googlelogin",
-  LIKE_POST:"/likepost/",
-  UNLIKE_POST:"/unlikepost/",
-  GET_CONVERSATIONS:"/conversations/",
-  GET_SINGLE_USER:'/singleuser/',
-  GET_MESSAGES:"/messages/",
-  ADD_MESSAGES:"/messages",
+  GET_SINGLE_TRAINER_PLANS: '/trainerplans/',
+  USER_OWN_PLAN: '/userownplan',
+  GOOGLE_LOGIN: '/googlelogin',
+  LIKE_POST: '/likepost/',
+  UNLIKE_POST: '/unlikepost/',
+  GET_CONVERSATIONS: '/conversations/',
+  GET_SINGLE_USER: '/singleuser/',
+  GET_MESSAGES: '/messages/',
+  ADD_MESSAGES: '/messages',
 }
-
 
 export const {
   GET_USER,
@@ -44,5 +43,5 @@ export const {
   GET_SINGLE_USER,
   GET_MESSAGES,
   ADD_MESSAGES,
-  UNLIKE_POST
+  UNLIKE_POST,
 } = urls

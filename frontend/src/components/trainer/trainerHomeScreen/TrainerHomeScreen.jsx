@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import {useSelector,useDispatch} from "react-redux"
 import { AllPosts} from "../../../features/trainerPosts/TrainerPostSlice"
 import Spinner from '../../spinner/Spinner'
+import TrainerPost from '../trainerPost/TrainerPost'
 function TrainerHomeScreen() {
   const dispatch= useDispatch()
 
@@ -25,43 +26,9 @@ dispatch(AllPosts())
       <span className="poststext">Posts</span>
       {allPosts ? allPosts.map((posts)=>(
 
-      <>
-      {/* single-Post */}
-      <div className="singlepost">
-        <div className="postuserdetails">
-          <img
-            src={posts.postedBy.profileimage}
-            alt=""
-            className="postuserimg"
-          />
-          <span className="postusername">{posts.postedBy.name}</span>
-        </div>
-        <img
-          src={posts.image}
-          alt=""
-          className="postimg"
-        />
-        <hr />
-        <div className="description ">
-         <p className="discriptionText">{posts.description}</p>
-        </div>
-        <div className="likeandcomment">
-          <div className="like">
-            <span className="liketext">
-              <ThumbUpIcon />
-              {posts.like}
-            </span>
-            <br></br>
-          
-          </div>
-          <div className="comment">
-           
-          </div>
-        </div>
-      </div>
-      <div className="space"></div>
-      {/* single-post */}
-      </>
+ <>
+ <TrainerPost posts={posts}/>
+ </>
       )) : ""}
      
     

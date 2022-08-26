@@ -1,0 +1,222 @@
+
+
+ 
+
+
+.editPimage{
+          width: 116px;
+          height: 110px;
+          background-color: red;
+          opacity: 0;
+          cursor: pointer;
+        }
+        .PeditPimg{
+          height: 110px;
+            width: 115px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .addPimageicon{
+          position: absolute;
+          margin-left: 45px;
+          margin-top: 85px;
+          color: white;
+          cursor: pointer;
+        }
+        .coverimgpopup {
+          width: 902px;
+          height: 445px;
+        }
+        .profileimgpopup {
+          width: 532px;
+          height: 445px;
+        }
+        .usersingleplanscreen {
+          .top {
+            background-color: transparent;
+            .addCovericon {
+              font-size: 37px;
+              margin-left: 687px;
+              margin-top: 126px;
+              position: absolute;
+              color: white;
+              cursor: pointer;
+            }
+            .proimginput {
+              position: absolute;
+              height: 58px;
+              width: 153px;
+              border-radius: -1px;
+              background-color: white;
+              margin-left: 610px;
+              margin-top: 121px;
+              cursor: pointer;
+              opacity: 0;
+            }
+            height: 25vh;
+            .coverimg {
+              width: 79%;
+              height: fit-content;
+              border-radius: 30px;
+              max-height: 53vh;
+              box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+              cursor: pointer;
+            }
+          }
+          .updetails {
+            height: 31vh;
+            .profilepic {
+              height: 139px;
+              width: 147px;
+              margin-left: 33px;
+              margin-top: -40px;
+              border-radius: 22px;
+              position: absolute;
+            }
+            .Sprofilepic {
+              height: 139px;
+              width: 147px;
+              margin-left: 33px;
+              margin-top: -40px;
+              border-radius: 22px;
+              position: absolute;
+              cursor: pointer;
+            }
+            .pdetails {
+              height: 28vh;
+            border-radius: 30px;
+            background-color: white;
+            width: 79%;
+              .Pnamediv {
+                display: flex;
+                
+        
+                width: 100%;
+                .Pname {
+                  margin-top: 15px;
+                  font-size: 26px;
+                  font-weight: 700;
+                  margin-left: 28%;
+                  font-family: system-ui;
+                }
+                .Peditbtndiv {
+                  display: flex;
+            justify-content: right;
+            width: 427px;
+            padding: 13px;
+                  .Peditbtn {
+                    width: 76px;
+                    height: 36px;
+                    border: 0;
+                    color: #424040;
+                    font-size: larger;
+                    border-radius: 10px;
+                    text-align: center;
+                    font-family: system-ui;
+                    font-weight: 500;
+                    background-color: gainsboro;
+                  }
+                }
+              }
+              .Pemaildiv {
+                display: flex;
+        
+                width: 94%;
+                .Pemail {
+                  margin-top: -12px;
+                  font-size: 18px;
+                  font-weight: 500;
+                  font-family: system-ui;
+                  margin-left: 212px;
+                  .emailPhone{
+                    font-family: system-ui;
+                    font-size: 21px;
+                  }
+                }
+              }
+              .pedit {
+                display: flex;
+                justify-content: right;
+                
+                .peditbtn {
+                  background-color: grey;
+                  width: 30px;
+                  height: 20px;
+                  border-radius: 8px;
+                }
+              }
+              .Pline {
+                margin-top: 18px;
+                border-top: 3px solid!important;
+              }
+        
+              .noPostsdiv{
+                height: 4rem;
+                border-bottom-right-radius: 32px;
+                border-bottom-left-radius: 32px;
+                display: flex;
+                .left{
+                  height: 100%;
+                   width: 33%;
+                   border-bottom-left-radius: 32px;
+                   border-style: groove;
+                   background-color: white;
+                   .plans{
+                    font-size: 24px;
+                    font-weight: 700;
+                    margin-left: 37%;
+                    font-family: system-ui;
+                   }
+                   .planscount{
+                    font-size: 23px;
+            width: 100%;
+            font-weight: 500;
+            margin-left: 17%;
+            font-family: system-ui;
+                  }
+                }
+                .center{
+                  height: 100%;
+                  width: 34%;
+                  border-style: groove;
+                  background-color: white;
+                  .clients{
+                    font-size: 24px;
+            font-weight: 700;
+            margin-left: 37%;
+            font-family: system-ui;
+                  }
+                  .clientscount{
+                    font-size: 27px;
+                    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+                    font-weight: 700;
+                    margin-left: 45%;
+                    margin-top: -4%;
+                  }
+        
+                }
+                .right{
+                  height: 100%;
+                  width: 33%;
+                  border-bottom-right-radius: 32px;
+                  border-style: groove;
+                  background-color: white;
+                    .posts{
+                      font-size: 24px;
+            font-weight: 700;
+            margin-left: 37%;
+            font-family: system-ui;
+                    }
+                    .postscount{
+                      font-size: 27px;
+                    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+                    font-weight: 700;
+                    margin-left: 45%;
+                    margin-top: -4%;
+                    }
+                }
+              }
+            }
+          }
+        }
+        
